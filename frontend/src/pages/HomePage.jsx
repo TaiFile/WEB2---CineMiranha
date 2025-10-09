@@ -3,7 +3,7 @@ import {moviesData} from "@/data/movieData.js";
 
 function HomePage() {
     return (
-        <div className="min-h-screen bg-[#282C31] pb-8">
+        <div className="min-h-screen bg-[#282C31] pb-8 pt-6" >
             <MovieCarousel
                 title="Filmes em cartaz:"
                 movies={moviesData.emCartaz}

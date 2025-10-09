@@ -6,7 +6,6 @@ function Header() {
     return (
         <header className=" bg-cinema-footer from-black to-transparent fixed top-0 w-full z-50 transition-all duration-300">
             <nav className="grid grid-cols-3 items-center justify-between px-4 md:px-8 py-2">
-                {/* Menu Mobile + Desktop */}
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -51,14 +50,12 @@ function Header() {
                     </ul>
                 </div>
 
-                {/* Logo */}
                 <div className="flex justify-center">
                     <a href="/" className="">
                         <img src="/Images/logo.png" alt="INCINE Logo" className="w-24 "/>
                     </a>
                 </div>
 
-                {/* Icons */}
                 <div className="flex items-center justify-end gap-3">
                     <button
                         aria-label="Buscar"
@@ -116,8 +113,7 @@ function Header() {
                     </button>
                 </div>
             </nav>
-
-            {/* Mobile Menu */}
+            
             {menuOpen && (
                 <div className="md:hidden bg-black bg-opacity-95 border-t border-gray-800">
                     <ul className="px-4 py-4 space-y-1">
