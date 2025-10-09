@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage";
 import MovieSynopsis from "./pages/MovieSynopsis";
+import Sessions from './pages/Sessions';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MovieSynopsis />} />
+            <Route path="/movies/session" element={<Sessions />} />
           </Routes>
         </main>
 

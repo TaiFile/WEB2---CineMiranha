@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { moviesData } from "@/data/movieData.js";
 import TrailerModal from "../components/TrailerModal/TrailerModal";
+import { useNavigate } from "react-router-dom";
+import MovieImage from "../components/MovieImage/MovieImage";
 
 function MovieSynopsis() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
   let movie = moviesData.emCartaz[0];
   movie.categories = ["História", "Drama", "Biografia"];
 
@@ -24,11 +28,7 @@ function MovieSynopsis() {
       </div>
 
       <section className="flex flex-col items-center -mt-16 py-6 px-6 gap-6">
-        <img
-          src={movie.image}
-          alt={movie.title}
-          className="relative rounded-md w-52 h-74 z-10"
-        />
+        <MovieImage imageUrl={movie.image} altText={movie.title} isBig />
 
         <h1 className="text-3xl font-bold">{movie.title}</h1>
 
@@ -67,9 +67,7 @@ function MovieSynopsis() {
         <div className="w-full max-w-48">
           <button
             className="bg-cinema-light-900 transition-all duration-200 hover:scale-105  text-cinema-darkPalette-900 font-bold py-2 px-4 w-full rounded-md"
-            onClick={() =>
-              alert("Funcionalidade de compra de ingressos em desenvolvimento!")
-            }
+            onClick={() => navigate("/movies/session")}
           >
             Adquirir Ingresso
           </button>
