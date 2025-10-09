@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function MovieCard({ title, duration, image, ageRating }) {
+    const navigate = useNavigate();
+
     return (
         <div className="flex-shrink-0 w-36 cursor-pointer group">
             {/* Imagem do Filme */}
@@ -7,6 +11,7 @@ function MovieCard({ title, duration, image, ageRating }) {
                     src={image}
                     alt={title}
                     className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-300"
+                    onClick={() => navigate(`/movies`)}
                 />
 
                 {/* Badge de Classificação */}
