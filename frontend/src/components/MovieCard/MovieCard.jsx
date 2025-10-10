@@ -9,7 +9,7 @@ function MovieCard({ title, duration, image, ageRating }) {
                 <img
                     src={image}
                     alt={title}
-                    className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-52 object-cover "
                     onClick={() => navigate(`/movies`)}
                 />
 
@@ -28,7 +28,7 @@ function MovieCard({ title, duration, image, ageRating }) {
             </div>
             
             <div className="mt-2">
-                <h3 className="text-white text-sm font-semibold line-clamp-2 leading-tight">
+                <h3 className="text-white text-sm font-semibold leading-tight">
                     {title}
                 </h3>
                 <p className="text-gray-400 text-xs mt-1">{duration}</p>
