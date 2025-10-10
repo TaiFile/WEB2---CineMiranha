@@ -3,6 +3,7 @@ import { moviesData } from "@/data/movieData.js";
 import TrailerModal from "../components/TrailerModal/TrailerModal";
 import { useNavigate } from "react-router-dom";
 import MovieImage from "../components/MovieImage/MovieImage";
+import AgeRating from "../components/AgeRating/AgeRating";
 
 function MovieSynopsis() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,12 +52,7 @@ function MovieSynopsis() {
                       Selton Mello
                     </p>
                   </div>
-                  <img
-                    src="public/images/14.png"
-                    alt={movie.ageRating}
-                    width={24}
-                    height={24}
-                  />
+                  <AgeRating rating={movie.ageRating} className={"self-end"} />
                 </div>
               </div>
             </div>
