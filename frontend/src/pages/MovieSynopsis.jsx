@@ -20,7 +20,7 @@ function MovieSynopsis() {
           className="w-full h-80 object-cover opacity-60"
         />
         <img
-          src="public/images/play.svg"
+          src="/Images/play.svg"
           alt={`Assistir trailer de ${movie.title}`}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 cursor-pointer hover:scale-110 transition-transform"
           onClick={() => setIsModalOpen(true)}
