@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage";
 import MovieSynopsis from "./pages/MovieSynopsis";
 import Sessions from './pages/Sessions';
+import Seats from './pages/Seats';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MovieSynopsis />} />
             <Route path="/movies/session" element={<Sessions />} />
+            <Route path="/movies/seats" element={<Seats />} />
           </Routes>
         </main>
 

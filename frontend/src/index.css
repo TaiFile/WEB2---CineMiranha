@@ -19,15 +19,15 @@
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-gray-900;
+        @apply bg-cinema-darkPalette-900;
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-gray-700 rounded-full;
+        @apply bg-cinema-darkPalette-600 rounded-full;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-gray-600;
+        @apply bg-cinema-darkPalette-500;
     }
 }
 
@@ -97,6 +97,30 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+
+    .thin-scrollbar::-webkit-scrollbar {
+        @apply w-1 h-1;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-cinema-darkPalette-600 rounded-full;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+        @apply bg-cinema-darkPalette-500;
+    }
+
+    /* For Firefox compatibility */
+    @supports (scrollbar-width: thin) {
+        .thin-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: theme('colors.cinema.darkPalette.600') theme('colors.cinema.darkPalette.900');
+        }
+    }
 }
 
 /* ===== ANIMAÇÕES ===== */
@@ -105,6 +129,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -120,6 +145,7 @@
         opacity: 0;
         transform: translateX(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
