@@ -1,21 +1,13 @@
 function MovieImage({ imageUrl, altText, isBig = false }) {
-  let width, height;
-
-  if (isBig) {
-    width = 208;
-    height = 296;
-  } else {
-    width = 89;
-    height = 122;
-  }
-
   return (
     <img
       src={imageUrl}
       alt={altText}
-      width={width}
-      height={height}
-      className="relative rounded-md z-10"
+      className={`relative rounded-md z-10 ${
+        isBig
+          ? "w-[208px] h-[296px] lg:w-[260px] lg:h-[370px]"
+          : "w-[89px] h-[122px] lg:w-[120px] lg:h-[170px]"
+      }`}
     />
   );
 }
