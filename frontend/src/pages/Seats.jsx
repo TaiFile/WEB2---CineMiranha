@@ -108,7 +108,7 @@ function Seats() {
     <div className="flex justify-center bg-cinema-darkPalette-800 min-h-screen min-w-screen text-white">
       <div className="w-full sm:container sm:mx-8">
         <div
-          className="mt-10 cursor-pointer z-10"
+          className="ml-6 mt-10 cursor-pointer z-10"
           onClick={() => navigate("/movies/session")}
         >
           <FaArrowLeft size={32} />
