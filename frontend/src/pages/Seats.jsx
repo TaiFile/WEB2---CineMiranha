@@ -12,6 +12,7 @@ function Seats() {
   const navigate = useNavigate();
 
   const movie = moviesData.emCartaz[0];
+  const session = { date: "03/FEV", time: "16:00", format: "2D", lang: "LEG" };
 
   const [seats, setSeats] = useState([
     { id: "E1", row: 1, column: 2, status: "available" },
@@ -104,7 +105,7 @@ function Seats() {
 
   return (
     <div className="flex justify-center bg-cinema-darkPalette-800 min-h-screen min-w-screen text-white">
-      <div className="w-full sm:container sm:mx-auto">
+      <div className="w-full sm:container sm:mx-8">
         <div className="max-w-4xl mx-auto mt-7">
           <StepProgressBar
             currentStep={2}
@@ -114,11 +115,11 @@ function Seats() {
         </div>
 
         <div className="lg:hidden">
-          <MovieDetails movie={movie} />
+          <MovieDetails movie={movie} session={session} />
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start my-8 mx-4">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start lg:justify-center my-8 mx-4">
+          <div className="flex-1 lg:max-w-4xl">
             <SeatMap seatGrid={seatGrid} onSeatClick={handleSeatClick} />
 
             <div className="mt-4">
@@ -156,6 +157,7 @@ function Seats() {
           <div className="hidden lg:block w-96 flex-shrink-0">
             <OrderSidebar
               movie={movie}
+              session={session}
               selectedSeats={selectedSeats}
               seats={seats}
               onRemoveSeat={handleSeatClick}
