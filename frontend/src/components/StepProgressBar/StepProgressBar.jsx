@@ -2,7 +2,7 @@ import React from "react";
 
 const mapStepToLabel = {
   1: "Escolha da sessão",
-  2: "Escolha seus de assentos",
+  2: "Escolha seus assentos",
   3: "Escolha seus ingressos",
   4: "Escolha seus snacks",
   5: "Confirmar seu pedido",
