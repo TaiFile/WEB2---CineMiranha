@@ -13,7 +13,7 @@ function MovieSynopsis() {
   movie.categories = ["História", "Drama", "Biografia"];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#2F3036] text-white">
+    <div className="flex flex-col w-full min-h-screen bg-[#2F3036] text-white">
       <div className="relative z-0">
         <img
           src={movie.thumbnail}
@@ -29,7 +29,7 @@ function MovieSynopsis() {
       </div>
 
       <div className="flex items-center justify-center">
-        <section className="md:container flex flex-col items-center -mt-16 lg:-mt-40 py-6 px-6 gap-6">
+        <section className="flex flex-col items-center -mt-16 lg:-mt-40 py-6 px-6 gap-6 max-w-7xl overflow-x-hidden">
           <div className="w-full flex flex-col items-center gap-4 lg:flex-row lg:justify-start lg:ml-32">
             <MovieImage imageUrl={movie.image} altText={movie.title} isBig />
 
