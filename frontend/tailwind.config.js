@@ -16,6 +16,24 @@ export default {
                     redHover: '#b8070f',
                     header: '#1F2024',
                     footer: '#1F2024',
+
+                    light: {
+                        900: '#C5C6CC',
+                        800: '#D4D6DD',
+                        700: '#E8E9F1',
+                        600: '#F8F9FE',
+                        500: '#FAFAFA',
+                    },
+                    
+                    // Dark Colors
+                    darkPalette: {
+                        900: '#1F2024',
+                        800: '#2F3036',
+                        700: '#494A50',
+                        600: '#71727A',
+                        500: '#8F9098',
+                    },
+
                 }
             },
             fontFamily: {

@@ -4,7 +4,10 @@ export const moviesData = {
             id: 1,
             title: 'AINDA ESTOU AQUI',
             duration: '135 min',
-            image: 'public/images/ainda-estou-aqui.jpg',
+            image: 'public/images/ainda-estou-aqui.jpg', 
+            video: 'https://www.youtube.com/embed/_NzqP0jmk3o',
+            thumbnail: 'public/images/thumbnail.jpg',
+            synopsis: "Sinopse Rio de Janeiro, início dos anos 1970. O país enfrenta o endurecimento da ditadura militar. Os Paiva — Rubens, Eunice e seus cinco filhos — vivem na frente da praia, numa casa de portas abertas para os amigos. Um dia, Rubens é levado por militares à paisana e desaparece. Eunice, cuja busca pela verdade sobre o destino de seu marido se estenderia por décadas, é obrigada a se reinventar e traçar um novo futuro para si e seus filhos. Baseado no livro biográfico de Marcelo Rubens Paiva.",
             ageRating: '14',
         },
         {
