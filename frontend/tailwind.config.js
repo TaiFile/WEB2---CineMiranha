@@ -14,7 +14,7 @@ export default {
                     lightGray: '#2a2a2a',
                     red: '#e50914',
                     redHover: '#b8070f',
-                    header: '#1F2024',  // ← adicione aqui
+                    header: '#1F2024',
                     footer: '#1F2024',
 
                     light: {
