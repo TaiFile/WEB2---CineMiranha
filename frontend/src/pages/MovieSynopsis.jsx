@@ -3,6 +3,7 @@ import { moviesData } from "@/data/movieData.js";
 import TrailerModal from "../components/TrailerModal/TrailerModal";
 import { useNavigate } from "react-router-dom";
 import AgeRating from "../components/AgeRating/AgeRating";
+import { FaArrowLeft } from "react-icons/fa6";
 
 function MovieSynopsis() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,7 +13,14 @@ function MovieSynopsis() {
   movie.categories = ["História", "Drama", "Biografia"];
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#2F3036] text-white">
+    <div className="relative flex flex-col w-full min-h-screen bg-[#2F3036] text-white">
+      <div
+        className="absolute top-10 left-10 cursor-pointer z-10"
+        onClick={() => navigate("/")}
+      >
+        <FaArrowLeft size={32} />
+      </div>
+
       <div className="relative z-0">
         <img
           src={movie.thumbnail}

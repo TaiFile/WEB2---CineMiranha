@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import SeatMap from "../components/SeatMap/SeatMap";
 import Seat from "../components/SeatMap/Seat";
 import OrderSidebar from "../components/OrderSideBar/OrderSideBar";
+import { FaArrowLeft } from "react-icons/fa6";
 
 function Seats() {
   const navigate = useNavigate();
@@ -106,6 +107,13 @@ function Seats() {
   return (
     <div className="flex justify-center bg-cinema-darkPalette-800 min-h-screen min-w-screen text-white">
       <div className="w-full sm:container sm:mx-8">
+        <div
+          className="mt-10 cursor-pointer z-10"
+          onClick={() => navigate("/movies/session")}
+        >
+          <FaArrowLeft size={32} />
+        </div>
+
         <div className="max-w-4xl mx-auto mt-7">
           <StepProgressBar
             currentStep={2}

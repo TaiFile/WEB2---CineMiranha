@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import StepProgressBar from "../components/StepProgressBar/StepProgressBar";
 import { moviesData } from "@/data/movieData.js";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const sessionData = {
   dates: [
@@ -42,6 +43,10 @@ function Sessions() {
   return (
     <div className="bg-cinema-darkPalette-900 text-cinema-light-800 p-4 min-h-screen">
       <div className="mx-8 my-8 space-y-8">
+        <div className="cursor-pointer z-10" onClick={() => navigate("/movies")}>
+          <FaArrowLeft size={32} />
+        </div>
+
         <StepProgressBar
           currentStep={1}
           totalSteps={7}
