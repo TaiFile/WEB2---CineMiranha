@@ -3,7 +3,7 @@ import { moviesData } from "@/data/movieData.js";
 
 function HomePage() {
   return (
-    <div className="flex flex-col items-centermin-h-screen bg-[#282C31] pb-8 pt-6">
+    <div className="flex flex-col min-h-screen bg-[#282C31] pb-8 pt-6">
       <MovieCarousel title="Filmes em cartaz:" movies={moviesData.emCartaz} />
 
       <MovieCarousel title="Em breve:" movies={moviesData.emBreve} />

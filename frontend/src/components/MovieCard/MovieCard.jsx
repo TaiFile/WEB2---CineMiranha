@@ -5,12 +5,12 @@ function MovieCard({ title, duration, image, ageRating }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-shrink-0 w-36 cursor-pointer group">
+    <div className="max-lg:flex-shrink-0 w-36 lg:w-52 cursor-pointer group">
       <div className="relative overflow-hidden rounded-lg">
         <img
           src={image}
           alt={title}
-          className="w-full h-52 object-cover"
+          className="w-full h-52 lg:h-72 object-cover"
           onClick={() => navigate(`/movies`)}
         />
 
