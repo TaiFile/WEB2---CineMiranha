@@ -1,9 +1,9 @@
-function MovieImage({ imageUrl, altText, isBig = false }) {
+function MovieImage({ imageUrl, altText, isBig = false, className = ""}) {
   return (
     <img
       src={imageUrl}
       alt={altText}
-      className={`relative rounded-md z-10 ${
+      className={`${className} ${
         isBig
           ? "w-[208px] h-[296px] lg:w-[260px] lg:h-[370px]"
           : "w-[89px] h-[122px] lg:w-[120px] lg:h-[170px]"

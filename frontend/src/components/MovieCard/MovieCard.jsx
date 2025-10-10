@@ -10,7 +10,7 @@ function MovieCard({ title, duration, image, ageRating }) {
         <img
           src={image}
           alt={title}
-          className="w-full h-52 object-cover "
+          className="w-full h-52 object-cover"
           onClick={() => navigate(`/movies`)}
         />
 

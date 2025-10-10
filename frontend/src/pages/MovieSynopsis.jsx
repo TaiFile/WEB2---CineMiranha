@@ -2,7 +2,6 @@ import { useState } from "react";
 import { moviesData } from "@/data/movieData.js";
 import TrailerModal from "../components/TrailerModal/TrailerModal";
 import { useNavigate } from "react-router-dom";
-import MovieImage from "../components/MovieImage/MovieImage";
 import AgeRating from "../components/AgeRating/AgeRating";
 
 function MovieSynopsis() {
@@ -31,7 +30,11 @@ function MovieSynopsis() {
       <div className="flex items-center justify-center">
         <section className="flex flex-col items-center -mt-16 lg:-mt-40 py-6 px-6 gap-6 max-w-7xl overflow-x-hidden">
           <div className="w-full flex flex-col items-center gap-4 lg:flex-row lg:justify-start lg:ml-32">
-            <MovieImage imageUrl={movie.image} altText={movie.title} isBig />
+            <img
+              src={movie.image}
+              alt={movie.title}
+              className="relative object-cover rounded-md w-[208px] h-[296px] lg:w-[260px] lg:h-[370px]"
+            />
 
             <div className="h-full flex flex-col lg:self-end gap-4">
               <h1 className="text-3xl font-bold">{movie.title}</h1>

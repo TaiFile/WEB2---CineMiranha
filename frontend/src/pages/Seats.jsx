@@ -10,7 +10,6 @@ import OrderSidebar from "../components/OrderSideBar/OrderSideBar";
 
 function Seats() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const movie = moviesData.emCartaz[0];
 
