@@ -105,11 +105,13 @@ function Seats() {
   return (
     <div className="flex justify-center bg-cinema-darkPalette-800 min-h-screen min-w-screen text-white">
       <div className="w-full sm:container sm:mx-auto">
-        <StepProgressBar
-          currentStep={1}
-          totalSteps={7}
-          label="Escolha da sessão"
-        />
+        <div className="max-w-4xl mx-auto mt-7">
+          <StepProgressBar
+            currentStep={2}
+            totalSteps={7}
+            label="Escolha da sessão"
+          />
+        </div>
 
         <div className="lg:hidden">
           <MovieDetails movie={movie} />
