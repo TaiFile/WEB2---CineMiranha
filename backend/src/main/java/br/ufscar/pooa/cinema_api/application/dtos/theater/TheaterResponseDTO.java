@@ -11,6 +11,7 @@ public class TheaterResponseDTO {
     private String logoUrl;
     private AddressDTO address;
     private List<UserResponseDTO> managers;
+    private Double distance;
 
     public TheaterResponseDTO() {
     }
@@ -61,5 +62,13 @@ public class TheaterResponseDTO {
 
     public void setManagers(List<UserResponseDTO> managers) {
         this.managers = managers;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 }

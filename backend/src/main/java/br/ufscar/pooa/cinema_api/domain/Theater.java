@@ -28,6 +28,9 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<Manager> managers = new ArrayList<>();
 
+    @Transient
+    private Double distance;
+
     public Theater() {}
 
     public Long getId() {
@@ -82,6 +85,14 @@ public class Theater {
     public Theater setManagers(List<Manager> managers) {
         this.managers = managers;
         return this;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 
 

@@ -43,6 +43,11 @@ public class TheaterRepositoryAdapter implements ITheaterRepository {
     }
 
     @Override
+    public List<Theater> findAll() {
+        return theaterJpaRepository.findAll();
+    }
+
+    @Override
     public Optional<Theater> findById(Long id) {
         return theaterJpaRepository.findById(id);
     }
