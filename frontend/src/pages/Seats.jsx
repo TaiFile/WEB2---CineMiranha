@@ -157,7 +157,7 @@ function Seats() {
             <div className="w-48">
               <Button
                 text="Escolher Ingressos"
-                onClickHandler={() => navigate("/ingressos")}
+                onClickHandler={() => alert("Em desenvolvimento")}
               />
             </div>
           </div>
