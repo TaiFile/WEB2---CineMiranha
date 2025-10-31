@@ -1,23 +1,38 @@
 package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.RoomType;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
+@Entity
+@Table(name = "rooms")
 public class Room {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RoomType roomType;
+
+    @ManyToOne
+    @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
-    private List<Row> rows = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<Row> rows = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "room")
     private List<Session> sessions = new ArrayList<>();
 
     public Room() {
     }
 
-    public Room(Long id, String name, RoomType roomType, Theater theater, List<Row> rows, List<Session> sessions) {
+    public Room(Long id, String name, RoomType roomType, Theater theater, Set<Row> rows, List<Session> sessions) {
         this.id = id;
         this.name = name;
         this.roomType = roomType;
@@ -62,11 +77,11 @@ public class Room {
         return this;
     }
 
-    public List<Row> getRows() {
+    public Set<Row> getRows() {
         return rows;
     }
 
-    public Room setRows(List<Row> rows) {
+    public Room setRows(Set<Row> rows) {
         this.rows = rows;
         return this;
     }
@@ -94,10 +109,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", roomType=" + roomType +
-                '}';
+        return String.format("Room{id=%d, name='%s', roomType=%s}", id, name, roomType);
     }
 }

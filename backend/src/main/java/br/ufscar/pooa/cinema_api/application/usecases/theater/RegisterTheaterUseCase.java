@@ -1,14 +1,16 @@
 package br.ufscar.pooa.cinema_api.application.usecases.theater;
 
+import br.ufscar.pooa.cinema_api.application.mappers.IAddressMapper;
+import br.ufscar.pooa.cinema_api.application.mappers.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.application.dtos.theater.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.application.dtos.theater.TheaterResponseDTO;
 import br.ufscar.pooa.cinema_api.application.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.application.exceptions.ResourceNotFoundException;
 import br.ufscar.pooa.cinema_api.application.ports.in.IRegisterTheaterUseCase;
-import br.ufscar.pooa.cinema_api.application.ports.out.mapper.IObjectMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IAddressRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IUserRepository;
+import br.ufscar.pooa.cinema_api.domain.Manager;
 import br.ufscar.pooa.cinema_api.domain.Theater;
 import br.ufscar.pooa.cinema_api.domain.User;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,19 @@ import java.util.List;
 @Service
 public class RegisterTheaterUseCase implements IRegisterTheaterUseCase {
     private final ITheaterRepository theaterRepository;
-    private final IObjectMapper objectMapper;
     private final IAddressRepository addressRepository;
     private final IUserRepository userRepository;
+    private final ITheaterMapper ITheaterMapper;
+    private final IAddressMapper IAddressMapper;
 
     public RegisterTheaterUseCase(ITheaterRepository theaterRepository,
-                                  IObjectMapper objectMapper,
-                                  IAddressRepository addressRepository, IUserRepository userRepository) {
+                                  IAddressRepository addressRepository, IUserRepository userRepository,
+                                  ITheaterMapper ITheaterMapper, IAddressMapper IAddressMapper) {
         this.theaterRepository = theaterRepository;
-        this.objectMapper = objectMapper;
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
+        this.ITheaterMapper = ITheaterMapper;
+        this.IAddressMapper = IAddressMapper;
     }
 
     @Override
@@ -50,11 +54,14 @@ public class RegisterTheaterUseCase implements IRegisterTheaterUseCase {
                     requestDTO.getAddress().getStreet() + " " + requestDTO.getAddress().getNumber());
         });
 
-        Theater newTheater = objectMapper.parseObject(requestDTO, Theater.class);
-        newTheater.setManagers(List.of(user));
+        Theater newTheater = new Theater();
+        newTheater.setName(requestDTO.getName());
+        newTheater.setLogoUrl(requestDTO.getLogoUrl());
+        newTheater.setAddress(IAddressMapper.toAddress(requestDTO.getAddress()));
+        newTheater.setManagers(List.of((Manager) user));
 
         Theater savedTheater = theaterRepository.save(newTheater);
 
-        return objectMapper.parseObject(savedTheater, TheaterResponseDTO.class);
+        return ITheaterMapper.toTheaterResponseDTO(savedTheater);
     }
 }

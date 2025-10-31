@@ -1,12 +1,28 @@
 package br.ufscar.pooa.cinema_api.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "genres")
 public class Genre {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String name;
+
+    @ManyToMany(mappedBy = "genres")
     private List<Movie> movies = new ArrayList<>();
 
     public Genre(Long id, String name, List<Movie> movies) {
@@ -16,7 +32,6 @@ public class Genre {
     }
 
     public Genre() {
-
     }
 
     public Long getId() {
@@ -45,7 +60,9 @@ public class Genre {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Genre genre = (Genre) o;
         return Objects.equals(getId(), genre.getId()) && Objects.equals(getName(), genre.getName());
     }

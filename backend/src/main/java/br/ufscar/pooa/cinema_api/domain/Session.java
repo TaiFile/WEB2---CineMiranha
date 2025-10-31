@@ -2,21 +2,41 @@ package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.Format;
 import br.ufscar.pooa.cinema_api.domain.enums.Subtitle;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "sessions")
 public class Session {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private Format format;
+
+    @Column
     private LocalDateTime date;
+
+    @Column
     private Subtitle subtitle;
+
+    @Column
     private Integer priceInCents;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
+
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 
     public boolean isSeatAvailable(Seat newSeat) {
@@ -24,11 +44,10 @@ public class Session {
         if ( room == null ) return true;
         if ( tickets == null ) return true;
 
-        List<List<Seat>> allSeats = room.getRows().stream().map(Row::getSeats).toList();
         List<Seat> takenSeats = tickets.stream().map(Ticket::getSeat).toList();
 
-        List<Seat> availableSeats = allSeats.stream()
-                .flatMap(List::stream)
+        List<Seat> availableSeats = room.getRows().stream()
+                .flatMap(row -> row.getSeats().stream())
                 .filter(seat -> !takenSeats.contains(seat))
                 .toList();
 

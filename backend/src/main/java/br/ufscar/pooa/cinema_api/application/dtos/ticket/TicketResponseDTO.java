@@ -9,6 +9,9 @@ public class TicketResponseDTO {
     private Instant paymentDate;
     private Integer priceInCents;
     private PaymentMethod paymentMethod;
+    private Long sessionId;
+    private Long clientId;
+    private Long seatId;
 
     public TicketResponseDTO(Instant paymentDate, Long id, Integer priceInCents, PaymentMethod paymentMethod) {
         this.paymentDate = paymentDate;
@@ -50,6 +53,30 @@ public class TicketResponseDTO {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public Long getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
+    }
+
+    public Long getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(Long seatId) {
+        this.seatId = seatId;
     }
 
     @Override

@@ -1,13 +1,25 @@
 package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.Role;
-
+import jakarta.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false, columnDefinition = "smallint DEFAULT 1")
     private Role role;
 
     public User() {
@@ -66,11 +78,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        return String.format("User{id=%d, email='%s', role=%s}", id, email, role);
     }
 }

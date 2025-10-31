@@ -1,16 +1,28 @@
 package br.ufscar.pooa.cinema_api.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "rows")
 public class Row {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Character letter;
-	private Room room;
-	private List<Seat> seats = new ArrayList<>();
 
-	public Row(Character letter, Room room, List<Seat> seats) {
+	@Column(nullable = false)
+	private Character letter;
+
+	@ManyToOne
+	@JoinColumn(name = "room_id", nullable = false)
+	private Room room;
+
+	@OneToMany(mappedBy = "row", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	private Set<Seat> seats = new LinkedHashSet<>();
+
+	public Row(Character letter, Room room, Set<Seat> seats) {
 		this.letter = letter;
 		this.room = room;
 		this.seats = seats;
@@ -44,11 +56,11 @@ public class Row {
 		this.room = room;
 	}
 
-	public List<Seat> getSeats() {
+	public Set<Seat> getSeats() {
 		return seats;
 	}
 
-	public void setSeats(List<Seat> seats) {
+	public void setSeats(Set<Seat> seats) {
 		this.seats = seats;
 	}
 
@@ -56,12 +68,12 @@ public class Row {
 	public boolean equals(Object o) {
 		if (o == null || getClass() != o.getClass()) return false;
 		Row row = (Row) o;
-		return Objects.equals(getId(), row.getId()) && Objects.equals(getLetter(), row.getLetter()) && Objects.equals(getRoom(), row.getRoom()) && Objects.equals(getSeats(), row.getSeats());
+		return Objects.equals(getId(), row.getId()) && Objects.equals(getLetter(), row.getLetter());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getLetter(), getRoom(), getSeats());
+		return Objects.hash(getId(), getLetter());
 	}
 
 	@Override
@@ -69,8 +81,6 @@ public class Row {
 		return "Row{" +
 				"id=" + id +
 				", letter=" + letter +
-				", room=" + room +
-				", seats=" + seats +
 				'}';
 	}
 }

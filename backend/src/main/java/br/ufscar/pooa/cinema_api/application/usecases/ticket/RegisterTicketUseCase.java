@@ -1,12 +1,12 @@
 package br.ufscar.pooa.cinema_api.application.usecases.ticket;
 
+import br.ufscar.pooa.cinema_api.application.mappers.ITicketMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.payment.PaymentStrategyFactory;
 import br.ufscar.pooa.cinema_api.application.dtos.ticket.RegisterTicketRequestDTO;
 import br.ufscar.pooa.cinema_api.application.dtos.ticket.TicketResponseDTO;
 import br.ufscar.pooa.cinema_api.application.exceptions.BadRequestException;
 import br.ufscar.pooa.cinema_api.application.exceptions.ResourceNotFoundException;
 import br.ufscar.pooa.cinema_api.application.ports.in.IRegisterTicketUseCase;
-import br.ufscar.pooa.cinema_api.application.ports.out.mapper.IObjectMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.payment.IPaymentStrategy;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IClientRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.ISeatRepository;
@@ -28,20 +28,20 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
     private final ISeatRepository seatRepository;
     private final IClientRepository clientRepository;
     private final PaymentStrategyFactory paymentStrategyFactory;
-    private final IObjectMapper objectMapper;
+    private final ITicketMapper ITicketMapper;
 
     public RegisterTicketUseCase(ITicketRepository ticketRepository,
                                  ISessionRepository sessionRepository,
                                  ISeatRepository seatRepository,
                                  IClientRepository clientRepository,
                                  PaymentStrategyFactory paymentStrategyFactory,
-                                 IObjectMapper objectMapper) {
+                                 ITicketMapper ITicketMapper) {
         this.ticketRepository = ticketRepository;
         this.sessionRepository = sessionRepository;
         this.seatRepository = seatRepository;
         this.clientRepository = clientRepository;
         this.paymentStrategyFactory = paymentStrategyFactory;
-        this.objectMapper = objectMapper;
+        this.ITicketMapper = ITicketMapper;
     }
 
     @Override
@@ -77,6 +77,6 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
 
         Ticket savedTicket = ticketRepository.save(newTicket);
 
-        return objectMapper.parseObject(savedTicket, TicketResponseDTO.class);
+        return ITicketMapper.toTicketResponseDTO(savedTicket);
     }
 }

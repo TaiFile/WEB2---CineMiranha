@@ -1,9 +1,10 @@
 package br.ufscar.pooa.cinema_api.application.usecases.room;
 
+import br.ufscar.pooa.cinema_api.application.mappers.IRoomMapper;
+import br.ufscar.pooa.cinema_api.application.mappers.IRowMapper;
 import br.ufscar.pooa.cinema_api.application.dtos.room.RegisterRoomRequestDTO;
 import br.ufscar.pooa.cinema_api.application.dtos.room.RoomResponseDTO;
 import br.ufscar.pooa.cinema_api.application.ports.in.IRegisterRoomUseCase;
-import br.ufscar.pooa.cinema_api.application.ports.out.mapper.IObjectMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IRoomRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.domain.Room;
@@ -12,18 +13,22 @@ import br.ufscar.pooa.cinema_api.domain.Seat;
 import br.ufscar.pooa.cinema_api.domain.Theater;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RegisterRoomUseCase implements IRegisterRoomUseCase {
     private final IRoomRepository repository;
     private final ITheaterRepository theaterRepository;
-    private final IObjectMapper mapper;
+    private final IRoomMapper IRoomMapper;
+    private final IRowMapper IRowMapper;
 
-    public RegisterRoomUseCase(IRoomRepository repository, ITheaterRepository theaterRepository, IObjectMapper mapper) {
+
+    public RegisterRoomUseCase(IRoomRepository repository, ITheaterRepository theaterRepository, IRoomMapper IRoomMapper, IRowMapper IRowMapper) {
         this.repository = repository;
         this.theaterRepository = theaterRepository;
-        this.mapper = mapper;
+        this.IRoomMapper = IRoomMapper;
+        this.IRowMapper = IRowMapper;
     }
 
     @Override
@@ -31,19 +36,24 @@ public class RegisterRoomUseCase implements IRegisterRoomUseCase {
         Theater theater = theaterRepository.findById(requestDTO.getTheaterId())
                 .orElseThrow(() -> new IllegalArgumentException("Theater not found."));
 
-        List<Row> rows = requestDTO.getRows().stream()
+        Set<Row> rows = requestDTO.getRows().stream()
                 .map(rowDTO -> {
-                    List<Seat> seats = rowDTO.getSeats().stream()
-                            .map(seatDTO -> mapper.parseObject(seatDTO, Seat.class))
-                            .toList();
-
-                    Row row = mapper.parseObject(rowDTO, Row.class);
+                    Row row = new Row();
+                    row.setLetter(rowDTO.getLetter());
+                    Set<Seat> seats = rowDTO.getSeats().stream()
+                            .map(seatDTO -> {
+                                Seat seat = new Seat();
+                                seat.setNumber(seatDTO.getNumber());
+                                seat.setSeatType(seatDTO.getSeatType());
+                                seat.setRow(row);
+                                return seat;
+                            })
+                            .collect(Collectors.toSet());
                     row.setSeats(seats);
-
-                    seats.forEach(seat -> seat.setRow(row));
+                    row.setRoom(null); // The room is set later
                     return row;
                 })
-                .toList();
+                .collect(Collectors.toSet());
 
         Room room = new Room();
         room.setName(requestDTO.getName());
@@ -51,8 +61,12 @@ public class RegisterRoomUseCase implements IRegisterRoomUseCase {
         room.setTheater(theater);
         room.setRows(rows);
 
+        for (Row row : rows) {
+            row.setRoom(room);
+        }
+
         Room savedRoom = repository.save(room);
 
-        return mapper.parseObject(savedRoom, RoomResponseDTO.class);
+        return IRoomMapper.toRoomResponseDTO(savedRoom);
     }
 }

@@ -1,9 +1,9 @@
 package br.ufscar.pooa.cinema_api.application.usecases.session;
 
+import br.ufscar.pooa.cinema_api.application.mappers.ISessionMapper;
 import br.ufscar.pooa.cinema_api.application.dtos.session.RegisterSessionRequestDTO;
 import br.ufscar.pooa.cinema_api.application.dtos.session.SessionResponseDTO;
 import br.ufscar.pooa.cinema_api.application.ports.in.IRegisterSessionUseCase;
-import br.ufscar.pooa.cinema_api.application.ports.out.mapper.IObjectMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IMovieRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IRoomRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.ISessionRepository;
@@ -17,13 +17,13 @@ public class RegisterSessionUseCase implements IRegisterSessionUseCase {
     private final ISessionRepository sessionRepository;
     private final IRoomRepository repository;
     private final IMovieRepository movieRepository;
-    private final IObjectMapper mapper;
+    private final ISessionMapper ISessionMapper;
 
-    public RegisterSessionUseCase(ISessionRepository sessionRepository, IRoomRepository repository, IMovieRepository movieRepository, IObjectMapper mapper) {
+    public RegisterSessionUseCase(ISessionRepository sessionRepository, IRoomRepository repository, IMovieRepository movieRepository, ISessionMapper ISessionMapper) {
         this.sessionRepository = sessionRepository;
         this.repository = repository;
         this.movieRepository = movieRepository;
-        this.mapper = mapper;
+        this.ISessionMapper = ISessionMapper;
     }
 
     @Override
@@ -44,6 +44,6 @@ public class RegisterSessionUseCase implements IRegisterSessionUseCase {
 
         Session savedSession = sessionRepository.save(session);
 
-        return mapper.parseObject(savedSession, SessionResponseDTO.class);
+        return ISessionMapper.toSessionResponseDTO(savedSession);
     }
 }

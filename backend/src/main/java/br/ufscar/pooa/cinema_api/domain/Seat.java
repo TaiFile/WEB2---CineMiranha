@@ -1,16 +1,31 @@
 package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.SeatType;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "seats")
 public class Seat {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private Character number;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private SeatType seatType;
+
+    @ManyToOne
+    @JoinColumn(name = "row_id", nullable = false)
     private Row row;
+
+    @OneToMany(mappedBy = "seat")
     private List<Ticket> tickets = new ArrayList<>();
 
     public Seat() {

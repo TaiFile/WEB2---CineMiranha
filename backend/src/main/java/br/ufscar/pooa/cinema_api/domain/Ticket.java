@@ -1,18 +1,38 @@
 package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.PaymentMethod;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.Objects;
-import java.util.Set;
 
+@Entity
+@Table(name = "tickets")
 public class Ticket {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column
 	private Instant paymentDate;
+
+	@Column
 	private Integer priceInCents;
+
+	@Column
+	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
+
+	@ManyToOne
+	@JoinColumn(name = "session_id", nullable = false)
 	private Session session;
+
+	@ManyToOne
+	@JoinColumn(name = "client_id", nullable = false)
 	private Client client;
+
+	@ManyToOne
+	@JoinColumn(name = "seat_id", nullable = false)
 	private Seat seat;
 
 	public Ticket() {

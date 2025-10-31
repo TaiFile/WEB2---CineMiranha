@@ -1,118 +1,196 @@
 package br.ufscar.pooa.cinema_api.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addresses")
 public class Address {
-	private String zipCode;
-	private String street;
-	private String number;
-	private String complement;
-	private String city;
-	private String neighborhood;
-	private String state;
-	private String country;
 
-	public Address() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Address(String zipCode, String street, String number, String complement, String city, String neighborhood, String state, String country) {
-		this.zipCode = zipCode;
-		this.street = street;
-		this.number = number;
-		this.complement = complement;
-		this.city = city;
-		this.neighborhood = neighborhood;
-		this.state = state;
-		this.country = country;
-	}
+    @Column(nullable = false)
+    private String zipCode;
 
-	public String getCountry() {
-		return country;
-	}
+    @Column(nullable = false)
+    private String street;
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    @Column(nullable = false)
+    private String number;
 
-	public String getState() {
-		return state;
-	}
+    @Column
+    private String complement;
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    @Column(nullable = false)
+    private String city;
 
-	public String getCity() {
-		return city;
-	}
+    @Column(nullable = false)
+    private String neighborhood;
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    @Column(nullable = false)
+    private String state;
 
-	public String getZipCode() {
-		return zipCode;
-	}
+    @Column(nullable = false)
+    private String country;
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+    @Column(nullable = false)
+    private Double latitude;
 
-	public String getNeighborhood() {
-		return neighborhood;
-	}
+    @Column(nullable = false)
+    private Double longitude;
 
-	public void setNeighborhood(String neighborhood) {
-		this.neighborhood = neighborhood;
-	}
+    @OneToOne(mappedBy = "address")
+    private Theater theater;
 
-	public String getStreet() {
-		return street;
-	}
+    public Address() {
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public Address(String zipCode, String street, String number, String complement, String city,
+        String neighborhood, String state, String country) {
+        this.zipCode = zipCode;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.state = state;
+        this.country = country;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getComplement() {
-		return complement;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setComplement(String complement) {
-		this.complement = complement;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (o == null || getClass() != o.getClass()) return false;
-		Address address = (Address) o;
-		return Objects.equals(country, address.country) && Objects.equals(state, address.state) && Objects.equals(city, address.city) && Objects.equals(zipCode, address.zipCode) && Objects.equals(neighborhood, address.neighborhood) && Objects.equals(street, address.street) && Objects.equals(number, address.number) && Objects.equals(complement, address.complement);
-	}
+    public String getState() {
+        return state;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(country, state, city, zipCode, neighborhood, street, number, complement);
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	@Override
-	public String toString() {
-		return "Address{" +
-				"zipCode='" + zipCode + '\'' +
-				", street='" + street + '\'' +
-				", number='" + number + '\'' +
-				", complement='" + complement + '\'' +
-				", city='" + city + '\'' +
-				", neighborhood='" + neighborhood + '\'' +
-				", state='" + state + '\'' +
-				", country='" + country + '\'' +
-				'}';
-	}
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Address setLatitude(Double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Address setLongitude(Double longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Address address)) {
+            return false;
+        }
+        return Objects.equals(getId(), address.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+            "id=" + id +
+            ", zipCode='" + zipCode + '\'' +
+            ", street='" + street + '\'' +
+            ", number='" + number + '\'' +
+            ", complement='" + complement + '\'' +
+            ", city='" + city + '\'' +
+            ", neighborhood='" + neighborhood + '\'' +
+            ", state='" + state + '\'' +
+            ", country='" + country + '\'' +
+            ", latitude=" + latitude +
+            ", longitude=" + longitude +
+            ", theater=" + theater +
+            '}';
+    }
 }

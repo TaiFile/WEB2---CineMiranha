@@ -1,20 +1,36 @@
 package br.ufscar.pooa.cinema_api.domain;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "theaters")
 public class Theater {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @Column
     private String logoUrl;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", unique = true)
     private Address address;
+
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
-    private List<User> managers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "theater")
+    private List<Manager> managers = new ArrayList<>();
 
     public Theater() {}
 
-    public Theater(String name, String logoUrl, List<Room> rooms, Address address, List<User> managers) {
+    public Theater(String name, String logoUrl, List<Room> rooms, Address address, List<Manager> managers) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.rooms = rooms;
@@ -62,11 +78,11 @@ public class Theater {
         this.rooms = rooms;
     }
 
-    public List<User> getManagers() {
+    public List<Manager> getManagers() {
         return managers;
     }
 
-    public void setManagers(List<User> managers) {
+    public void setManagers(List<Manager> managers) {
         this.managers = managers;
     }
 
@@ -88,10 +104,6 @@ public class Theater {
 
     @Override
     public String toString() {
-        return "Theater{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", logoUrl='" + logoUrl + '\'' +
-                '}';
+        return String.format("Theater{id=%d, name='%s', logoUrl='%s'}", id, name, logoUrl);
     }
 }

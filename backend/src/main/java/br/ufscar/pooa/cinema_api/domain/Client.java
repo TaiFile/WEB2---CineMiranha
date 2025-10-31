@@ -2,19 +2,33 @@ package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.Gender;
 import br.ufscar.pooa.cinema_api.domain.enums.Role;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "clients")
 public class Client extends User {
+    @Column
     private String cpf;
+
+    @Column
     private String name;
+
+    @Column
     private String phoneNumber;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "client")
     private List<Ticket> tickets = new ArrayList<>();
 
     public Client(String email,

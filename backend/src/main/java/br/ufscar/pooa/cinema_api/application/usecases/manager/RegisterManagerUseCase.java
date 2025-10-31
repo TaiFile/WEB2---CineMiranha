@@ -1,14 +1,15 @@
 package br.ufscar.pooa.cinema_api.application.usecases.manager;
 
+import br.ufscar.pooa.cinema_api.application.mappers.IManagerMapper;
 import br.ufscar.pooa.cinema_api.application.dtos.manager.ManagerResponseDTO;
 import br.ufscar.pooa.cinema_api.application.dtos.manager.RegisterManagerRequestDTO;
 import br.ufscar.pooa.cinema_api.application.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.application.ports.in.IRegisterManagerUseCase;
-import br.ufscar.pooa.cinema_api.application.ports.out.mapper.IObjectMapper;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IManagerRepository;
 import br.ufscar.pooa.cinema_api.application.ports.out.repository.IUserRepository;
 import br.ufscar.pooa.cinema_api.domain.Manager;
 import br.ufscar.pooa.cinema_api.domain.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,12 +19,14 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
 
     private final IUserRepository userRepository;
     private final IManagerRepository managerRepository;
-    private final IObjectMapper objectMapper;
+    private final IManagerMapper IManagerMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegisterManagerUseCase(IUserRepository userRepository, IManagerRepository managerRepository, IObjectMapper objectMapper) {
+    public RegisterManagerUseCase(IUserRepository userRepository, IManagerRepository managerRepository, IManagerMapper IManagerMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.managerRepository = managerRepository;
-        this.objectMapper = objectMapper;
+        this.IManagerMapper = IManagerMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,9 +41,10 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
             throw new ResourceAlreadyExistsException("Manager", "CPF", requestDTO.getCpf());
         }
 
-        Manager newManager = objectMapper.parseObject(requestDTO, Manager.class);
+        Manager newManager = IManagerMapper.toManager(requestDTO);
+        newManager.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         Manager savedUser = managerRepository.save(newManager);
 
-        return objectMapper.parseObject(savedUser, ManagerResponseDTO.class);
+        return IManagerMapper.toManagerResponseDTO(savedUser);
     }
 }
