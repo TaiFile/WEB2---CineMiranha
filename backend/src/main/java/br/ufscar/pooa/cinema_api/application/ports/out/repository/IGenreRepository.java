@@ -6,6 +6,8 @@ import br.ufscar.pooa.cinema_api.domain.enums.Gender;
 import java.util.Optional;
 
 public interface IGenreRepository {
+    void saveAll(Iterable<Genre> genres);
+
     Genre save(Genre genre);
 
     Optional<Genre> findById(Long id);

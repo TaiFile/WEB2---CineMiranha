@@ -5,6 +5,7 @@ import br.ufscar.pooa.cinema_api.domain.Genre;
 import br.ufscar.pooa.cinema_api.domain.Movie;
 import br.ufscar.pooa.cinema_api.adapters.out.database.repositories.genre.GenreJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -32,10 +33,10 @@ public class MovieRepositoryAdapter implements IMovieRepository {
 
         // Re-hydrate the genres to ensure they are managed entities
         if (movie.getGenres() != null && !movie.getGenres().isEmpty()) {
-            Set<Genre> managedGenres = movie.getGenres().stream()
+            List<Genre> managedGenres = movie.getGenres().stream()
                     .map(genre -> genreJpaRepository.findById(genre.getId())
                             .orElseThrow(() -> new EntityNotFoundException("Genre not found with id: " + genre.getId())))
-                    .collect(Collectors.toSet());
+                    .toList();
             movie.setGenres(managedGenres);
         }
 

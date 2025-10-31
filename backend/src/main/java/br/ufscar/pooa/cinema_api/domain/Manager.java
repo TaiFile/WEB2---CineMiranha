@@ -24,29 +24,40 @@ public class Manager extends User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public Manager(String email,
-                   String password,
-                   String cpf,
-                   LocalDate birthDate,
-                   Theater theater,
-                   Role role,
-                   Gender gender) {
-        super(email, password, role);
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.theater = theater;
-        this.gender = gender;
+    public Manager() {
     }
 
-    public Manager() {
+    @Override
+    public Manager setId(Long id) {
+        super.setId(id);
+        return this;
+    }
+
+    @Override
+    public Manager setEmail(String email) {
+        super.setEmail(email);
+        return this;
+    }
+
+    @Override
+    public Manager setPassword(String password) {
+        super.setPassword(password);
+        return this;
+    }
+
+    @Override
+    public Manager setRole(Role role) {
+        super.setRole(role);
+        return this;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public Manager setCpf(String cpf) {
         this.cpf = cpf;
+        return this;
     }
 
 
@@ -54,24 +65,27 @@ public class Manager extends User {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public Manager setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
     public Theater getTheater() {
         return theater;
     }
 
-    public void setTheater(Theater theater) {
+    public Manager setTheater(Theater theater) {
         this.theater = theater;
+        return this;
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public Manager setGender(Gender gender) {
         this.gender = gender;
+        return this;
     }
 
     @Override

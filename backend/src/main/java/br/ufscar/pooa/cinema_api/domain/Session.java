@@ -57,78 +57,76 @@ public class Session {
     public Session() {
     }
 
-    public Session(Format format, LocalDateTime date, Subtitle subtitle, Integer priceInCents, Room room, Movie movie, List<Ticket> tickets) {
-        this.format = format;
-        this.date = date;
-        this.subtitle = subtitle;
-        this.priceInCents = priceInCents;
-        this.room = room;
-        this.movie = movie;
-        this.tickets = tickets;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Session setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Format getFormat() {
         return format;
     }
 
-    public void setFormat(Format format) {
+    public Session setFormat(Format format) {
         this.format = format;
+        return this;
     }
 
     public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public Session setDate(LocalDateTime date) {
         this.date = date;
+        return this;
     }
 
     public Subtitle getSubtitle() {
         return subtitle;
     }
 
-    public void setSubtitle(Subtitle subtitle) {
+    public Session setSubtitle(Subtitle subtitle) {
         this.subtitle = subtitle;
+        return this;
     }
 
     public Integer getPriceInCents() {
         return priceInCents;
     }
 
-    public void setPriceInCents(Integer priceInCents) {
+    public Session setPriceInCents(Integer priceInCents) {
         this.priceInCents = priceInCents;
+        return this;
     }
 
     public Room getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public Session setRoom(Room room) {
         this.room = room;
+        return this;
     }
 
     public Movie getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
+    public Session setMovie(Movie movie) {
         this.movie = movie;
+        return this;
     }
 
     public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public Session setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+        return this;
     }
 
     @Override

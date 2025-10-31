@@ -38,69 +38,67 @@ public class Ticket {
 	public Ticket() {
 	}
 
-	public Ticket(Instant paymentDate, Integer priceInCents, Session session, Client client, Seat seat, PaymentMethod paymentMethod) {
-		this.paymentDate = paymentDate;
-		this.priceInCents = priceInCents;
-		this.session = session;
-		this.client = client;
-		this.seat = seat;
-		this.paymentMethod = paymentMethod;
-	}
-
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public Ticket setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public Instant getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(Instant paymentDate) {
+	public Ticket setPaymentDate(Instant paymentDate) {
 		this.paymentDate = paymentDate;
+		return this;
 	}
 
 	public Integer getPriceInCents() {
 		return priceInCents;
 	}
 
-	public void setPriceInCents(Integer priceInCents) {
+	public Ticket setPriceInCents(Integer priceInCents) {
 		this.priceInCents = priceInCents;
+		return this;
 	}
 
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
+	public Ticket setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
+		return this;
 	}
 
 	public Session getSession() {
 		return session;
 	}
 
-	public void setSession(Session session) {
+	public Ticket setSession(Session session) {
 		this.session = session;
+		return this;
 	}
 
 	public Client getClient() {
 		return client;
 	}
 
-	public void setClient(Client client) {
+	public Ticket setClient(Client client) {
 		this.client = client;
+		return this;
 	}
 
 	public Seat getSeat() {
 		return seat;
 	}
 
-	public void setSeat(Seat seat) {
+	public Ticket setSeat(Seat seat) {
 		this.seat = seat;
+		return this;
 	}
 
 	@Override

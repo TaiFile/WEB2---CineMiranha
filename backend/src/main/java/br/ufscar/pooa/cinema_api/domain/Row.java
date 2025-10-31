@@ -22,12 +22,6 @@ public class Row {
 	@OneToMany(mappedBy = "row", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<Seat> seats = new LinkedHashSet<>();
 
-	public Row(Character letter, Room room, Set<Seat> seats) {
-		this.letter = letter;
-		this.room = room;
-		this.seats = seats;
-	}
-
 	public Row(){
 
 	}
@@ -36,32 +30,36 @@ public class Row {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public Row setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public Character getLetter() {
 		return letter;
 	}
 
-	public void setLetter(Character letter) {
+	public Row setLetter(Character letter) {
 		this.letter = letter;
+		return this;
 	}
 
 	public Room getRoom() {
 		return room;
 	}
 
-	public void setRoom(Room room) {
+	public Row setRoom(Room room) {
 		this.room = room;
+		return this;
 	}
 
 	public Set<Seat> getSeats() {
 		return seats;
 	}
 
-	public void setSeats(Set<Seat> seats) {
+	public Row setSeats(Set<Seat> seats) {
 		this.seats = seats;
+		return this;
 	}
 
 	@Override

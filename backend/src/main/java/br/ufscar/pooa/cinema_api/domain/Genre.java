@@ -25,12 +25,6 @@ public class Genre {
     @ManyToMany(mappedBy = "genres")
     private List<Movie> movies = new ArrayList<>();
 
-    public Genre(Long id, String name, List<Movie> movies) {
-        this.id = id;
-        this.name = name;
-        this.movies = movies;
-    }
-
     public Genre() {
     }
 
@@ -38,24 +32,27 @@ public class Genre {
         return id;
     }
 
-    public void setId(Long id) {
+    public Genre setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Genre setName(String name) {
         this.name = name;
+        return this;
     }
 
     public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public Genre setMovies(List<Movie> movies) {
         this.movies = movies;
+        return this;
     }
 
     @Override

@@ -1,9 +1,12 @@
 package br.ufscar.pooa.cinema_api.domain;
 
 import br.ufscar.pooa.cinema_api.domain.enums.AgeRating;
+import br.ufscar.pooa.cinema_api.domain.enums.MovieStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,6 +45,13 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<Session> sessions = new ArrayList<>();
 
+    @Column
+    private AgeRating ageRating;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private MovieStatus status;
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "movie_genres",
@@ -50,22 +60,6 @@ public class Movie {
     )
     private List<Genre> genres;
 
-    @Column
-    private AgeRating ageRating;
-
-    public Movie(AgeRating ageRating, List<Genre> genres, List<Session> sessions,
-        Integer durationInSeconds, String trailerUrl, String coverUrl, String synopsis,
-        String title) {
-        this.ageRating = ageRating;
-        this.genres = genres;
-        this.sessions = sessions;
-        this.durationInSeconds = durationInSeconds;
-        this.trailerUrl = trailerUrl;
-        this.coverUrl = coverUrl;
-        this.synopsis = synopsis;
-        this.title = title;
-    }
-
     public Movie() {
     }
 
@@ -73,73 +67,90 @@ public class Movie {
         return id;
     }
 
-    public void setId(Long id) {
+    public Movie setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Movie setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public String getSynopsis() {
         return synopsis;
     }
 
-    public void setSynopsis(String synopsis) {
+    public Movie setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+        return this;
     }
 
     public String getCoverUrl() {
         return coverUrl;
     }
 
-    public void setCoverUrl(String coverUrl) {
+    public Movie setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
+        return this;
     }
 
     public String getTrailerUrl() {
         return trailerUrl;
     }
 
-    public void setTrailerUrl(String trailerUrl) {
+    public Movie setTrailerUrl(String trailerUrl) {
         this.trailerUrl = trailerUrl;
+        return this;
     }
 
     public Integer getDurationInSeconds() {
         return durationInSeconds;
     }
 
-    public void setDurationInSeconds(Integer durationInSeconds) {
+    public Movie setDurationInSeconds(Integer durationInSeconds) {
         this.durationInSeconds = durationInSeconds;
+        return this;
     }
-
 
     public List<Session> getSessions() {
         return sessions;
     }
 
-    public void setSessions(List<Session> sessions) {
+    public Movie setSessions(List<Session> sessions) {
         this.sessions = sessions;
+        return this;
     }
 
     public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public Movie setGenres(List<Genre> genres) {
         this.genres = genres;
+        return this;
     }
 
     public AgeRating getAgeRating() {
         return ageRating;
     }
 
-    public void setAgeRating(AgeRating ageRating) {
+    public Movie setAgeRating(AgeRating ageRating) {
         this.ageRating = ageRating;
+        return this;
+    }
+
+    public MovieStatus getStatus() {
+        return status;
+    }
+
+    public Movie setStatus(MovieStatus status) {
+        this.status = status;
+        return this;
     }
 
     @Override
@@ -152,12 +163,13 @@ public class Movie {
             movie.getTitle()) && Objects.equals(getSynopsis(), movie.getSynopsis())
             && Objects.equals(getCoverUrl(), movie.getCoverUrl()) && Objects.equals(getTrailerUrl(),
             movie.getTrailerUrl()) && Objects.equals(getDurationInSeconds(),
-            movie.getDurationInSeconds()) && getAgeRating() == movie.getAgeRating();
+            movie.getDurationInSeconds()) && getAgeRating() == movie.getAgeRating()
+            && getStatus() == movie.getStatus();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getTitle(), getSynopsis(), getCoverUrl(), getTrailerUrl(),
-            getDurationInSeconds(), getAgeRating());
+            getDurationInSeconds(), getAgeRating(), getStatus());
     }
 }

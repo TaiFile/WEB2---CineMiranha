@@ -25,18 +25,13 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, Role role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public User setId(Long id) {
         this.id = id;
+        return this;
     }
 
 
@@ -44,24 +39,27 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public User setRole(Role role) {
         this.role = role;
+        return this;
     }
 
     @Override

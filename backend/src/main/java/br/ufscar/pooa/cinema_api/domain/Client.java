@@ -31,73 +31,85 @@ public class Client extends User {
     @OneToMany(mappedBy = "client")
     private List<Ticket> tickets = new ArrayList<>();
 
-    public Client(String email,
-                  String password,
-                  String cpf,
-                  String name,
-                  String phoneNumber,
-                  Gender gender,
-                  LocalDate birthDate,
-                  List<Ticket> tickets,
-                  Role role) {
-        super(email, password, role);
-        this.cpf = cpf;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.tickets = tickets;
+    public Client() {
     }
 
-    public Client() {
+    @Override
+    public Client setId(Long id) {
+        super.setId(id);
+        return this;
+    }
+
+    @Override
+    public Client setEmail(String email) {
+        super.setEmail(email);
+        return this;
+    }
+
+    @Override
+    public Client setPassword(String password) {
+        super.setPassword(password);
+        return this;
+    }
+
+    @Override
+    public Client setRole(Role role) {
+        super.setRole(role);
+        return this;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public Client setCpf(String cpf) {
         this.cpf = cpf;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Client setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public Client setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public Client setGender(Gender gender) {
         this.gender = gender;
+        return this;
     }
 
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public Client setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
     public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public Client setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+        return this;
     }
 
     @Override

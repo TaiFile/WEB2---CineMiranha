@@ -32,15 +32,6 @@ public class Room {
     public Room() {
     }
 
-    public Room(Long id, String name, RoomType roomType, Theater theater, Set<Row> rows, List<Session> sessions) {
-        this.id = id;
-        this.name = name;
-        this.roomType = roomType;
-        this.theater = theater;
-        this.rows = rows;
-        this.sessions = sessions;
-    }
-
     public Long getId() {
         return id;
     }

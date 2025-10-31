@@ -53,88 +53,85 @@ public class Address {
     public Address() {
     }
 
-    public Address(String zipCode, String street, String number, String complement, String city,
-        String neighborhood, String state, String country) {
-        this.zipCode = zipCode;
-        this.street = street;
-        this.number = number;
-        this.complement = complement;
-        this.city = city;
-        this.neighborhood = neighborhood;
-        this.state = state;
-        this.country = country;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Address setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public Address setCountry(String country) {
         this.country = country;
+        return this;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public Address setState(String state) {
         this.state = state;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public Address setCity(String city) {
         this.city = city;
+        return this;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    public Address setZipCode(String zipCode) {
         this.zipCode = zipCode;
+        return this;
     }
 
     public String getNeighborhood() {
         return neighborhood;
     }
 
-    public void setNeighborhood(String neighborhood) {
+    public Address setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+        return this;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
+    public Address setStreet(String street) {
         this.street = street;
+        return this;
     }
 
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public Address setNumber(String number) {
         this.number = number;
+        return this;
     }
 
     public String getComplement() {
         return complement;
     }
 
-    public void setComplement(String complement) {
+    public Address setComplement(String complement) {
         this.complement = complement;
+        return this;
     }
 
     public Double getLatitude() {
@@ -159,8 +156,9 @@ public class Address {
         return theater;
     }
 
-    public void setTheater(Theater theater) {
+    public Address setTheater(Theater theater) {
         this.theater = theater;
+        return this;
     }
 
     @Override

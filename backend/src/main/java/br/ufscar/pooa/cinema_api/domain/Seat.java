@@ -31,51 +31,49 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(Character number, Row row, List<Ticket> tickets, SeatType seatType) {
-        this.number = number;
-        this.row = row;
-        this.tickets = tickets;
-        this.seatType = seatType;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Seat setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Character getNumber() {
         return number;
     }
 
-    public void setNumber(Character number) {
+    public Seat setNumber(Character number) {
         this.number = number;
+        return this;
     }
 
     public SeatType getSeatType() {
         return seatType;
     }
 
-    public void setSeatType(SeatType seatType) {
+    public Seat setSeatType(SeatType seatType) {
         this.seatType = seatType;
+        return this;
     }
 
     public Row getRow() {
         return row;
     }
 
-    public void setRow(Row row) {
+    public Seat setRow(Row row) {
         this.row = row;
+        return this;
     }
 
     public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public Seat setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+        return this;
     }
 
     @Override

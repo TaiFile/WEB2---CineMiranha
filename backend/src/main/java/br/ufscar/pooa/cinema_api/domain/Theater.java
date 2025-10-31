@@ -30,60 +30,58 @@ public class Theater {
 
     public Theater() {}
 
-    public Theater(String name, String logoUrl, List<Room> rooms, Address address, List<Manager> managers) {
-        this.name = name;
-        this.logoUrl = logoUrl;
-        this.rooms = rooms;
-        this.address = address;
-        this.managers = managers;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Theater setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Theater setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getLogoUrl() {
         return logoUrl;
     }
 
-    public void setLogoUrl(String logoUrl) {
+    public Theater setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+        return this;
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public Theater setAddress(Address address) {
         this.address = address;
+        return this;
     }
 
     public List<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<Room> rooms) {
+    public Theater setRooms(List<Room> rooms) {
         this.rooms = rooms;
+        return this;
     }
 
     public List<Manager> getManagers() {
         return managers;
     }
 
-    public void setManagers(List<Manager> managers) {
+    public Theater setManagers(List<Manager> managers) {
         this.managers = managers;
+        return this;
     }
 
 
