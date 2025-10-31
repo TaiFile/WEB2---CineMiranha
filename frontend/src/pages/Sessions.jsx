@@ -124,7 +124,7 @@ function Sessions() {
                       <button
                         key={`${horario.time}-${horario.lang}-${horario.format}`}
                         onClick={() => navigate("/movies/seats")}
-                        className="overflow-hidden justify-self-center flex flex-col gap-2 w-[90px] h-[70px] p-2 sm:w-[150px] sm:h-[80px] sm:p-3 md:w-[240px] md:h-[120px] md:p-3 2xl:w-[500px] 2xl:h-[150px] 2xl:p-5 
+                        className="overflow-hidden justify-self-center flex flex-col gap-2 w-[90%] h-full p-[10%] md:p-3 
                                   bg-cinema-darkPalette-500 border border-cinema-darkPalette-700 
                                     rounded-lg hover:border-cinema-red transition-colors duration-200"
                       >
