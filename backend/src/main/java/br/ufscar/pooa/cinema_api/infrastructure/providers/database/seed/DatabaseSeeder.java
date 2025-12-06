@@ -1,14 +1,14 @@
 package br.ufscar.pooa.cinema_api.infrastructure.providers.database.seed;
 
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IClientRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IGenreRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IManagerRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IMovieRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IRoomRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.IRowRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.ISeatRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.ISessionRepository;
-import br.ufscar.pooa.cinema_api.features._shared.gateways.repository.ITheaterRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.client.IClientRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.genre.IGenreRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.manager.IManagerRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.movie.IMovieRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.room.IRoomRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.row.IRowRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.seat.ISeatRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.session.ISessionRepository;
+import br.ufscar.pooa.cinema_api.domain.repositories.theater.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.domain.entities.Address;
 import br.ufscar.pooa.cinema_api.domain.entities.Client;
 import br.ufscar.pooa.cinema_api.domain.entities.Genre;
