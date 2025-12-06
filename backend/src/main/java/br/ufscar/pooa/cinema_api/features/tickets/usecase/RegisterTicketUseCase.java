@@ -5,6 +5,7 @@ import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceNotFoundExc
 import br.ufscar.pooa.cinema_api.features._shared.gateways.payment.PaymentStrategyFactory;
 import br.ufscar.pooa.cinema_api.features.tickets.dto.RegisterTicketRequestDTO;
 import br.ufscar.pooa.cinema_api.features.tickets.dto.TicketResponseDTO;
+import br.ufscar.pooa.cinema_api.features.tickets.mapper.ITicketMapper;
 import br.ufscar.pooa.cinema_api.features._shared.gateways.payment.IPaymentStrategy;
 import br.ufscar.pooa.cinema_api.domain.repositories.client.IClientRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.seat.ISeatRepository;

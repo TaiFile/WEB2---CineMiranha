@@ -1,8 +1,8 @@
-package br.ufscar.pooa.cinema_api.features.theaters.usecase;
+package br.ufscar.pooa.cinema_api.features.theaters.mapper;
 
-import br.ufscar.pooa.cinema_api.features.rooms.usecase.IAddressMapper;
+import br.ufscar.pooa.cinema_api.features.rooms.mapper.IAddressMapper;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
-import br.ufscar.pooa.cinema_api.features.managers.usecase.IUserMapper;
+import br.ufscar.pooa.cinema_api.features.managers.mapper.IUserMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
 import org.mapstruct.Mapper;
 
@@ -13,3 +13,4 @@ public interface ITheaterMapper {
     @Mapping(source = "distance", target = "distance")
     TheaterResponseDTO toTheaterResponseDTO(Theater theater);
 }
+

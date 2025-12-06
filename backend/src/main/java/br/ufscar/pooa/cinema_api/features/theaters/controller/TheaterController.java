@@ -3,7 +3,7 @@ package br.ufscar.pooa.cinema_api.features.theaters.controller;
 
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
-import br.ufscar.pooa.cinema_api.features.theaters.usecase.ITheaterMapper;
+import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;

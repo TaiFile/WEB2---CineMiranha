@@ -7,6 +7,7 @@ import br.ufscar.pooa.cinema_api.domain.repositories.user.IUserRepository;
 import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.features.clients.dto.ClientResponseDTO;
 import br.ufscar.pooa.cinema_api.features.clients.dto.RegisterClientRequestDTO;
+import br.ufscar.pooa.cinema_api.features.clients.mapper.IClientMapper;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,17 +17,14 @@ public class RegisterClientUseCase implements IRegisterClientUseCase {
 
     private final IUserRepository userRepository;
     private final IClientRepository clientRepository;
-    private final IClientMapper IClientMapper;
+    private final IClientMapper clientMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterClientUseCase(
-        IUserRepository userRepository,
-        IClientRepository clientRepository,
-        IClientMapper IClientMapper,
-        PasswordEncoder passwordEncoder) {
+    public RegisterClientUseCase(IUserRepository userRepository, IClientRepository clientRepository,
+        IClientMapper clientMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
-        this.IClientMapper = IClientMapper;
+        this.clientMapper = clientMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -42,10 +40,10 @@ public class RegisterClientUseCase implements IRegisterClientUseCase {
             throw new ResourceAlreadyExistsException("Client", "CPF", requestDTO.getCpf());
         }
 
-        Client newClient = IClientMapper.toClient(requestDTO);
+        Client newClient = clientMapper.toClient(requestDTO);
         newClient.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         Client savedUser = clientRepository.save(newClient);
 
-        return IClientMapper.toClientResponseDTO(savedUser);
+        return clientMapper.toClientResponseDTO(savedUser);
     }
 }

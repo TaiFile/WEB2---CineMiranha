@@ -8,6 +8,7 @@ import br.ufscar.pooa.cinema_api.domain.repositories.room.IRoomRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.theater.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RegisterRoomRequestDTO;
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RoomResponseDTO;
+import br.ufscar.pooa.cinema_api.features.rooms.mapper.IRoomMapper;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class RegisterRoomUseCase implements IRegisterRoomUseCase {
 
 
     public RegisterRoomUseCase(IRoomRepository repository, ITheaterRepository theaterRepository,
-        IRoomMapper IRoomMapper, IRowMapper IRowMapper) {
+        IRoomMapper IRoomMapper) {
         this.repository = repository;
         this.theaterRepository = theaterRepository;
         this.IRoomMapper = IRoomMapper;

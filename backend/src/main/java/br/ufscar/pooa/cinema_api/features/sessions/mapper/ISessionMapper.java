@@ -1,8 +1,8 @@
-package br.ufscar.pooa.cinema_api.features.sessions.usecase;
+package br.ufscar.pooa.cinema_api.features.sessions.mapper;
 
-import br.ufscar.pooa.cinema_api.features.rooms.usecase.IRoomMapper;
+import br.ufscar.pooa.cinema_api.features.rooms.mapper.IRoomMapper;
 import br.ufscar.pooa.cinema_api.domain.entities.Session;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IMovieMapper;
+import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,3 +14,4 @@ public interface ISessionMapper {
     @Mapping(source = "room.id", target = "roomId")
     SessionResponseDTO toSessionResponseDTO(Session session);
 }
+

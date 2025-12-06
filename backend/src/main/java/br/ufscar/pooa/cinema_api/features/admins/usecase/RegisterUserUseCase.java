@@ -5,7 +5,7 @@ import br.ufscar.pooa.cinema_api.domain.repositories.user.IUserRepository;
 import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.features.admins.dto.RegisterUserRequestDTO;
 import br.ufscar.pooa.cinema_api.features.admins.dto.UserResponseDTO;
-import br.ufscar.pooa.cinema_api.features.managers.usecase.IUserMapper;
+import br.ufscar.pooa.cinema_api.features.managers.mapper.IUserMapper;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

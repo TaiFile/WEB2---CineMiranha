@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.movies.controller;
 
 import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IMovieMapper;
+import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMovieByIdUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IRegisterMovieUseCase;

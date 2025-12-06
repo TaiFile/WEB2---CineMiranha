@@ -2,6 +2,7 @@ package br.ufscar.pooa.cinema_api.features.sessions.usecase;
 
 import br.ufscar.pooa.cinema_api.features.sessions.dto.RegisterSessionRequestDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
+import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
 import br.ufscar.pooa.cinema_api.domain.repositories.movie.IMovieRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.room.IRoomRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.session.ISessionRepository;
