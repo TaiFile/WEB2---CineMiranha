@@ -1,4 +1,4 @@
-package br.ufscar.pooa.cinema_api.config;
+package br.ufscar.pooa.cinema_api.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

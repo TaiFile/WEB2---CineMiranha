@@ -1,4 +1,4 @@
-package br.ufscar.pooa.cinema_api.infrastructure.web.exceptions;
+package br.ufscar.pooa.cinema_api.features._shared.exceptions.handler;
 
 import java.time.Instant;
 

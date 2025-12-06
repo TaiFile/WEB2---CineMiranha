@@ -1,4 +1,4 @@
-package br.ufscar.pooa.cinema_api.infrastructure.providers.database.seed;
+package br.ufscar.pooa.cinema_api.infrastructure.database;
 
 import br.ufscar.pooa.cinema_api.domain.repositories.client.IClientRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.genre.IGenreRepository;
