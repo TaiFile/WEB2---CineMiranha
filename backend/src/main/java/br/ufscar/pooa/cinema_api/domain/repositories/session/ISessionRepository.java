@@ -15,6 +15,6 @@ public interface ISessionRepository extends JpaRepository<Session, Long> {
     Optional<Session> findById(@NonNull Long id);
 
     @EntityGraph(attributePaths = {"movie", "room", "room.rows", "room.rows.seats", "tickets"})
-    List<Session> findAllByDateBetween(LocalDateTime start, LocalDateTime end);
+    List<Session> findAllByMovieId(Long movieId);
 }
 
