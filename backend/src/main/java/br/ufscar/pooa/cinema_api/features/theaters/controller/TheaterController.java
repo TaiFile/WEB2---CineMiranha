@@ -2,10 +2,14 @@ package br.ufscar.pooa.cinema_api.features.theaters.controller;
 
 
 import br.ufscar.pooa.cinema_api.domain.entities.Movie;
+import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesByTheaterIdUseCase;
+import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
+import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
+import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMovieIdAndTheaterIdUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
@@ -31,19 +35,25 @@ public class TheaterController {
     private final IRegisterTheaterUseCase registerTheaterUseCase;
     private final IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase;
     private final IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase;
+    private final IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase;
     private final ITheaterMapper theaterMapper;
     private final IMovieMapper movieMapper;
+    private final ISessionMapper sessionMapper;
 
     public TheaterController(IRegisterTheaterUseCase registerTheaterUseCase,
         IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase,
         IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase,
+        IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase,
         ITheaterMapper theaterMapper,
-        IMovieMapper movieMapper) {
+        IMovieMapper movieMapper,
+        ISessionMapper sessionMapper) {
         this.registerTheaterUseCase = registerTheaterUseCase;
         this.getTheatersByDistanceUseCase = getTheatersByDistanceUseCase;
         this.findAllMoviesByTheaterIdUseCase = findAllMoviesByTheaterIdUseCase;
+        this.findAllSessionsByMovieIdAndTheaterIdUseCase = findAllSessionsByMovieIdAndTheaterIdUseCase;
         this.theaterMapper = theaterMapper;
         this.movieMapper = movieMapper;
+        this.sessionMapper = sessionMapper;
     }
 
     @Operation(summary = "Register a new theater")
@@ -75,6 +85,18 @@ public class TheaterController {
         List<Movie> movies = findAllMoviesByTheaterIdUseCase.execute(id);
         List<MovieResponseDTO> response = movies.stream()
             .map(movieMapper::toMovieResponseDTO)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Get all sessions for a specific movie at a specific theater")
+    @GetMapping("/{theaterId}/movies/{movieId}/sessions")
+    public ResponseEntity<List<SessionResponseDTO>> findAllSessionsByMovieIdAndTheaterId(
+        @PathVariable Long theaterId,
+        @PathVariable Long movieId) {
+        List<Session> sessions = findAllSessionsByMovieIdAndTheaterIdUseCase.execute(movieId, theaterId);
+        List<SessionResponseDTO> response = sessions.stream()
+            .map(sessionMapper::toSessionResponseDTO)
             .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
