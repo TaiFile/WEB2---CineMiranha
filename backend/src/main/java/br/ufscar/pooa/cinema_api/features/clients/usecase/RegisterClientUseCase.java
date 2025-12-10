@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterClientUseCase implements IRegisterClientUseCase {
+public class RegisterClientUseCase {
 
     private final IUserRepository userRepository;
     private final IClientRepository clientRepository;
@@ -28,7 +28,6 @@ public class RegisterClientUseCase implements IRegisterClientUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
     public ClientResponseDTO execute(RegisterClientRequestDTO requestDTO) {
         Optional<User> userExists = userRepository.findByEmail(requestDTO.getEmail());
         if (userExists.isPresent()) {
@@ -47,3 +46,4 @@ public class RegisterClientUseCase implements IRegisterClientUseCase {
         return clientMapper.toClientResponseDTO(savedUser);
     }
 }
+

@@ -6,15 +6,15 @@ import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesByTheaterIdUseCase;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.FindAllMoviesByTheaterIdUseCase;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
-import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMovieIdAndTheaterIdUseCase;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.FindAllSessionsByMovieIdAndTheaterIdUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
-import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
-import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.GetTheatersByDistanceUseCase;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.RegisterTheaterUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import java.net.URI;
 import java.util.List;
@@ -32,18 +32,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TheaterController {
 
-    private final IRegisterTheaterUseCase registerTheaterUseCase;
-    private final IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase;
-    private final IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase;
-    private final IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase;
+    private final RegisterTheaterUseCase registerTheaterUseCase;
+    private final GetTheatersByDistanceUseCase getTheatersByDistanceUseCase;
+    private final FindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase;
+    private final FindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase;
     private final ITheaterMapper theaterMapper;
     private final IMovieMapper movieMapper;
     private final ISessionMapper sessionMapper;
 
-    public TheaterController(IRegisterTheaterUseCase registerTheaterUseCase,
-        IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase,
-        IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase,
-        IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase,
+    public TheaterController(RegisterTheaterUseCase registerTheaterUseCase,
+        GetTheatersByDistanceUseCase getTheatersByDistanceUseCase,
+        FindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase,
+        FindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase,
         ITheaterMapper theaterMapper,
         IMovieMapper movieMapper,
         ISessionMapper sessionMapper) {

@@ -4,13 +4,13 @@ import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMovieByIdUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IRegisterMovieUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllMoviesUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindMovieByIdUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.RegisterMovieUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllSessionsByMovieIdUseCase;
 import br.ufscar.pooa.cinema_api.domain.entities.Movie;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
-import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMovieIdUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +21,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-    private final IRegisterMovieUseCase registerMovieUseCase;
-    private final IFindAllMoviesUseCase findAllMoviesUseCase;
-    private final IFindMovieByIdUseCase findMovieByIdUseCase;
-    private final IFindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase;
+    private final RegisterMovieUseCase registerMovieUseCase;
+    private final FindAllMoviesUseCase findAllMoviesUseCase;
+    private final FindMovieByIdUseCase findMovieByIdUseCase;
+    private final FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase;
     private final IMovieMapper movieMapper;
     private final ISessionMapper sessionMapper;
 
-    public MovieController(IRegisterMovieUseCase registerMovieUseCase, IFindAllMoviesUseCase findAllMoviesUseCase, IFindMovieByIdUseCase findMovieByIdUseCase,
-        IFindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase, IMovieMapper movieMapper, ISessionMapper sessionMapper) {
+    public MovieController(RegisterMovieUseCase registerMovieUseCase, FindAllMoviesUseCase findAllMoviesUseCase, FindMovieByIdUseCase findMovieByIdUseCase,
+        FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase, IMovieMapper movieMapper, ISessionMapper sessionMapper) {
         this.registerMovieUseCase = registerMovieUseCase;
         this.findAllMoviesUseCase = findAllMoviesUseCase;
         this.findMovieByIdUseCase = findMovieByIdUseCase;

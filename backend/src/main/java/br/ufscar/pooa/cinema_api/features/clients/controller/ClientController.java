@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.clients.controller;
 
 import br.ufscar.pooa.cinema_api.features.clients.dto.ClientResponseDTO;
 import br.ufscar.pooa.cinema_api.features.clients.dto.RegisterClientRequestDTO;
-import br.ufscar.pooa.cinema_api.features.clients.usecase.IRegisterClientUseCase;
+import br.ufscar.pooa.cinema_api.features.clients.usecase.RegisterClientUseCase;
 import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final IRegisterClientUseCase registerClientUseCase;
+    private final RegisterClientUseCase registerClientUseCase;
 
     public ClientController(
-        IRegisterClientUseCase registerClientUseCase) {
+        RegisterClientUseCase registerClientUseCase) {
         this.registerClientUseCase = registerClientUseCase;
     }
 

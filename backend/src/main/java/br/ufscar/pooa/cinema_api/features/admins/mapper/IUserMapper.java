@@ -1,4 +1,4 @@
-package br.ufscar.pooa.cinema_api.features.managers.mapper;
+package br.ufscar.pooa.cinema_api.features.admins.mapper;
 
 import br.ufscar.pooa.cinema_api.domain.entities.User;
 import br.ufscar.pooa.cinema_api.features.admins.dto.RegisterUserRequestDTO;

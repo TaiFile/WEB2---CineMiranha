@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class RegisterManagerUseCase implements IRegisterManagerUseCase {
+public class RegisterManagerUseCase {
 
     private final IUserRepository userRepository;
     private final IManagerRepository managerRepository;
@@ -28,7 +28,6 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
     public ManagerResponseDTO execute(RegisterManagerRequestDTO requestDTO) {
         Optional<User> userExists = userRepository.findByEmail(requestDTO.getEmail());
         if (userExists.isPresent()) {
@@ -47,3 +46,4 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
         return IManagerMapper.toManagerResponseDTO(savedUser);
     }
 }
+

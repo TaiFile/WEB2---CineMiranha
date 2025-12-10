@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class FindMovieByIdUseCase implements IFindMovieByIdUseCase {
+public class FindMovieByIdUseCase {
 
     private final IMovieRepository movieRepository;
 
@@ -16,9 +16,9 @@ public class FindMovieByIdUseCase implements IFindMovieByIdUseCase {
         this.movieRepository = movieRepository;
     }
 
-    @Override
     public Movie execute(Long id) {
         Optional<Movie> movie = movieRepository.findById(id);
         return movie.orElseThrow(() -> new ResourceNotFoundException("Movie", "id", id.toString()));
     }
 }
+

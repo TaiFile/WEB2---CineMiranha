@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.tickets.controller;
 
 import br.ufscar.pooa.cinema_api.features.tickets.dto.RegisterTicketRequestDTO;
 import br.ufscar.pooa.cinema_api.features.tickets.dto.TicketResponseDTO;
-import br.ufscar.pooa.cinema_api.features.tickets.usecase.IRegisterTicketUseCase;
+import br.ufscar.pooa.cinema_api.features.tickets.usecase.RegisterTicketUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +14,9 @@ import java.net.URI;
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
-    private final IRegisterTicketUseCase ticketUseCase;
+    private final RegisterTicketUseCase ticketUseCase;
 
-    public TicketController(IRegisterTicketUseCase ticketUseCase) {
+    public TicketController(RegisterTicketUseCase ticketUseCase) {
         this.ticketUseCase = ticketUseCase;
     }
 

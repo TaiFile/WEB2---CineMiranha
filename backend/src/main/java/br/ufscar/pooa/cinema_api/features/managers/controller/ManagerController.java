@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.managers.controller;
 
 import br.ufscar.pooa.cinema_api.features.managers.dto.ManagerResponseDTO;
 import br.ufscar.pooa.cinema_api.features.managers.dto.RegisterManagerRequestDTO;
-import br.ufscar.pooa.cinema_api.features.managers.usecase.IRegisterManagerUseCase;
+import br.ufscar.pooa.cinema_api.features.managers.usecase.RegisterManagerUseCase;
 import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/managers")
 public class ManagerController {
 
-    private final IRegisterManagerUseCase registerManagerUseCase;
+    private final RegisterManagerUseCase registerManagerUseCase;
 
-    public ManagerController(IRegisterManagerUseCase registerManagerUseCase) {
+    public ManagerController(RegisterManagerUseCase registerManagerUseCase) {
         this.registerManagerUseCase = registerManagerUseCase;
     }
 

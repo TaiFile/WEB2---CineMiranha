@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 
 @Service
-public class RegisterTicketUseCase implements IRegisterTicketUseCase {
+public class RegisterTicketUseCase {
 
     private final ITicketRepository ticketRepository;
     private final ISessionRepository sessionRepository;
@@ -43,7 +43,6 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
         this.ITicketMapper = ITicketMapper;
     }
 
-    @Override
     public TicketResponseDTO execute(RegisterTicketRequestDTO requestDTO) {
         Session session = sessionRepository.findById(requestDTO.getSessionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Sessão", "id", requestDTO.getSessionId().toString()));
@@ -79,3 +78,5 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
         return ITicketMapper.toTicketResponseDTO(savedTicket);
     }
 }
+
+

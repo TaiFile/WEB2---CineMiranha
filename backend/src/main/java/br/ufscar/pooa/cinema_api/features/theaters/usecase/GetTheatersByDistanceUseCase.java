@@ -1,6 +1,5 @@
-package br.ufscar.pooa.cinema_api.features.rooms.usecase;
+package br.ufscar.pooa.cinema_api.features.theaters.usecase;
 
-import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.domain.repositories.theater.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
 import br.ufscar.pooa.cinema_api.utils.DistanceCalculator;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetTheatersByDistanceUseCase implements IGetTheatersByDistanceUseCase {
+public class GetTheatersByDistanceUseCase {
 
     private final ITheaterRepository theaterRepository;
 
@@ -18,7 +17,6 @@ public class GetTheatersByDistanceUseCase implements IGetTheatersByDistanceUseCa
         this.theaterRepository = theaterRepository;
     }
 
-    @Override
     public List<Theater> execute(Double userLatitude, Double userLongitude) {
         List<Theater> theaters = theaterRepository.findAll();
 
@@ -37,3 +35,5 @@ public class GetTheatersByDistanceUseCase implements IGetTheatersByDistanceUseCa
             .collect(Collectors.toList());
     }
 }
+
+

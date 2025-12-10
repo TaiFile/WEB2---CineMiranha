@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.admins.controller;
 
 import br.ufscar.pooa.cinema_api.features.admins.dto.RegisterUserRequestDTO;
 import br.ufscar.pooa.cinema_api.features.admins.dto.UserResponseDTO;
-import br.ufscar.pooa.cinema_api.features.admins.usecase.IRegisterUserUseCase;
+import br.ufscar.pooa.cinema_api.features.admins.usecase.RegisterUserUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +14,9 @@ import java.net.URI;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private final IRegisterUserUseCase registerUserUseCase;
+    private final RegisterUserUseCase registerUserUseCase;
 
-    public UserController(IRegisterUserUseCase registerUserUseCase) {
+    public UserController(RegisterUserUseCase registerUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
     }
 

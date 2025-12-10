@@ -1,4 +1,4 @@
-package br.ufscar.pooa.cinema_api.features.rooms.usecase;
+package br.ufscar.pooa.cinema_api.features.theaters.usecase;
 
 import br.ufscar.pooa.cinema_api.domain.entities.Manager;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
@@ -8,7 +8,6 @@ import br.ufscar.pooa.cinema_api.domain.repositories.theater.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.domain.repositories.user.IUserRepository;
 import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceNotFoundException;
-import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.features.rooms.mapper.IAddressMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class RegisterTheaterUseCase implements IRegisterTheaterUseCase {
+public class RegisterTheaterUseCase {
 
     private final ITheaterRepository theaterRepository;
     private final IAddressRepository addressRepository;
@@ -36,7 +35,6 @@ public class RegisterTheaterUseCase implements IRegisterTheaterUseCase {
         this.IAddressMapper = IAddressMapper;
     }
 
-    @Override
     @Transactional
     public TheaterResponseDTO execute(String userEmail, RegisterTheaterRequestDTO requestDTO) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(
@@ -65,3 +63,4 @@ public class RegisterTheaterUseCase implements IRegisterTheaterUseCase {
         return ITheaterMapper.toTheaterResponseDTO(savedTheater);
     }
 }
+

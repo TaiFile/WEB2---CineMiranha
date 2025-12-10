@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterRoomUseCase implements IRegisterRoomUseCase {
+public class RegisterRoomUseCase {
 
     private final IRoomRepository repository;
     private final ITheaterRepository theaterRepository;
@@ -28,7 +28,6 @@ public class RegisterRoomUseCase implements IRegisterRoomUseCase {
         this.IRoomMapper = IRoomMapper;
     }
 
-    @Override
     public RoomResponseDTO execute(RegisterRoomRequestDTO requestDTO) {
         Theater theater = theaterRepository.findById(requestDTO.getTheaterId())
             .orElseThrow(() -> new IllegalArgumentException("Theater not found."));
@@ -67,3 +66,4 @@ public class RegisterRoomUseCase implements IRegisterRoomUseCase {
         return IRoomMapper.toRoomResponseDTO(savedRoom);
     }
 }
+

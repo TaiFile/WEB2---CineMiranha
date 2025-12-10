@@ -12,7 +12,7 @@ import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterSessionUseCase implements IRegisterSessionUseCase {
+public class RegisterSessionUseCase {
     private final ISessionRepository sessionRepository;
     private final IRoomRepository repository;
     private final IMovieRepository movieRepository;
@@ -25,7 +25,6 @@ public class RegisterSessionUseCase implements IRegisterSessionUseCase {
         this.ISessionMapper = ISessionMapper;
     }
 
-    @Override
     public SessionResponseDTO execute(RegisterSessionRequestDTO requestDTO) {
         Room room = repository.findById(requestDTO.getRoomId())
                 .orElseThrow(() -> new IllegalArgumentException("Room not found."));
@@ -46,3 +45,4 @@ public class RegisterSessionUseCase implements IRegisterSessionUseCase {
         return ISessionMapper.toSessionResponseDTO(savedSession);
     }
 }
+

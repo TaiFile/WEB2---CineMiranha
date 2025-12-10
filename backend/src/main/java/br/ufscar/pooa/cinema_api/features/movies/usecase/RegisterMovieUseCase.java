@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterMovieUseCase implements IRegisterMovieUseCase {
+public class RegisterMovieUseCase {
 
     private final IMovieRepository movieRepository;
     private final IMovieMapper IMovieMapper;
@@ -33,3 +33,5 @@ public class RegisterMovieUseCase implements IRegisterMovieUseCase {
         return IMovieMapper.toMovieResponseDTO(savedMovie);
     }
 }
+
+

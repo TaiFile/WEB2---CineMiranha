@@ -2,7 +2,7 @@ package br.ufscar.pooa.cinema_api.features.rooms.controller;
 
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RegisterRoomRequestDTO;
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RoomResponseDTO;
-import br.ufscar.pooa.cinema_api.features.rooms.usecase.IRegisterRoomUseCase;
+import br.ufscar.pooa.cinema_api.features.rooms.usecase.RegisterRoomUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +15,9 @@ import java.net.URI;
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {
-    private final IRegisterRoomUseCase registerRoomUseCase;
+    private final RegisterRoomUseCase registerRoomUseCase;
 
-    public RoomController(IRegisterRoomUseCase registerRoomUseCase) {
+    public RoomController(RegisterRoomUseCase registerRoomUseCase) {
         this.registerRoomUseCase = registerRoomUseCase;
     }
 

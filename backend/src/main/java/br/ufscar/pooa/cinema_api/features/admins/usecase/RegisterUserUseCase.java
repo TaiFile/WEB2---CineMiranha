@@ -5,13 +5,13 @@ import br.ufscar.pooa.cinema_api.domain.repositories.user.IUserRepository;
 import br.ufscar.pooa.cinema_api.features._shared.exceptions.ResourceAlreadyExistsException;
 import br.ufscar.pooa.cinema_api.features.admins.dto.RegisterUserRequestDTO;
 import br.ufscar.pooa.cinema_api.features.admins.dto.UserResponseDTO;
-import br.ufscar.pooa.cinema_api.features.managers.mapper.IUserMapper;
+import br.ufscar.pooa.cinema_api.features.admins.mapper.IUserMapper;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterUserUseCase implements IRegisterUserUseCase {
+public class RegisterUserUseCase {
 
     private final IUserRepository userRepository;
     private final IUserMapper IUserMapper;
@@ -39,3 +39,4 @@ public class RegisterUserUseCase implements IRegisterUserUseCase {
         return IUserMapper.toUserResponseDTO(savedUser);
     }
 }
+
