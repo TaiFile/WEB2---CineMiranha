@@ -11,6 +11,7 @@ import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
@@ -56,6 +57,7 @@ public class TheaterController {
         return ResponseEntity.created(uri).body(responseDTO);
     }
 
+    @Operation(summary = "Get all theaters sorted by distance from the user")
     @GetMapping("/by-distance")
     public ResponseEntity<List<TheaterResponseDTO>> getTheatersByDistance(
         @RequestParam("latitude") Double latitude,
