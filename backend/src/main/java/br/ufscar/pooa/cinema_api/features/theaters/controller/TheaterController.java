@@ -12,7 +12,6 @@ import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,9 +46,10 @@ public class TheaterController {
         this.movieMapper = movieMapper;
     }
 
+    @Operation(summary = "Register a new theater")
     @PostMapping
     public ResponseEntity<TheaterResponseDTO> register(
-        @PathParam("userEmail") String userEmail,
+        @RequestParam String userEmail,
         @RequestBody RegisterTheaterRequestDTO registerRequestBody) {
         var responseDTO = registerTheaterUseCase.execute(userEmail, registerRequestBody);
 
@@ -69,6 +69,7 @@ public class TheaterController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Get all movies for a specific theater by its ID")
     @GetMapping("/{id}/movies")
     public ResponseEntity<List<MovieResponseDTO>> findAllMoviesByTheaterId(@PathVariable Long id) {
         List<Movie> movies = findAllMoviesByTheaterIdUseCase.execute(id);
