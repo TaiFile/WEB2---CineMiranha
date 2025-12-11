@@ -1,19 +1,16 @@
 // OrderSidebar.jsx
+import { FaTrash } from "react-icons/fa";
 import Button from "../Button/Button";
 import MovieDetails from "../MovieDetails/MovieDetails";
 
 const OrderSidebar = ({
   movie,
   session,
-  selectedSeats,
-  seats,
+  selectedSeats = [],
   onRemoveSeat,
 }) => {
   const seatPrice = 25.0;
-  const selectedSeatsList = seats.filter((seat) =>
-    selectedSeats.includes(seat.id)
-  );
-  const totalItems = selectedSeatsList.length;
+  const totalItems = selectedSeats.length;
   const totalTaxa = 0.0;
   const totalPrice = totalItems * seatPrice;
 
@@ -33,36 +30,45 @@ const OrderSidebar = ({
         </div>
 
         {/* Session Info */}
-        <div className="px-6 py-2 border-b border-cinema-darkPalette-600">
-          <div className="grid grid-cols-3 gap-4 text-center text-sm">
-            <div>
-              <p className="text-white font-semibold">SALA 2</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold">SEX 10/10</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold">18:30</p>
+        {session && (
+          <div className="px-6 py-2 border-b border-cinema-darkPalette-600">
+            <div className="grid grid-cols-3 gap-4 text-center text-sm">
+              <div>
+                <p className="text-gray-400 text-xs">Formato</p>
+                <p className="text-white font-semibold">{session.format} {session.lang}</p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-xs">Data</p>
+                <p className="text-white font-semibold">{session.date}</p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-xs">Horário</p>
+                <p className="text-white font-semibold">{session.time}</p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Selected Seats */}
         <div className="p-4 border-b border-cinema-darkPalette-600">
-          <h3 className="text-white font-semibold mb-4">Assentos</h3>
-          {selectedSeatsList.length > 0 ? (
-            <div className="space-y-3">
-              {selectedSeatsList.map((seat) => (
+          <h3 className="text-white font-semibold mb-4">
+            Assentos ({totalItems})
+          </h3>
+          {selectedSeats.length > 0 ? (
+            <div className="space-y-3 max-h-64 overflow-y-auto thin-scrollbar">
+              {selectedSeats.map((seat) => (
                 <div
                   key={seat.id}
                   className="flex items-center justify-between bg-cinema-darkPalette-800 rounded-lg p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-cinema-light-500 rounded-md flex items-center justify-center text-black font-bold">
-                      {seat.id}
+                    <div className="w-10 h-10 bg-cinema-light-500 rounded-md flex items-center justify-center text-black font-bold text-sm">
+                      {seat.displayId || `${seat.rowLetter}${seat.seatNumber}`}
                     </div>
                     <div>
-                      <p className="text-white font-medium">{seat.id}</p>
+                      <p className="text-white font-medium">
+                        Fileira {seat.rowLetter} - Assento {seat.seatNumber}
+                      </p>
                       <p className="text-gray-400 text-sm">
                         R$ {seatPrice.toFixed(2)}
                       </p>
@@ -70,9 +76,9 @@ const OrderSidebar = ({
                   </div>
                   <button
                     onClick={() => onRemoveSeat(seat.id)}
-                    className="text-gray-400 hover:text-red-500 transition-colors"
+                    className="text-gray-400 hover:text-red-500 transition-colors p-2"
                   >
-                    <Trash2 size={16} />
+                    <FaTrash size={14} />
                   </button>
                 </div>
               ))}
@@ -106,9 +112,12 @@ const OrderSidebar = ({
         {/* Checkout Button */}
         <div className="w-full px-6 py-2">
           <Button
-            text="Escolher assentos"
+            text={totalItems > 0 ? "Continuar" : "Escolher assentos"}
+            disabled={totalItems === 0}
             onClickHandler={() => {
-              alert("Funicionalidade em desenvolvimento");
+              if (totalItems > 0) {
+                alert("Prosseguindo para pagamento...");
+              }
             }}
           />
         </div>

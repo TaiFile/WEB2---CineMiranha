@@ -256,7 +256,6 @@ function Seats() {
               movie={movieForDetails}
               session={sessionForDetails}
               selectedSeats={selectedSeats}
-              seats={allSeats}
               onRemoveSeat={handleSeatClick}
             />
           </div>
