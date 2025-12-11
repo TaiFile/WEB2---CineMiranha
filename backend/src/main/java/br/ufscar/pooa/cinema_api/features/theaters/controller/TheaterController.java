@@ -1,6 +1,7 @@
 package br.ufscar.pooa.cinema_api.features.theaters.controller;
 
 
+import br.ufscar.pooa.cinema_api.domain.entities.Address;
 import br.ufscar.pooa.cinema_api.domain.entities.Movie;
 import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import br.ufscar.pooa.cinema_api.domain.entities.Theater;
@@ -13,6 +14,8 @@ import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMov
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetAllAddressTheaterUseCase;
+import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetAllTheatersUsecase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IGetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.IRegisterTheaterUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,6 +39,8 @@ public class TheaterController {
     private final IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase;
     private final IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase;
     private final IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase;
+    private final IGetAllAddressTheaterUseCase getAllAddressTheaterUseCase;
+    private final IGetAllTheatersUsecase getAllTheatersUsecase;
     private final ITheaterMapper theaterMapper;
     private final IMovieMapper movieMapper;
     private final ISessionMapper sessionMapper;
@@ -44,6 +49,8 @@ public class TheaterController {
         IGetTheatersByDistanceUseCase getTheatersByDistanceUseCase,
         IFindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase,
         IFindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase,
+        IGetAllAddressTheaterUseCase getAllAddressTheaterUseCase,
+        IGetAllTheatersUsecase getAllTheatersUsecase,
         ITheaterMapper theaterMapper,
         IMovieMapper movieMapper,
         ISessionMapper sessionMapper) {
@@ -51,6 +58,8 @@ public class TheaterController {
         this.getTheatersByDistanceUseCase = getTheatersByDistanceUseCase;
         this.findAllMoviesByTheaterIdUseCase = findAllMoviesByTheaterIdUseCase;
         this.findAllSessionsByMovieIdAndTheaterIdUseCase = findAllSessionsByMovieIdAndTheaterIdUseCase;
+        this.getAllAddressTheaterUseCase = getAllAddressTheaterUseCase;
+        this.getAllTheatersUsecase = getAllTheatersUsecase;
         this.theaterMapper = theaterMapper;
         this.movieMapper = movieMapper;
         this.sessionMapper = sessionMapper;
@@ -67,6 +76,16 @@ public class TheaterController {
         return ResponseEntity.created(uri).body(responseDTO);
     }
 
+    @GetMapping("/addresses")
+    public List<Address> getAllAddressTheater() {
+        return getAllAddressTheaterUseCase.execute();
+    }
+
+    @GetMapping("/list")
+    public List<Theater> getAllTheaters() {
+        return getAllTheatersUsecase.execute();
+    }
+    
     @Operation(summary = "Get all theaters sorted by distance from the user")
     @GetMapping("/by-distance")
     public ResponseEntity<List<TheaterResponseDTO>> getTheatersByDistance(

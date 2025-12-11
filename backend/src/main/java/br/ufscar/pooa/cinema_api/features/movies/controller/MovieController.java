@@ -1,22 +1,29 @@
 package br.ufscar.pooa.cinema_api.features.movies.controller;
 
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.ufscar.pooa.cinema_api.domain.entities.Movie;
 import br.ufscar.pooa.cinema_api.domain.entities.Session;
-import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
+import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMovieByIdUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.IRegisterMovieUseCase;
-import br.ufscar.pooa.cinema_api.domain.entities.Movie;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
 import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMovieIdUseCase;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/movies")

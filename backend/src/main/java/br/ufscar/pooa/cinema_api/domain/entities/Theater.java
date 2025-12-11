@@ -1,5 +1,6 @@
 package br.ufscar.pooa.cinema_api.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +19,16 @@ public class Theater {
     @Column
     private String logoUrl;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", unique = true)
     private Address address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "theater")
     private List<Manager> managers = new ArrayList<>();
 

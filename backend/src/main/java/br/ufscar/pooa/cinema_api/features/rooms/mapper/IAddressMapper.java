@@ -8,6 +8,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface IAddressMapper {
 
+    AddressDTO toAddressDTO(Address address);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "latitude", ignore = true)
     @Mapping(target = "longitude", ignore = true)
