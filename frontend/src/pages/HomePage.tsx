@@ -1,8 +1,10 @@
+import React from "react";
 import MovieCarousel from "../components/MovieCarousel/MovieCarousel";
 import { useMovies } from "../hooks/useMovies";
 import { MovieStatus } from "../types/enums";
+import { Movie } from "../types/Movie";
 
-function HomePage() {
+const HomePage: React.FC = () => {
   const { movies, loading, error } = useMovies();
 
   if (loading) {
@@ -13,12 +15,12 @@ function HomePage() {
     return <div className="text-red-500">{error}</div>;
   }
 
-  const filmesEmCartaz = movies.filter(
-    (movie) => movie.status === MovieStatus.NOW_PLAYING 
+  const filmesEmCartaz: Movie[] = movies.filter(
+    (movie) => movie.status === MovieStatus.NOW_PLAYING
   );
 
-  const filmesEmBreve = movies.filter(
-    (movie) => movie.status === MovieStatus.COMING_SOON 
+  const filmesEmBreve: Movie[] = movies.filter(
+    (movie) => movie.status === MovieStatus.COMING_SOON
   );
 
 
