@@ -8,9 +8,10 @@ import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class RegisterMovieUseCase implements IRegisterMovieUseCase {
+public class RegisterMovieUseCase {
 
     private final IMovieRepository movieRepository;
     private final IMovieMapper IMovieMapper;
@@ -20,6 +21,7 @@ public class RegisterMovieUseCase implements IRegisterMovieUseCase {
         this.IMovieMapper = IMovieMapper;
     }
 
+    @Transactional
     public MovieResponseDTO execute(RegisterMovieRequestDTO requestDTO) {
         Optional<Movie> movieFound = movieRepository.findByTitle(requestDTO.getTitle());
 
@@ -33,3 +35,5 @@ public class RegisterMovieUseCase implements IRegisterMovieUseCase {
         return IMovieMapper.toMovieResponseDTO(savedMovie);
     }
 }
+
+

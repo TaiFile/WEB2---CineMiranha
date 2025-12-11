@@ -18,9 +18,10 @@ import br.ufscar.pooa.cinema_api.domain.entities.Ticket;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class RegisterTicketUseCase implements IRegisterTicketUseCase {
+public class RegisterTicketUseCase {
 
     private final ITicketRepository ticketRepository;
     private final ISessionRepository sessionRepository;
@@ -43,7 +44,7 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
         this.ITicketMapper = ITicketMapper;
     }
 
-    @Override
+    @Transactional
     public TicketResponseDTO execute(RegisterTicketRequestDTO requestDTO) {
         Session session = sessionRepository.findById(requestDTO.getSessionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Sessão", "id", requestDTO.getSessionId().toString()));
@@ -79,3 +80,5 @@ public class RegisterTicketUseCase implements IRegisterTicketUseCase {
         return ITicketMapper.toTicketResponseDTO(savedTicket);
     }
 }
+
+

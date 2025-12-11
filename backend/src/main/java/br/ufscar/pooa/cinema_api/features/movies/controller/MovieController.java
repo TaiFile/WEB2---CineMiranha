@@ -1,45 +1,44 @@
 package br.ufscar.pooa.cinema_api.features.movies.controller;
 
-import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import br.ufscar.pooa.cinema_api.domain.enums.MovieStatus;
 import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
-import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindAllMoviesUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMovieByIdUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMoviesByStatusUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IRegisterMovieUseCase;
-import br.ufscar.pooa.cinema_api.domain.entities.Movie;
+import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllMoviesUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindMovieByIdUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindMoviesByStatusUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.RegisterMovieUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllSessionsByMovieIdUseCase;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
-import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
-import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindAllSessionsByMovieIdUseCase;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-    private final IRegisterMovieUseCase registerMovieUseCase;
-    private final IFindAllMoviesUseCase findAllMoviesUseCase;
-    private final IFindMovieByIdUseCase findMovieByIdUseCase;
-    private final IFindMoviesByStatusUseCase findMoviesByStatusUseCase;
-    private final IFindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase;
+    private final RegisterMovieUseCase registerMovieUseCase;
+    private final FindAllMoviesUseCase findAllMoviesUseCase;
+    private final FindMovieByIdUseCase findMovieByIdUseCase;
+    private final FindMoviesByStatusUseCase findMoviesByStatusUseCase;
+    private final FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase;
     private final IMovieMapper movieMapper;
-    private final ISessionMapper sessionMapper;
 
-    public MovieController(IRegisterMovieUseCase registerMovieUseCase, IFindAllMoviesUseCase findAllMoviesUseCase, IFindMovieByIdUseCase findMovieByIdUseCase,
-        IFindMoviesByStatusUseCase findMoviesByStatusUseCase, IFindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase, IMovieMapper movieMapper, ISessionMapper sessionMapper) {
+    public MovieController(RegisterMovieUseCase registerMovieUseCase, 
+        FindAllMoviesUseCase findAllMoviesUseCase, 
+        FindMovieByIdUseCase findMovieByIdUseCase,
+        FindMoviesByStatusUseCase findMoviesByStatusUseCase, 
+        FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase,
+        IMovieMapper movieMapper) {
         this.registerMovieUseCase = registerMovieUseCase;
         this.findAllMoviesUseCase = findAllMoviesUseCase;
         this.findMovieByIdUseCase = findMovieByIdUseCase;
         this.findMoviesByStatusUseCase = findMoviesByStatusUseCase;
         this.findAllSessionsByMovieIdUseCase = findAllSessionsByMovieIdUseCase;
         this.movieMapper = movieMapper;
-        this.sessionMapper = sessionMapper;
     }
 
     @PostMapping
@@ -51,30 +50,26 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<MovieResponseDTO>> findAll(@RequestParam(required = false) MovieStatus status) {
-        List<Movie> movies;
+        List<MovieResponseDTO> movies;
         if (status != null) {
-            movies = findMoviesByStatusUseCase.execute(status);
+            movies = findMoviesByStatusUseCase.execute(status).stream().map(movieMapper::toMovieResponseDTO).toList();
         } else {
             movies = findAllMoviesUseCase.execute();
         }
-        List<MovieResponseDTO> response = movies.stream()
-                .map(movieMapper::toMovieResponseDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(response);
+
+
+        return ResponseEntity.ok(movies);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> findById(@PathVariable Long id) {
-        Movie movie = findMovieByIdUseCase.execute(id);
-        return ResponseEntity.ok(movieMapper.toMovieResponseDTO(movie));
+        MovieResponseDTO response = findMovieByIdUseCase.execute(id);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}/sessions")
     public ResponseEntity<List<SessionResponseDTO>> findAllSessionsByMovieId(@PathVariable Long id) {
-        List<Session> sessions = findAllSessionsByMovieIdUseCase.execute(id);
-        List<SessionResponseDTO> response = sessions.stream()
-            .map(sessionMapper::toSessionResponseDTO)
-            .collect(Collectors.toList());
+        List<SessionResponseDTO> response = findAllSessionsByMovieIdUseCase.execute(id);
         return ResponseEntity.ok(response);
     }
 }

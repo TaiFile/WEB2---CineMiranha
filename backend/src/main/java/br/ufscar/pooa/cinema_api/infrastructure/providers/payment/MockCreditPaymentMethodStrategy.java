@@ -6,7 +6,7 @@ import br.ufscar.pooa.cinema_api.domain.enums.PaymentMethod;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreditPaymentMethodStrategy implements IPaymentStrategy {
+public class MockCreditPaymentMethodStrategy implements IPaymentStrategy {
 
     @Override
     public boolean pay(Integer amount) {

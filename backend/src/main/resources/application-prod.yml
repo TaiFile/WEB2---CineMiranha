@@ -1,0 +1,55 @@
+spring:
+  config:
+    import: optional:file:./env-prod.properties
+  datasource:
+    url: jdbc:postgresql://${DB_URL}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    sender: ${EMAIL_SENDER}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: when-authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: production
+  simple:
+    metrics:
+      export:
+        enabled: true
+
+logging:
+  level:
+    root: WARN
+    br.ufscar.pooa.cinema_api: INFO

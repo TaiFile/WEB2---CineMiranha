@@ -5,9 +5,10 @@ import br.ufscar.pooa.cinema_api.domain.repositories.session.ISessionRepository;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionDetailResponseDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class FindSessionByIdUseCase implements IFindSessionByIdUseCase {
+public class FindSessionByIdUseCase {
 
     private final ISessionRepository sessionRepository;
     private final ISessionMapper sessionMapper;
@@ -17,7 +18,7 @@ public class FindSessionByIdUseCase implements IFindSessionByIdUseCase {
         this.sessionMapper = sessionMapper;
     }
 
-    @Override
+    @Transactional(readOnly = true)
     public SessionDetailResponseDTO execute(Long sessionId) {
         Session session = sessionRepository.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Session not found with id: " + sessionId));

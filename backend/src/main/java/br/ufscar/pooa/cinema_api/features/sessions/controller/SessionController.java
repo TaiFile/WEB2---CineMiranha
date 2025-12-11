@@ -3,8 +3,8 @@ package br.ufscar.pooa.cinema_api.features.sessions.controller;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.RegisterSessionRequestDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionDetailResponseDTO;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
-import br.ufscar.pooa.cinema_api.features.sessions.usecase.IFindSessionByIdUseCase;
-import br.ufscar.pooa.cinema_api.features.sessions.usecase.IRegisterSessionUseCase;
+import br.ufscar.pooa.cinema_api.features.sessions.usecase.FindSessionByIdUseCase;
+import br.ufscar.pooa.cinema_api.features.sessions.usecase.RegisterSessionUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ import java.net.URI;
 @RestController
 @RequestMapping("/sessions")
 public class SessionController {
-    private final IRegisterSessionUseCase registerSessionUseCase;
-    private final IFindSessionByIdUseCase findSessionByIdUseCase;
+    private final RegisterSessionUseCase registerSessionUseCase;
+    private final FindSessionByIdUseCase findSessionByIdUseCase;
 
-    public SessionController(IRegisterSessionUseCase registerSessionUseCase,
-                             IFindSessionByIdUseCase findSessionByIdUseCase) {
+    public SessionController(RegisterSessionUseCase registerSessionUseCase,
+                             FindSessionByIdUseCase findSessionByIdUseCase) {
         this.registerSessionUseCase = registerSessionUseCase;
         this.findSessionByIdUseCase = findSessionByIdUseCase;
     }

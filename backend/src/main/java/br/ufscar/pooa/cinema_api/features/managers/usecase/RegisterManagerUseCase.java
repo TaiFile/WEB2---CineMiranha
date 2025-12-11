@@ -10,11 +10,12 @@ import br.ufscar.pooa.cinema_api.domain.entities.Manager;
 import br.ufscar.pooa.cinema_api.domain.entities.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-public class RegisterManagerUseCase implements IRegisterManagerUseCase {
+public class RegisterManagerUseCase {
 
     private final IUserRepository userRepository;
     private final IManagerRepository managerRepository;
@@ -28,7 +29,7 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+    @Transactional
     public ManagerResponseDTO execute(RegisterManagerRequestDTO requestDTO) {
         Optional<User> userExists = userRepository.findByEmail(requestDTO.getEmail());
         if (userExists.isPresent()) {
@@ -47,3 +48,4 @@ public class RegisterManagerUseCase implements IRegisterManagerUseCase {
         return IManagerMapper.toManagerResponseDTO(savedUser);
     }
 }
+
