@@ -20,5 +20,10 @@ export const movieService = {
   searchMovies: async (query: string): Promise<Movie[]> => {
     const response = await api.get<Movie[]>(`/movies/search?q=${query}`);
     return response.data;
+  },
+
+  getMoviesByTheater: async(theaterId: number): Promise<Movie[]> =>{
+    const response = await api.get<Movie[]>(`/theaters/${theaterId}/movies`);
+    return response.data;
   }
 };
