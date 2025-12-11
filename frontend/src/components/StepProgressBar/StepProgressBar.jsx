@@ -15,7 +15,7 @@ const StepProgressBar = ({ currentStep = 1 }) => {
   const label = mapStepToLabel[currentStep] || "Progresso";
 
   return (
-    <div className="py-9 px-4 sm:px-16 rounded-lg">
+    <div className="rounded-lg">
       <div className="flex items-center justify-between mb-4">
         {Array.from({ length: totalSteps }).map((_, index) => {
           const stepNumber = index + 1;

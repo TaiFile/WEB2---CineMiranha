@@ -154,119 +154,123 @@ function Sessions() {
     : null;
 
   return (
-    <div className="bg-cinema-darkPalette-900 text-cinema-light-800 p-4 min-h-screen">
-      <div className="mx-8 my-8 space-y-8">
-        <div className="cursor-pointer z-10" onClick={() => navigate("/")}>
-          <FaArrowLeft size={32} />
-        </div>
-
-        <StepProgressBar
-          currentStep={1}
-          totalSteps={7}
-          label="Escolha da sessão"
-        />
-        {movieForDetails && <MovieDetails movie={movieForDetails} />}
-
-        <div>
-          <div className="flex justify-start flex-shrink-0 gap-10 overflow-x-auto pb-2 scrollbar-hide overflow-auto">
-            {dates.map((d) => (
-              <button
-                key={d.fullDate}
-                onClick={() => setSelectedDate(d.fullDate)}
-                className={`p-2 rounded-lg min-w-[80px] min-h-[60px] md:min-w-[120px] md:min-h-[80px] transition-colors duration-200 ${
-                  selectedDate === d.fullDate
-                    ? "bg-cinema-light-600 text-black font-bold"
-                    : "bg-cinema-darkPalette-800 text-cinema-light-900 hover:bg-cinema-darkPalette-700"
-                }`}
-              >
-                <div className="text-sm lg:text-2xl">{d.day}</div>
-                <div className="font-semibold lg:text-2xl">{d.date}</div>
-              </button>
-            ))}
+    <div className="flex justify-center bg-cinema-darkPalette-800 text-cinema-light-800 min-h-screen mx-auto">
+      <div className="w-full sm:mx-8 sm:container ">
+        <div className="mx-4 my-8 space-y-8">
+          <div className="cursor-pointer z-10" onClick={() => navigate("/")}>
+            <FaArrowLeft size={32} />
           </div>
-        </div>
 
-        {/* Lista idioma e formato */}
-        <div className="flex justify-between gap-1">
-          <select
-            value={selectedLang}
-            onChange={(e) => setSelectedLang(e.target.value)}
-            className="flex-shrink-0 bg-cinema-light-600 text-black rounded-lg p-2 min-w-[121px] lg:w-[250px] appearance-none lg:text-lg text-center font-semibold"
-          >
-            <option value="ALL">Todos os idiomas</option>
-            <option value="LEG">Legendado</option>
-            <option value="DUB">Dublado</option>
-          </select>
+          <div className="max-w-4xl sm:mx-auto">
+            <StepProgressBar
+              currentStep={1}
+              totalSteps={7}
+              label="Escolha da sessão"
+            />
+          </div>
+          {movieForDetails && <MovieDetails movie={movieForDetails} />}
 
-          <select
-            value={selectedFormat}
-            onChange={(e) => setSelectedFormat(e.target.value)}
-            className="bg-cinema-light-600 text-black rounded-lg p-2 min-w-[121px] lg:w-[250px] appearance-none lg:text-lg text-center font-semibold"
-          >
-            <option value="ALL">Todos os formatos</option>
-            <option value="2D">2D</option>
-            <option value="3D">3D</option>
-          </select>
-        </div>
-
-        {/* Seção de horários */}
-        <div className="space-y-8">
-          {Object.keys(sessionsByRoom).length === 0 ? (
-            <div className="text-center text-cinema-light-600 py-8">
-              <p className="text-xl">
-                Nenhuma sessão disponível para esta data.
-              </p>
+          <div>
+            <div className="flex justify-start flex-shrink-0 gap-5 sm:gap-10 overflow-x-auto pb-2 scrollbar-hide overflow-auto">
+              {dates.map((d) => (
+                <button
+                  key={d.fullDate}
+                  onClick={() => setSelectedDate(d.fullDate)}
+                  className={`p-2 rounded-lg min-w-fit min-h-[60px] md:min-w-[120px] md:min-h-[80px] transition-colors duration-200 ${
+                    selectedDate === d.fullDate
+                      ? "bg-cinema-light-600 text-black font-bold"
+                      : "bg-cinema-darkPalette-700 text-cinema-light-900 hover:bg-cinema-darkPalette-700"
+                  }`}
+                >
+                  <div className="text-sm lg:text-2xl">{d.day}</div>
+                  <div className="font-semibold lg:text-2xl">{d.date}</div>
+                </button>
+              ))}
             </div>
-          ) : (
-            Object.entries(sessionsByRoom).map(([sala, horarios]) => {
-              const filteredHorarios = horarios.filter((h) => {
-                const langMatch =
-                  selectedLang === "ALL" || h.lang === selectedLang;
-                const formatMatch =
-                  selectedFormat === "ALL" || h.format === selectedFormat;
-                return langMatch && formatMatch;
-              });
+          </div>
 
-              if (filteredHorarios.length === 0) return null;
+          {/* Lista idioma e formato */}
+          <div className="flex justify-between gap-1">
+            <select
+              value={selectedLang}
+              onChange={(e) => setSelectedLang(e.target.value)}
+              className="flex-shrink-0 bg-cinema-light-600 text-black rounded-lg p-2 min-w-[121px] lg:w-[250px] appearance-none lg:text-lg text-center font-semibold"
+            >
+              <option value="ALL">Todos os idiomas</option>
+              <option value="LEG">Legendado</option>
+              <option value="DUB">Dublado</option>
+            </select>
 
-              return (
-                <div key={sala}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-1.5 h-6 bg-cinema-red rounded-full"></div>
-                    <h3 className="text-4xl font-bold text-cinema-light-700">
-                      {sala}
-                    </h3>
-                  </div>
+            <select
+              value={selectedFormat}
+              onChange={(e) => setSelectedFormat(e.target.value)}
+              className="bg-cinema-light-600 text-black rounded-lg p-2 min-w-[121px] lg:w-[250px] appearance-none lg:text-lg text-center font-semibold"
+            >
+              <option value="ALL">Todos os formatos</option>
+              <option value="2D">2D</option>
+              <option value="3D">3D</option>
+            </select>
+          </div>
 
-                  <div className="grid grid-cols-3 gap-4">
-                    {filteredHorarios.map((horario) => (
-                      <button
-                        key={horario.id}
-                        onClick={() =>
-                          navigate(`/sessions/${horario.id}/seats`)
-                        }
-                        className="overflow-hidden justify-self-center flex flex-col gap-2 w-[90%] h-full p-[10%] md:p-3 
+          {/* Seção de horários */}
+          <div className="space-y-8">
+            {Object.keys(sessionsByRoom).length === 0 ? (
+              <div className="text-center text-cinema-light-600 py-8">
+                <p className="text-xl">
+                  Nenhuma sessão disponível para esta data.
+                </p>
+              </div>
+            ) : (
+              Object.entries(sessionsByRoom).map(([sala, horarios]) => {
+                const filteredHorarios = horarios.filter((h) => {
+                  const langMatch =
+                    selectedLang === "ALL" || h.lang === selectedLang;
+                  const formatMatch =
+                    selectedFormat === "ALL" || h.format === selectedFormat;
+                  return langMatch && formatMatch;
+                });
+
+                if (filteredHorarios.length === 0) return null;
+
+                return (
+                  <div key={sala}>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-1.5 h-6 bg-cinema-red rounded-full"></div>
+                      <h3 className="text-4xl font-bold text-cinema-light-700">
+                        {sala}
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4">
+                      {filteredHorarios.map((horario) => (
+                        <button
+                          key={horario.id}
+                          onClick={() =>
+                            navigate(`/sessions/${horario.id}/seats`)
+                          }
+                          className="overflow-hidden justify-self-center flex flex-col gap-2 w-[90%] h-full p-[10%] md:p-3 
                                   bg-cinema-darkPalette-500 border border-cinema-darkPalette-700 
                                     rounded-lg hover:border-cinema-red transition-colors duration-200"
-                      >
-                        <div className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 font-bold lg:text-lg text-xs h-full py-1 2xl:py-2 rounded-md">
-                          {horario.time}
-                        </div>
-                        <div className="flex gap-2 justify-center items-center h-full">
-                          <span className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 2xl:text-2xl text-xs w-full h-full px-1 2xl:px-12 py-0.5 2xl:py-2 rounded-sm">
-                            {horario.format}
-                          </span>
-                          <span className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 2xl:text-2xl text-xs w-full h-full px-1 2xl:px-12 py-0.5 2xl:py-2 rounded-sm">
-                            {horario.lang}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
+                        >
+                          <div className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 font-bold lg:text-lg text-xs h-full py-1 2xl:py-2 rounded-md">
+                            {horario.time}
+                          </div>
+                          <div className="flex gap-2 justify-center items-center h-full">
+                            <span className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 2xl:text-2xl text-xs w-full h-full px-1 2xl:px-12 py-0.5 2xl:py-2 rounded-sm">
+                              {horario.format}
+                            </span>
+                            <span className="flex items-center justify-center bg-cinema-light-800 text-cinema-darkPalette-900 2xl:text-2xl text-xs w-full h-full px-1 2xl:px-12 py-0.5 2xl:py-2 rounded-sm">
+                              {horario.lang}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          )}
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
     </div>
