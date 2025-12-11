@@ -10,8 +10,9 @@ export const useMovies = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
+                console.log("🔵 Iniciando fetch...");
                 setLoading(true);
-                const data = await movieService.getAllMovies();
+                const data = await movieService.getAllMovies();    
                 setMovies(data);
                 setError(null);
             }
@@ -25,6 +26,5 @@ export const useMovies = () => {
 
         fetchMovies();
     }, []);
-
     return { movies, loading, error };
 }

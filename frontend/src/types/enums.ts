@@ -8,9 +8,9 @@ export enum AgeRating {
 }
 
 export enum MovieStatus {
-    COMING_SOON,
-    NOW_PLAYING,
-    PAST_RELEASE
+    COMING_SOON = "COMING_SOON",
+    NOW_PLAYING = "NOW_PLAYING",
+    PAST_RELEASE = "PAST_RELEASE"
 }
 
 export enum Format {
