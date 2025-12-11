@@ -160,8 +160,8 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setGenres(genres)
             .setSessions(new ArrayList<>())
             .setDurationInSeconds(7500)
-            .setTrailerUrl("http://trailer.url/trailer.mp4")
-            .setCoverUrl("http://cover.url/cover.jpg")
+            .setTrailerUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            .setCoverUrl("https://picsum.photos/200/300?random=1")
             .setSynopsis("Um filme de teste para uma API incrível.")
             .setTitle("Filme de Teste")
             .setStatus(MovieStatus.NOW_PLAYING);
@@ -207,7 +207,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setDurationInSeconds(8100)
             .setAgeRating(AgeRating.SIXTEEN_YEARS)
             .setGenres(List.of(scifiGenre, dramaGenre))
-            .setCoverUrl("https://picsum.photos/200/300?random=1")
+            .setCoverUrl("https://picsum.photos/200/300?random=2")
             .setTrailerUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movie2);
@@ -239,7 +239,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setDurationInSeconds(5820)
             .setAgeRating(AgeRating.TWELVE_YEARS)
             .setGenres(List.of(comedyGenre))
-            .setCoverUrl("https://picsum.photos/200/300?random=2")
+            .setCoverUrl("https://picsum.photos/200/300?random=3")
             .setTrailerUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movie3);
@@ -261,7 +261,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setDurationInSeconds(7800)
             .setAgeRating(AgeRating.EIGHTEEN_YEARS)
             .setGenres(List.of(horrorGenre, dramaGenre))
-            .setCoverUrl("https://picsum.photos/200/300?random=3")
+            .setCoverUrl("https://picsum.photos/200/300?random=4")
             .setTrailerUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movie4);
