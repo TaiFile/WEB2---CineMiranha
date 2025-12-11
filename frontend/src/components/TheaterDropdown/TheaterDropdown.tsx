@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Theater } from "../../types/Theater";
-import { theaterService } from "../../services/theaterService";
+import { theaterService } from "../../services/api/theaterService";
 import { useUserGeoLocation } from "../../hooks/useUserGeoLocation";
 import { FaChevronDown, FaMapMarkerAlt } from "react-icons/fa";
 

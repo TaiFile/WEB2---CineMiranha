@@ -1,6 +1,6 @@
-import { Movie } from "../types/Movie";
-import { MovieStatus } from "../types/enums";
-import api from "./api/axios";
+import { Movie } from "../../types/Movie";
+import { MovieStatus } from "../../types/enums";
+import api from "./axios";
 
 export const movieService = {
   getAllMovies: async (status?: MovieStatus): Promise<Movie[]> => {

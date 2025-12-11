@@ -1,6 +1,6 @@
-import { Theater } from "../types/Theater";
-import { Movie } from "../types/Movie";
-import api from "./api/axios";
+import { Theater } from "../../types/Theater";
+import { Movie } from "../../types/Movie";
+import api from "./axios";
 
 export const theaterService = {
   getTheatersByDistance: async (latitude: number, longitude: number): Promise<Theater[]> => {

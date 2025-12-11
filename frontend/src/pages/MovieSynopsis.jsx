@@ -3,7 +3,7 @@ import TrailerModal from "../components/TrailerModal/TrailerModal";
 import { useNavigate, useParams } from "react-router-dom";
 import AgeRating from "../components/AgeRating/AgeRating";
 import { FaArrowLeft } from "react-icons/fa6";
-import { movieService } from "../services/movieService";
+import { movieService } from "../services/api/movieService";
 
 function MovieSynopsis() {
   const [isModalOpen, setIsModalOpen] = useState(false);

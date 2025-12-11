@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { Theater } from "../../types/Theater";
-import { mapService } from "../../services/mapService";
+import { mapService } from "../../services/nominatim/mapService";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 
