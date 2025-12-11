@@ -1,7 +1,7 @@
 package br.ufscar.pooa.cinema_api.features.movies.dto;
 
 import br.ufscar.pooa.cinema_api.domain.enums.AgeRating;
-
+import br.ufscar.pooa.cinema_api.domain.enums.MovieStatus;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -15,13 +15,16 @@ public class MovieResponseDTO {
     private String trailerUrl;
     private Integer durationInSeconds;
     private AgeRating ageRating;
+    private MovieStatus status;
     private List<String> sessionTimes;
     private Set<String> genreNames;
 
     public MovieResponseDTO() {
     }
 
-    public MovieResponseDTO(Long id, String title, String synopsis, String coverUrl, String trailerUrl, Integer durationInSeconds, AgeRating ageRating, List<String> sessionTimes, Set<String> genreNames) {
+    public MovieResponseDTO(Long id, String title, String synopsis, String coverUrl,
+        String trailerUrl, Integer durationInSeconds, AgeRating ageRating, MovieStatus status,
+        List<String> sessionTimes, Set<String> genreNames) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -29,6 +32,7 @@ public class MovieResponseDTO {
         this.trailerUrl = trailerUrl;
         this.durationInSeconds = durationInSeconds;
         this.ageRating = ageRating;
+        this.status = status;
         this.sessionTimes = sessionTimes;
         this.genreNames = genreNames;
     }
@@ -91,6 +95,13 @@ public class MovieResponseDTO {
         this.ageRating = ageRating;
     }
 
+    public MovieStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MovieStatus status) {
+        this.status = status;
+    }
 
     public List<String> getSessionTimes() {
         return sessionTimes;
@@ -111,36 +122,41 @@ public class MovieResponseDTO {
     @Override
     public String toString() {
         return "MovieResponseDTO{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", synopsis='" + synopsis + '\'' +
-                ", coverUrl='" + coverUrl + '\'' +
-                ", trailerUrl='" + trailerUrl + '\'' +
-                ", durationInSeconds=" + durationInSeconds +
-                ", ageRating=" + ageRating +
-                ", sessionTimes=" + sessionTimes +
-                ", genreNames=" + genreNames +
-                '}';
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", synopsis='" + synopsis + '\'' +
+            ", coverUrl='" + coverUrl + '\'' +
+            ", trailerUrl='" + trailerUrl + '\'' +
+            ", durationInSeconds=" + durationInSeconds +
+            ", ageRating=" + ageRating +
+            ", sessionTimes=" + sessionTimes +
+            ", genreNames=" + genreNames +
+            '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MovieResponseDTO that = (MovieResponseDTO) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(synopsis, that.synopsis) &&
-                Objects.equals(coverUrl, that.coverUrl) &&
-                Objects.equals(trailerUrl, that.trailerUrl) &&
-                Objects.equals(durationInSeconds, that.durationInSeconds) &&
-                ageRating == that.ageRating &&
-                Objects.equals(sessionTimes, that.sessionTimes) &&
-                Objects.equals(genreNames, that.genreNames);
+            Objects.equals(title, that.title) &&
+            Objects.equals(synopsis, that.synopsis) &&
+            Objects.equals(coverUrl, that.coverUrl) &&
+            Objects.equals(trailerUrl, that.trailerUrl) &&
+            Objects.equals(durationInSeconds, that.durationInSeconds) &&
+            ageRating == that.ageRating &&
+            Objects.equals(sessionTimes, that.sessionTimes) &&
+            Objects.equals(genreNames, that.genreNames);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, synopsis, coverUrl, trailerUrl, durationInSeconds, ageRating, sessionTimes, genreNames);
+        return Objects.hash(id, title, synopsis, coverUrl, trailerUrl, durationInSeconds, ageRating,
+            sessionTimes, genreNames);
     }
 }
