@@ -1,7 +1,4 @@
-// src/components/AgeRating/AgeRating.jsx
-
 function AgeRating({ rating, className = "" }) {
-  // Mapeia enum do backend para display
   const displayMap = {
     GENERAL_AUDIENCE: "L",
     TEN_YEARS: "10",
@@ -11,7 +8,6 @@ function AgeRating({ rating, className = "" }) {
     EIGHTEEN_YEARS: "18"
   };
 
-  // Mapeia para cores
   const colorMap = {
     GENERAL_AUDIENCE: "bg-green-600",
     TEN_YEARS: "bg-blue-600",
@@ -22,7 +18,6 @@ function AgeRating({ rating, className = "" }) {
   };
 
   if (!rating) return null;
-
   const displayValue = displayMap[rating] || rating;
   const colorClass = colorMap[rating] || "bg-gray-600";
 
