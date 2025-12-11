@@ -16,7 +16,6 @@ const ratingMap = {
 };
 
 const AgeRating: React.FC<AgeRatingProps> = ({ rating, className }) => {
-  console.log(rating);
   const { text, color } = ratingMap[rating] || { text: "N/A", color: "bg-gray-600" };
 
   return (

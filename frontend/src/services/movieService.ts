@@ -1,19 +1,17 @@
 import { Movie } from "../types/Movie";
+import { MovieStatus } from "../types/enums";
 import api from "./api/axios";
 
 export const movieService = {
-  getAllMovies: async (): Promise<Movie[]> => {
-    const response = await api.get<Movie[]>('/movies');
+  getAllMovies: async (status?: MovieStatus): Promise<Movie[]> => {
+    const response = await api.get<Movie[]>('/movies', {
+      params: status ? { status } : undefined
+    });
     return response.data; 
   },
 
   getMovieById: async (id: number): Promise<Movie> => {
     const response = await api.get<Movie>(`/movies/${id}`);
-    return response.data;
-  },
-
-  getMoviesByStatus: async (status: string): Promise<Movie[]> => {
-    const response = await api.get<Movie[]>(`/movies?status=${status}`);
     return response.data;
   },
 

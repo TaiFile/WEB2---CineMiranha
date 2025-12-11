@@ -9,8 +9,6 @@ import org.mapstruct.Mapping;
 public interface IAddressMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "latitude", ignore = true)
-    @Mapping(target = "longitude", ignore = true)
     @Mapping(target = "theater", ignore = true)
     Address toAddress(AddressDTO addressDTO);
 }
