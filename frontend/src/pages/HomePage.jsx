@@ -3,8 +3,8 @@ import MovieCarousel from "../components/MovieCarousel/MovieCarousel";
 import { moviesData } from "@/data/movieData.js";
 
 function HomePage() {
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
+  const [ setLocation] = useState(null);
+  const [ setError] = useState(null);
 
   useEffect(() => {
     const storedLocation = localStorage.getItem("userLocation");
