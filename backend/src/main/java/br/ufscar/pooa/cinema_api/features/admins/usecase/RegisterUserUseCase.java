@@ -9,6 +9,7 @@ import br.ufscar.pooa.cinema_api.features.admins.mapper.IUserMapper;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterUserUseCase {
@@ -24,6 +25,7 @@ public class RegisterUserUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     public UserResponseDTO execute(RegisterUserRequestDTO requestDTO) {
         Optional<User> userExists = userRepository.findByEmail(requestDTO.getEmail());
 

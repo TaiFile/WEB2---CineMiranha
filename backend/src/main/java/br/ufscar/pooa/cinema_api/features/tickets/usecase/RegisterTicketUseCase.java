@@ -18,6 +18,7 @@ import br.ufscar.pooa.cinema_api.domain.entities.Ticket;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterTicketUseCase {
@@ -43,6 +44,7 @@ public class RegisterTicketUseCase {
         this.ITicketMapper = ITicketMapper;
     }
 
+    @Transactional
     public TicketResponseDTO execute(RegisterTicketRequestDTO requestDTO) {
         Session session = sessionRepository.findById(requestDTO.getSessionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Sessão", "id", requestDTO.getSessionId().toString()));

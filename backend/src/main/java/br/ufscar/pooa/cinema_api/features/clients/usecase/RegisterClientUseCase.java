@@ -11,6 +11,7 @@ import br.ufscar.pooa.cinema_api.features.clients.mapper.IClientMapper;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterClientUseCase {
@@ -28,6 +29,7 @@ public class RegisterClientUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     public ClientResponseDTO execute(RegisterClientRequestDTO requestDTO) {
         Optional<User> userExists = userRepository.findByEmail(requestDTO.getEmail());
         if (userExists.isPresent()) {

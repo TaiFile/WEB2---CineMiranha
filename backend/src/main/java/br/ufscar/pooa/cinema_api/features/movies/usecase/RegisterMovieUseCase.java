@@ -8,6 +8,7 @@ import br.ufscar.pooa.cinema_api.features.movies.dto.RegisterMovieRequestDTO;
 import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterMovieUseCase {
@@ -20,6 +21,7 @@ public class RegisterMovieUseCase {
         this.IMovieMapper = IMovieMapper;
     }
 
+    @Transactional
     public MovieResponseDTO execute(RegisterMovieRequestDTO requestDTO) {
         Optional<Movie> movieFound = movieRepository.findByTitle(requestDTO.getTitle());
 

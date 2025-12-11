@@ -1,24 +1,16 @@
 package br.ufscar.pooa.cinema_api.features.theaters.controller;
 
-
-import br.ufscar.pooa.cinema_api.domain.entities.Movie;
-import br.ufscar.pooa.cinema_api.domain.entities.Session;
-import br.ufscar.pooa.cinema_api.domain.entities.Theater;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
-import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.FindAllMoviesByTheaterIdUseCase;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
-import br.ufscar.pooa.cinema_api.features.sessions.mapper.ISessionMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.FindAllSessionsByMovieIdAndTheaterIdUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.RegisterTheaterRequestDTO;
 import br.ufscar.pooa.cinema_api.features.theaters.dto.TheaterResponseDTO;
-import br.ufscar.pooa.cinema_api.features.theaters.mapper.ITheaterMapper;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.GetTheatersByDistanceUseCase;
 import br.ufscar.pooa.cinema_api.features.theaters.usecase.RegisterTheaterUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,24 +28,15 @@ public class TheaterController {
     private final GetTheatersByDistanceUseCase getTheatersByDistanceUseCase;
     private final FindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase;
     private final FindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase;
-    private final ITheaterMapper theaterMapper;
-    private final IMovieMapper movieMapper;
-    private final ISessionMapper sessionMapper;
 
     public TheaterController(RegisterTheaterUseCase registerTheaterUseCase,
         GetTheatersByDistanceUseCase getTheatersByDistanceUseCase,
         FindAllMoviesByTheaterIdUseCase findAllMoviesByTheaterIdUseCase,
-        FindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase,
-        ITheaterMapper theaterMapper,
-        IMovieMapper movieMapper,
-        ISessionMapper sessionMapper) {
+        FindAllSessionsByMovieIdAndTheaterIdUseCase findAllSessionsByMovieIdAndTheaterIdUseCase) {
         this.registerTheaterUseCase = registerTheaterUseCase;
         this.getTheatersByDistanceUseCase = getTheatersByDistanceUseCase;
         this.findAllMoviesByTheaterIdUseCase = findAllMoviesByTheaterIdUseCase;
         this.findAllSessionsByMovieIdAndTheaterIdUseCase = findAllSessionsByMovieIdAndTheaterIdUseCase;
-        this.theaterMapper = theaterMapper;
-        this.movieMapper = movieMapper;
-        this.sessionMapper = sessionMapper;
     }
 
     @Operation(summary = "Register a new theater")
@@ -72,20 +55,14 @@ public class TheaterController {
     public ResponseEntity<List<TheaterResponseDTO>> getTheatersByDistance(
         @RequestParam("latitude") Double latitude,
         @RequestParam("longitude") Double longitude) {
-        List<Theater> theaters = getTheatersByDistanceUseCase.execute(latitude, longitude);
-        List<TheaterResponseDTO> response = theaters.stream()
-            .map(theaterMapper::toTheaterResponseDTO)
-            .collect(Collectors.toList());
+        List<TheaterResponseDTO> response = getTheatersByDistanceUseCase.execute(latitude, longitude);
         return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Get all movies for a specific theater by its ID")
     @GetMapping("/{id}/movies")
     public ResponseEntity<List<MovieResponseDTO>> findAllMoviesByTheaterId(@PathVariable Long id) {
-        List<Movie> movies = findAllMoviesByTheaterIdUseCase.execute(id);
-        List<MovieResponseDTO> response = movies.stream()
-            .map(movieMapper::toMovieResponseDTO)
-            .collect(Collectors.toList());
+        List<MovieResponseDTO> response = findAllMoviesByTheaterIdUseCase.execute(id);
         return ResponseEntity.ok(response);
     }
 
@@ -94,10 +71,7 @@ public class TheaterController {
     public ResponseEntity<List<SessionResponseDTO>> findAllSessionsByMovieIdAndTheaterId(
         @PathVariable Long theaterId,
         @PathVariable Long movieId) {
-        List<Session> sessions = findAllSessionsByMovieIdAndTheaterIdUseCase.execute(movieId, theaterId);
-        List<SessionResponseDTO> response = sessions.stream()
-            .map(sessionMapper::toSessionResponseDTO)
-            .collect(Collectors.toList());
+        List<SessionResponseDTO> response = findAllSessionsByMovieIdAndTheaterIdUseCase.execute(movieId, theaterId);
         return ResponseEntity.ok(response);
     }
 }

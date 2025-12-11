@@ -10,6 +10,7 @@ import br.ufscar.pooa.cinema_api.domain.entities.Movie;
 import br.ufscar.pooa.cinema_api.domain.entities.Room;
 import br.ufscar.pooa.cinema_api.domain.entities.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterSessionUseCase {
@@ -25,6 +26,7 @@ public class RegisterSessionUseCase {
         this.ISessionMapper = ISessionMapper;
     }
 
+    @Transactional
     public SessionResponseDTO execute(RegisterSessionRequestDTO requestDTO) {
         Room room = repository.findById(requestDTO.getRoomId())
                 .orElseThrow(() -> new IllegalArgumentException("Room not found."));

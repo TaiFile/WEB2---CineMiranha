@@ -12,6 +12,7 @@ import br.ufscar.pooa.cinema_api.features.rooms.mapper.IRoomMapper;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterRoomUseCase {
@@ -28,6 +29,7 @@ public class RegisterRoomUseCase {
         this.IRoomMapper = IRoomMapper;
     }
 
+    @Transactional
     public RoomResponseDTO execute(RegisterRoomRequestDTO requestDTO) {
         Theater theater = theaterRepository.findById(requestDTO.getTheaterId())
             .orElseThrow(() -> new IllegalArgumentException("Theater not found."));
