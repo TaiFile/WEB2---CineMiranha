@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FindMoviesByStatusUseCase implements IFindMoviesByStatusUseCase {
+public class FindMoviesByStatusUseCase {
 
     private final IMovieRepository movieRepository;
 
@@ -16,7 +16,6 @@ public class FindMoviesByStatusUseCase implements IFindMoviesByStatusUseCase {
         this.movieRepository = movieRepository;
     }
 
-    @Override
     public List<Movie> execute(MovieStatus status) {
         return movieRepository.findByStatus(status);
     }

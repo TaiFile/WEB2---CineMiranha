@@ -6,7 +6,7 @@ import br.ufscar.pooa.cinema_api.features.movies.mapper.IMovieMapper;
 import br.ufscar.pooa.cinema_api.features.movies.dto.MovieResponseDTO;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllMoviesUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.FindMovieByIdUseCase;
-import br.ufscar.pooa.cinema_api.features.movies.usecase.IFindMoviesByStatusUseCase;
+import br.ufscar.pooa.cinema_api.features.movies.usecase.FindMoviesByStatusUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.RegisterMovieUseCase;
 import br.ufscar.pooa.cinema_api.features.movies.usecase.FindAllSessionsByMovieIdUseCase;
 import br.ufscar.pooa.cinema_api.features.sessions.dto.SessionResponseDTO;
@@ -23,14 +23,14 @@ public class MovieController {
     private final RegisterMovieUseCase registerMovieUseCase;
     private final FindAllMoviesUseCase findAllMoviesUseCase;
     private final FindMovieByIdUseCase findMovieByIdUseCase;
-    private final IFindMoviesByStatusUseCase findMoviesByStatusUseCase;
+    private final FindMoviesByStatusUseCase findMoviesByStatusUseCase;
     private final FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase;
     private final IMovieMapper movieMapper;
 
     public MovieController(RegisterMovieUseCase registerMovieUseCase, 
         FindAllMoviesUseCase findAllMoviesUseCase, 
         FindMovieByIdUseCase findMovieByIdUseCase,
-        IFindMoviesByStatusUseCase findMoviesByStatusUseCase, 
+        FindMoviesByStatusUseCase findMoviesByStatusUseCase, 
         FindAllSessionsByMovieIdUseCase findAllSessionsByMovieIdUseCase,
         IMovieMapper movieMapper) {
         this.registerMovieUseCase = registerMovieUseCase;
