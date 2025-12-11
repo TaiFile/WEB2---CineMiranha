@@ -1,6 +1,7 @@
 package br.ufscar.pooa.cinema_api.domain.repositories.movie;
 
 import br.ufscar.pooa.cinema_api.domain.entities.Movie;
+import br.ufscar.pooa.cinema_api.domain.enums.MovieStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +11,8 @@ import java.util.Optional;
 
 public interface IMovieRepository extends JpaRepository<Movie, Long> {
     Optional<Movie> findByTitle(String title);
+
+    List<Movie> findByStatus(MovieStatus status);
 
     @Query("""
         SELECT DISTINCT m

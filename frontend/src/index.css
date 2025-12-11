@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== ESTILOS GLOBAIS ===== */
 @layer base {
     html {
         @apply scroll-smooth;
@@ -13,7 +12,6 @@
         font-family: 'Inter', system-ui, sans-serif;
     }
 
-    /* Scrollbar customizada */
     ::-webkit-scrollbar {
         @apply w-2;
     }
@@ -31,9 +29,7 @@
     }
 }
 
-/* ===== COMPONENTES REUTILIZÁVEIS ===== */
 @layer components {
-    /* Botões */
     .btn-primary {
         @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl;
     }
@@ -70,7 +66,6 @@
     }
 }
 
-/* ===== UTILITIES CUSTOMIZADAS ===== */
 @layer utilities {
     .text-shadow {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -123,7 +118,6 @@
     }
 }
 
-/* ===== ANIMAÇÕES ===== */
 @keyframes fadeIn {
     from {
         opacity: 0;

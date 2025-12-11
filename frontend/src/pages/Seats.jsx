@@ -1,115 +1,202 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Button from "../components/Button/Button";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import StepProgressBar from "../components/StepProgressBar/StepProgressBar";
-import { moviesData } from "@/data/movieData.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SeatMap from "../components/SeatMap/SeatMap";
 import Seat from "../components/SeatMap/Seat";
 import OrderSidebar from "../components/OrderSideBar/OrderSideBar";
 import { FaArrowLeft } from "react-icons/fa6";
+import { sessionService } from "../services/api/sessionService";
+import { movieService } from "../services/api/movieService";
+
+// Helpers para converter enums do backend para exibição
+const formatDisplay = {
+  TWO_D: "2D",
+  THREE_D: "3D",
+};
+
+const subtitleDisplay = {
+  SUBTITLED: "LEG",
+  DUBBED: "DUB",
+  ORIGINAL: "ORI",
+};
+
+// Helper para formatar duração
+function formatDuration(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return `${hours}h ${minutes}min`;
+}
 
 function Seats() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const sessionId = Number(id);
 
-  const movie = moviesData.emCartaz[0];
-  const session = { date: "03/FEV", time: "16:00", format: "2D", lang: "LEG" };
+  const [sessionData, setSessionData] = useState(null);
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedSeatIds, setSelectedSeatIds] = useState(new Set());
 
-  const [seats, setSeats] = useState([
-    { id: "E1", row: 1, column: 2, status: "available" },
-    { id: "E2", row: 1, column: 3, status: "available" },
-    { id: "E3", row: 1, column: 4, status: "available" },
-    { id: "E4", row: 1, column: 5, status: "available" },
-    { id: "E5", row: 1, column: 6, status: "available" },
-    { id: "E6", row: 1, column: 7, status: "available" },
-    { id: "E8", row: 1, column: 9, status: "occupied" },
-    { id: "E9", row: 1, column: 10, status: "occupied" },
-    { id: "E10", row: 1, column: 11, status: "occupied" },
-    { id: "E11", row: 1, column: 12, status: "occupied" },
-    { id: "E12", row: 1, column: 13, status: "available" },
-    { id: "E13", row: 1, column: 14, status: "available" },
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const session = await sessionService.getSessionById(sessionId);
+        setSessionData(session);
 
-    { id: "D1", row: 2, column: 2, status: "available" },
-    { id: "D2", row: 2, column: 3, status: "available" },
-    { id: "D4", row: 2, column: 5, status: "available" },
-    { id: "D5", row: 2, column: 6, status: "available" },
-    { id: "D6", row: 2, column: 7, status: "available" },
-    { id: "D8", row: 2, column: 9, status: "available" },
-    { id: "D9", row: 2, column: 10, status: "occupied" },
-    { id: "D10", row: 2, column: 11, status: "occupied" },
-    { id: "D12", row: 2, column: 13, status: "available" },
-    { id: "D13", row: 2, column: 14, status: "available" },
+        // Buscar dados do filme
+        const movieData = await movieService.getMovieById(session.movieId);
+        setMovie(movieData);
+      } catch (err) {
+        console.error("Erro ao carregar dados:", err);
+        setError("Erro ao carregar sessão. Tente novamente.");
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    { id: "C1", row: 3, column: 2, status: "occupied" },
-    { id: "C2", row: 3, column: 3, status: "occupied" },
-    { id: "C4", row: 3, column: 5, status: "occupied" },
-    { id: "C5", row: 3, column: 6, status: "occupied" },
-    { id: "C6", row: 3, column: 7, status: "selected" },
-    { id: "C7", row: 3, column: 8, status: "occupied" },
-    { id: "C8", row: 3, column: 9, status: "occupied" },
-    { id: "C9", row: 3, column: 10, status: "occupied" },
-    { id: "C10", row: 3, column: 11, status: "occupied" },
-    { id: "C12", row: 3, column: 13, status: "available" },
-    { id: "C13", row: 3, column: 14, status: "available" },
+    if (sessionId) {
+      fetchData();
+    }
+  }, [sessionId]);
 
-    { id: "B1", row: 4, column: 2, status: "available" },
-    { id: "B2", row: 4, column: 3, status: "available" },
-    { id: "B4", row: 4, column: 5, status: "occupied" },
-    { id: "B5", row: 4, column: 6, status: "occupied" },
-    { id: "B6", row: 4, column: 7, status: "occupied" },
-    { id: "B7", row: 4, column: 8, status: "occupied" },
-    { id: "B8", row: 4, column: 9, status: "occupied" },
-    { id: "B9", row: 4, column: 10, status: "occupied" },
-    { id: "B12", row: 4, column: 13, status: "available" },
-    { id: "B13", row: 4, column: 14, status: "available" },
+  // Criar mapa de assentos ocupados (seatId -> true)
+  const occupiedSeatIds = useMemo(() => {
+    if (!sessionData?.tickets) return new Set();
+    return new Set(sessionData.tickets.map((ticket) => ticket.seatId));
+  }, [sessionData]);
 
-    { id: "A3", row: 5, column: 4, status: "available" },
-    { id: "A4", row: 5, column: 5, status: "available" },
-    { id: "A5", row: 5, column: 6, status: "occupied" },
-    { id: "A6", row: 5, column: 7, status: "occupied" },
-    { id: "A7", row: 5, column: 8, status: "occupied" },
-    { id: "A8", row: 5, column: 9, status: "available" },
-    { id: "A9", row: 5, column: 10, status: "available" },
-  ]);
+  // Converter rows do backend para o formato esperado pelo SeatMap
+  const { seatGrid, allSeats } = useMemo(() => {
+    if (!sessionData?.room?.rows) {
+      return { seatGrid: [], allSeats: [] };
+    }
+
+    const rows = sessionData.room.rows;
+    // Ordenar fileiras por letra (A, B, C, ...)
+    const sortedRows = [...rows].sort((a, b) =>
+      a.letter.localeCompare(b.letter)
+    );
+
+    // Encontrar o número máximo de assentos em uma fileira
+    const maxSeats = Math.max(
+      ...sortedRows.map((row) => row.seats?.length || 0),
+      0
+    );
+
+    const grid = [];
+    const seats = [];
+
+    sortedRows.forEach((row, rowIndex) => {
+      const rowSeats = row.seats || [];
+      // Ordenar assentos por número
+      const sortedSeats = [...rowSeats].sort((a, b) => {
+        const numA = parseInt(a.number) || a.number.charCodeAt(0);
+        const numB = parseInt(b.number) || b.number.charCodeAt(0);
+        return numA - numB;
+      });
+
+      const gridRow = [];
+
+      sortedSeats.forEach((seat, colIndex) => {
+        const isOccupied = occupiedSeatIds.has(seat.id);
+        const isSelected = selectedSeatIds.has(seat.id);
+
+        const seatData = {
+          id: seat.id,
+          row: rowIndex + 1,
+          column: colIndex + 1,
+          rowLetter: row.letter,
+          seatNumber: seat.number,
+          seatType: seat.seatType,
+          status: isOccupied
+            ? "occupied"
+            : isSelected
+            ? "selected"
+            : "available",
+          displayId: `${row.letter}${seat.number}`,
+        };
+
+        gridRow.push(seatData);
+        seats.push(seatData);
+      });
+
+      // Preencher com nulls se necessário para manter o grid uniforme
+      while (gridRow.length < maxSeats) {
+        gridRow.push(null);
+      }
+
+      grid.push(gridRow);
+    });
+
+    return { seatGrid: grid, allSeats: seats };
+  }, [sessionData, occupiedSeatIds, selectedSeatIds]);
 
   const handleSeatClick = (seatId) => {
-    setSeats(
-      seats.map((seat) => {
-        if (seat.id === seatId && seat.status !== "occupied") {
-          return {
-            ...seat,
-            status: seat.status === "selected" ? "available" : "selected",
-          };
-        }
-        return seat;
-      })
-    );
+    setSelectedSeatIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(seatId)) {
+        newSet.delete(seatId);
+      } else {
+        newSet.add(seatId);
+      }
+      return newSet;
+    });
   };
 
-  const numRows = 5;
-  const numCols = 14;
-  const seatGrid = Array(numRows)
-    .fill(null)
-    .map(() => Array(numCols).fill(null));
-  seats.forEach((seat) => {
-    if (
-      seat.row >= 1 &&
-      seat.row <= numRows &&
-      seat.column >= 1 &&
-      seat.column <= numCols
-    ) {
-      seatGrid[seat.row - 1][seat.column - 1] = seat;
-    }
-  });
+  const selectedSeats = allSeats.filter((seat) => selectedSeatIds.has(seat.id));
 
-  const selectedSeats = seats.filter((seat) => seat.status === "selected");
+  if (loading) {
+    return (
+      <div className="bg-cinema-darkPalette-800 text-white min-h-screen flex items-center justify-center">
+        <div className="text-xl">Carregando assentos...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-cinema-darkPalette-800 text-white min-h-screen flex items-center justify-center">
+        <div className="text-xl text-red-500">{error}</div>
+      </div>
+    );
+  }
+
+  // Preparar dados do filme e sessão para os componentes
+  const movieForDetails = movie
+    ? {
+        image: movie.coverUrl,
+        title: movie.title,
+        duration: formatDuration(movie.durationInSeconds),
+      }
+    : null;
+
+  const sessionForDetails = sessionData
+    ? {
+        date: new Date(sessionData.date)
+          .toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "short",
+          })
+          .toUpperCase(),
+        time: new Date(sessionData.date).toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        format: formatDisplay[sessionData.format] || sessionData.format,
+        lang: subtitleDisplay[sessionData.subtitle] || sessionData.subtitle,
+      }
+    : null;
 
   return (
     <div className="flex justify-center bg-cinema-darkPalette-800 min-h-screen min-w-screen text-white">
       <div className="w-full sm:container sm:mx-8">
         <div
           className="ml-6 mt-10 cursor-pointer z-10"
-          onClick={() => navigate("/movies/session")}
+          onClick={() => navigate(-1)}
         >
           <FaArrowLeft size={32} />
         </div>
@@ -118,12 +205,14 @@ function Seats() {
           <StepProgressBar
             currentStep={2}
             totalSteps={7}
-            label="Escolha da sessão"
+            label="Escolha dos assentos"
           />
         </div>
 
         <div className="lg:hidden">
-          <MovieDetails movie={movie} session={session} />
+          {movieForDetails && (
+            <MovieDetails movie={movieForDetails} session={sessionForDetails} />
+          )}
         </div>
 
         <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start lg:justify-center my-8 mx-4">
@@ -164,10 +253,10 @@ function Seats() {
 
           <div className="hidden lg:block w-96 flex-shrink-0">
             <OrderSidebar
-              movie={movie}
-              session={session}
+              movie={movieForDetails}
+              session={sessionForDetails}
               selectedSeats={selectedSeats}
-              seats={seats}
+              seats={allSeats}
               onRemoveSeat={handleSeatClick}
             />
           </div>
