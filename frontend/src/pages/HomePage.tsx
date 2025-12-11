@@ -8,24 +8,36 @@ import { movieService } from "../services/api/movieService";
 import { MovieStatus } from "../types/enums";
 import { Movie } from "../types/Movie";
 import { Theater } from "../types/Theater";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaExclamationTriangle } from "react-icons/fa";
 
 const HomePage: React.FC = () => {
   const [selectedTheater, setSelectedTheater] = useState<Theater | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [comingSoonMovies, setComingSoonMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  
+  // Separate loading states for better UX
+  const [loadingMovies, setLoadingMovies] = useState(false);
+  const [loadingComingSoon, setLoadingComingSoon] = useState(true);
+  
+  // Separate error states
+  const [errorMovies, setErrorMovies] = useState<string | null>(null);
+  const [errorComingSoon, setErrorComingSoon] = useState<string | null>(null);
+  
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
   // Fetch coming soon movies (global, not tied to a theater)
   useEffect(() => {
     const fetchComingSoon = async () => {
       try {
+        setLoadingComingSoon(true);
+        setErrorComingSoon(null);
         const data = await movieService.getAllMovies(MovieStatus.COMING_SOON);
         setComingSoonMovies(data);
       } catch (err) {
         console.error("Erro ao carregar filmes em breve", err);
+        setErrorComingSoon("Não foi possível carregar os filmes em breve");
+      } finally {
+        setLoadingComingSoon(false);
       }
     };
 
@@ -35,18 +47,24 @@ const HomePage: React.FC = () => {
   // Fetch movies by selected theater
   useEffect(() => {
     const fetchMovies = async () => {
-      if (!selectedTheater) return;
+      if (!selectedTheater) {
+        setMovies([]);
+        setErrorMovies(null);
+        return;
+      }
 
       try {
-        setLoading(true);
+        setLoadingMovies(true);
+        setErrorMovies(null);
         const data = await theaterService.getMoviesByTheaterId(selectedTheater.id);
         setMovies(data);
-        setError(null);
       } catch (err) {
-        setError("Erro ao carregar filmes");
+        const errorMessage = "Não foi possível carregar os filmes deste cinema";
+        setErrorMovies(errorMessage);
         console.error(err);
+        setMovies([]);
       } finally {
-        setLoading(false);
+        setLoadingMovies(false);
       }
     };
 
@@ -55,6 +73,32 @@ const HomePage: React.FC = () => {
 
   const filmesEmCartaz: Movie[] = movies.filter(
     (movie) => movie.status === MovieStatus.NOW_PLAYING
+  );
+
+  // Reusable loading spinner component
+  const LoadingSpinner = () => (
+    <div className="flex items-center justify-center py-12">
+      <div className="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
+    </div>
+  );
+
+  // Reusable error message component
+  const ErrorMessage: React.FC<{ message: string; onRetry?: () => void }> = ({ 
+    message, 
+    onRetry 
+  }) => (
+    <div className="flex flex-col items-center justify-center py-8 px-6">
+      <FaExclamationTriangle className="text-red-500 text-4xl mb-3" />
+      <p className="text-red-400 text-center mb-4">{message}</p>
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded transition-colors"
+        >
+          Tentar novamente
+        </button>
+      )}
+    </div>
   );
 
   return (
@@ -71,35 +115,50 @@ const HomePage: React.FC = () => {
             onClick={() => setIsMapModalOpen(true)}
             className="flex items-center gap-2 text-red-500 hover:text-red-400 transition-colors cursor-pointer"
           >
-            <FaMapMarkerAlt />
-            <span className="underline">Ver localização</span>
+            <FaMapMarkerAlt className="text-xl sm:text-base" />
+            <span className="hidden sm:inline underline">Ver localização</span>
           </button>
         )}
+
       </div>
 
-      {loading ? (
-        <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
-        </div>
-      ) : error ? (
-        <div className="text-red-500 px-6">{error}</div>
+      {/* Theater movies section */}
+      {loadingMovies ? (
+        <LoadingSpinner />
+      ) : errorMovies ? (
+        <ErrorMessage 
+          message={errorMovies}
+          onRetry={() => selectedTheater && setSelectedTheater({...selectedTheater})}
+        />
       ) : !selectedTheater ? (
-        <div className="text-gray-400 px-6">Selecione um cinema para ver os filmes disponíveis</div>
+        <div className="text-gray-400 px-6 py-8 text-center">
+          Selecione um cinema para ver os filmes disponíveis
+        </div>
       ) : (
         <>
-          {filmesEmCartaz.length > 0 && (
+          {filmesEmCartaz.length > 0 ? (
             <MovieCarousel title="Filmes em cartaz:" movies={filmesEmCartaz} />
-          )}
-          
-          {filmesEmCartaz.length === 0 && (
-            <div className="text-gray-400 px-6">Nenhum filme em cartaz neste cinema</div>
+          ) : (
+            <div className="text-gray-400 px-6 py-4">
+              Nenhum filme em cartaz neste cinema
+            </div>
           )}
         </>
       )}
 
-      {comingSoonMovies.length > 0 && (
-        <MovieCarousel title="Em breve:" movies={comingSoonMovies} />
-      )}
+      {/* Coming soon section */}
+      <div className="mt-6">
+        {loadingComingSoon ? (
+          <LoadingSpinner />
+        ) : errorComingSoon ? (
+          <ErrorMessage 
+            message={errorComingSoon}
+            onRetry={() => window.location.reload()}
+          />
+        ) : comingSoonMovies.length > 0 ? (
+          <MovieCarousel title="Em breve:" movies={comingSoonMovies} />
+        ) : null}
+      </div>
 
       {selectedTheater && (
         <Modal
@@ -112,7 +171,6 @@ const HomePage: React.FC = () => {
       )}
     </div>
   );
-}
-
+};
 
 export default HomePage;

@@ -109,7 +109,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("AINDA ESTOU AQUI")
             .setDurationInSeconds(8100)
             .setCoverUrl("/Images/ainda-estou-aqui.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/_NzqP0jmk3o")
+            .setTrailerUrl("https://www.youtube.com/watch?v=_NzqP0jmk3o")
             .setSynopsis(
                 "Rio de Janeiro, início dos anos 1970. O país enfrenta o endurecimento da ditadura militar. Os Paiva — Rubens, Eunice e seus cinco filhos — vivem na frente da praia, numa casa de portas abertas para os amigos. Um dia, Rubens é levado por militares à paisana e desaparece. Eunice, cuja busca pela verdade sobre o destino de seu marido se estenderia por décadas, é obrigada a se reinventar e traçar um novo futuro para si e seus filhos. Baseado no livro biográfico de Marcelo Rubens Paiva.")
             .setAgeRating(AgeRating.FOURTEEN_YEARS)
@@ -121,7 +121,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("CHICO BENTO E A GOIABEIRA MARAVILHOSA")
             .setDurationInSeconds(6000)
             .setCoverUrl("/Images/chico-bento.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-chico-bento")
+            .setTrailerUrl("https://www.youtube.com/watch?v=7M0fKoXuQxc")
             .setSynopsis("Chico Bento embarca em uma aventura mágica para salvar a goiabeira mais especial de sua vila.")
             .setAgeRating(AgeRating.GENERAL_AUDIENCE)
             .setGenres(List.of(animationGenre, comedyGenre, familyGenre))
@@ -132,7 +132,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("MOANA 2")
             .setDurationInSeconds(7200)
             .setCoverUrl("/Images/moana-2.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-moana2")
+            .setTrailerUrl("https://www.youtube.com/watch?v=lqMJQa3JhZU")
             .setSynopsis("Moana retorna ao oceano em uma nova aventura épica para salvar seu povo.")
             .setAgeRating(AgeRating.GENERAL_AUDIENCE)
             .setGenres(List.of(animationGenre, adventureGenre, familyGenre))
@@ -143,7 +143,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("WICKED")
             .setDurationInSeconds(9600)
             .setCoverUrl("/Images/wicked.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-wicked")
+            .setTrailerUrl("https://www.youtube.com/watch?v=6COmYeLsz4c")
             .setSynopsis("A história não contada das bruxas de Oz, antes de Dorothy chegar.")
             .setAgeRating(AgeRating.TWELVE_YEARS)
             .setGenres(List.of(fantasyGenre, musicalGenre))
@@ -151,15 +151,16 @@ public class DatabaseSeeder implements CommandLineRunner {
         movieRepository.save(movieWicked);
 
         Movie movieGodcomputer = new Movie()
-            .setTitle("The Godcomputer")
-            .setSynopsis("In a future where an AI governs the world, a small group of rebels attempts to overthrow it.")
-            .setDurationInSeconds(8100)
-            .setAgeRating(AgeRating.SIXTEEN_YEARS)
-            .setGenres(List.of(scifiGenre, dramaGenre))
-            .setCoverUrl("https://picsum.photos/200/300?random=2")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-godcomputer")
-            .setStatus(MovieStatus.NOW_PLAYING);
+                .setTitle("The Godcomputer")
+                .setSynopsis("In a future where an AI governs the world, a small group of rebels attempts to overthrow it.")
+                .setDurationInSeconds(8100)
+                .setAgeRating(AgeRating.SIXTEEN_YEARS)
+                .setGenres(List.of(scifiGenre, dramaGenre))
+                .setCoverUrl("https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg")
+                .setTrailerUrl("https://www.youtube.com/watch?v=RYuCoCk2_ZA")
+                .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieGodcomputer);
+
 
         Movie movieHillHouse = new Movie()
             .setTitle("The Haunting of Hill House 2")
@@ -168,7 +169,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setAgeRating(AgeRating.EIGHTEEN_YEARS)
             .setGenres(List.of(horrorGenre, dramaGenre))
             .setCoverUrl("https://picsum.photos/200/300?random=4")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-hillhouse")
+            .setTrailerUrl("https://www.youtube.com/watch?v=KgGdQK2SHWo")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieHillHouse);
 
@@ -179,7 +180,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setAgeRating(AgeRating.FOURTEEN_YEARS)
             .setGenres(List.of(actionGenre, scifiGenre))
             .setCoverUrl("https://image.tmdb.org/t/p/w500/8c4a8kE7PizaGQQnditMmI1xbRp.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/9ix7TUGVYIo")
+            .setTrailerUrl("https://www.youtube.com/watch?v=9ix7TUGVYIo")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieMatrix);
 
@@ -190,7 +191,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setAgeRating(AgeRating.TEN_YEARS)
             .setGenres(List.of(scifiGenre, adventureGenre, dramaGenre))
             .setCoverUrl("https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/zSWdZVtXT7E")
+            .setTrailerUrl("https://www.youtube.com/watch?v=zSWdZVtXT7E")
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieInterstellar);
 
@@ -211,7 +212,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("CAPITÃO AMÉRICA: ADMIRÁVEL MUNDO NOVO")
             .setDurationInSeconds(0)
             .setCoverUrl("/Images/capitao-america.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-capitao")
+            .setTrailerUrl("https://www.youtube.com/watch?v=U7JG6FMoEdM")
             .setSynopsis("Sam Wilson assume o manto do Capitão América e enfrenta novos desafios.")
             .setGenres(List.of(actionGenre, scifiGenre))
             .setStatus(MovieStatus.COMING_SOON);
@@ -221,7 +222,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("CORINGA 2: FOLIE À DEUX")
             .setDurationInSeconds(0)
             .setCoverUrl("/Images/coringa-2.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-coringa2")
+            .setTrailerUrl("https://www.youtube.com/watch?v=kD6LoK5GcGw")
             .setSynopsis("Arthur Fleck encontra o amor enquanto enfrenta as consequências de seus atos.")
             .setGenres(List.of(crimeGenre, dramaGenre, musicalGenre))
             .setStatus(MovieStatus.COMING_SOON);
