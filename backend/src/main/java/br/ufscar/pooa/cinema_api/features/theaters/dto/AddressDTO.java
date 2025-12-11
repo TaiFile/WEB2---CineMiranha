@@ -10,11 +10,13 @@ public class AddressDTO {
     private String city;
     private String state;
     private String country;
+    private Double latitude;
+    private Double longitude;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(String zipCode, String street, String number, String complement, String neighborhood, String city, String state, String country) {
+    public AddressDTO(String zipCode, String street, String number, String complement, String neighborhood, String city, String state, String country, Double latitude, Double longitude) {
         this.zipCode = zipCode;
         this.street = street;
         this.number = number;
@@ -23,6 +25,8 @@ public class AddressDTO {
         this.city = city;
         this.state = state;
         this.country = country;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getZipCode() {
@@ -87,5 +91,21 @@ public class AddressDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
