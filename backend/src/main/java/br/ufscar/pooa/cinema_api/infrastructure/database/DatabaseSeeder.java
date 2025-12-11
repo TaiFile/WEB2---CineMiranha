@@ -113,7 +113,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setSynopsis(
                 "Rio de Janeiro, início dos anos 1970. O país enfrenta o endurecimento da ditadura militar. Os Paiva — Rubens, Eunice e seus cinco filhos — vivem na frente da praia, numa casa de portas abertas para os amigos. Um dia, Rubens é levado por militares à paisana e desaparece. Eunice, cuja busca pela verdade sobre o destino de seu marido se estenderia por décadas, é obrigada a se reinventar e traçar um novo futuro para si e seus filhos. Baseado no livro biográfico de Marcelo Rubens Paiva.")
             .setAgeRating(AgeRating.FOURTEEN_YEARS)
-            .setGenres(List.of(dramaGenre))
+            .setGenres(new ArrayList<>(List.of(dramaGenre)))
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieAindaEstouAqui);
 
@@ -124,7 +124,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTrailerUrl("https://www.youtube.com/watch?v=7M0fKoXuQxc")
             .setSynopsis("Chico Bento embarca em uma aventura mágica para salvar a goiabeira mais especial de sua vila.")
             .setAgeRating(AgeRating.GENERAL_AUDIENCE)
-            .setGenres(List.of(animationGenre, comedyGenre, familyGenre))
+            .setGenres(new ArrayList<>(List.of(animationGenre, comedyGenre, familyGenre)))
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieChicoBento);
 
@@ -135,7 +135,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTrailerUrl("https://www.youtube.com/watch?v=lqMJQa3JhZU")
             .setSynopsis("Moana retorna ao oceano em uma nova aventura épica para salvar seu povo.")
             .setAgeRating(AgeRating.GENERAL_AUDIENCE)
-            .setGenres(List.of(animationGenre, adventureGenre, familyGenre))
+            .setGenres(new ArrayList<>(List.of(animationGenre, adventureGenre, familyGenre)))
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieMoana2);
 
@@ -146,7 +146,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTrailerUrl("https://www.youtube.com/watch?v=6COmYeLsz4c")
             .setSynopsis("A história não contada das bruxas de Oz, antes de Dorothy chegar.")
             .setAgeRating(AgeRating.TWELVE_YEARS)
-            .setGenres(List.of(fantasyGenre, musicalGenre))
+            .setGenres(new ArrayList<>(List.of(fantasyGenre, musicalGenre)))
             .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieWicked);
 
@@ -155,22 +155,23 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .setSynopsis("In a future where an AI governs the world, a small group of rebels attempts to overthrow it.")
                 .setDurationInSeconds(8100)
                 .setAgeRating(AgeRating.SIXTEEN_YEARS)
-                .setGenres(List.of(scifiGenre, dramaGenre))
+                .setGenres(new ArrayList<>(List.of(scifiGenre, dramaGenre)))
                 .setCoverUrl("https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg")
-                .setTrailerUrl("https://www.youtube.com/watch?v=RYuCoCk2_ZA")
+                .setTrailerUrl("https://www.youtube.com/watch?v=GV01B5kVsC0")
                 .setStatus(MovieStatus.NOW_PLAYING);
         movieRepository.save(movieGodcomputer);
 
 
         Movie movieHillHouse = new Movie()
-            .setTitle("The Haunting of Hill House 2")
+            .setTitle("The Haunting of Hill House")
             .setSynopsis("A family is confronted with haunting memories of their old home and the terrifying events that drove them from it.")
             .setDurationInSeconds(7800)
             .setAgeRating(AgeRating.EIGHTEEN_YEARS)
-            .setGenres(List.of(horrorGenre, dramaGenre))
+            .setGenres(new ArrayList<>(List.of(horrorGenre, dramaGenre)))
             .setCoverUrl("https://picsum.photos/200/300?random=4")
-            .setTrailerUrl("https://www.youtube.com/watch?v=KgGdQK2SHWo")
+            .setTrailerUrl("https://www.youtube.com/watch?v=3eqxXqJDmcY")
             .setStatus(MovieStatus.NOW_PLAYING);
+        movieRepository.save(movieHillHouse);
         movieRepository.save(movieHillHouse);
 
         Movie movieMatrix = new Movie()
@@ -178,7 +179,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setSynopsis("Neo retorna à Matrix, enfrentando uma nova ameaça enquanto tenta desvendar os mistérios de sua existência e reencontrar Trinity.")
             .setDurationInSeconds(8880)
             .setAgeRating(AgeRating.FOURTEEN_YEARS)
-            .setGenres(List.of(actionGenre, scifiGenre))
+            .setGenres(new ArrayList<>(List.of(actionGenre, scifiGenre)))
             .setCoverUrl("https://image.tmdb.org/t/p/w500/8c4a8kE7PizaGQQnditMmI1xbRp.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=9ix7TUGVYIo")
             .setStatus(MovieStatus.NOW_PLAYING);
@@ -189,7 +190,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setSynopsis("Um grupo de exploradores viaja através de um buraco de minhoca no espaço, em uma tentativa de garantir a sobrevivência da humanidade.")
             .setDurationInSeconds(10140)
             .setAgeRating(AgeRating.TEN_YEARS)
-            .setGenres(List.of(scifiGenre, adventureGenre, dramaGenre))
+            .setGenres(new ArrayList<>(List.of(scifiGenre, adventureGenre, dramaGenre)))
             .setCoverUrl("https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=zSWdZVtXT7E")
             .setStatus(MovieStatus.NOW_PLAYING);
@@ -202,9 +203,9 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("SHREK 5")
             .setDurationInSeconds(0)
             .setCoverUrl("/Images/shrek-5.jpg")
-            .setTrailerUrl("https://www.youtube.com/embed/trailer-shrek5")
+            .setTrailerUrl("https://www.youtube.com/watch?v=W37DlG1i61s")
             .setSynopsis("O ogro mais amado do cinema retorna em uma nova aventura hilária.")
-            .setGenres(List.of(animationGenre, comedyGenre, familyGenre))
+            .setGenres(new ArrayList<>(List.of(animationGenre, comedyGenre, familyGenre)))
             .setStatus(MovieStatus.COMING_SOON);
         movieRepository.save(movieShrek5);
 
@@ -214,7 +215,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setCoverUrl("/Images/capitao-america.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=U7JG6FMoEdM")
             .setSynopsis("Sam Wilson assume o manto do Capitão América e enfrenta novos desafios.")
-            .setGenres(List.of(actionGenre, scifiGenre))
+            .setGenres(new ArrayList<>(List.of(actionGenre, scifiGenre)))
             .setStatus(MovieStatus.COMING_SOON);
         movieRepository.save(movieCapitaoAmerica);
 
@@ -224,7 +225,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setCoverUrl("/Images/coringa-2.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=kD6LoK5GcGw")
             .setSynopsis("Arthur Fleck encontra o amor enquanto enfrenta as consequências de seus atos.")
-            .setGenres(List.of(crimeGenre, dramaGenre, musicalGenre))
+            .setGenres(new ArrayList<>(List.of(crimeGenre, dramaGenre, musicalGenre)))
             .setStatus(MovieStatus.COMING_SOON);
         movieRepository.save(movieCoringa2);
 
@@ -289,18 +290,11 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setSessions(new ArrayList<>());
         Room savedRoomIguatemi2 = roomRepository.save(roomIguatemi2);
 
-        // Rows and Seats for Iguatemi Sala 1
-        Row rowIguatemi1A = new Row().setLetter('A').setRoom(savedRoomIguatemi1).setSeats(new HashSet<>());
-        rowRepository.save(rowIguatemi1A);
-        Seat seatIguatemi1A1 = new Seat().setNumber('1').setRow(rowIguatemi1A).setSeatType(SeatType.STANDARD).setTickets(new ArrayList<>());
-        Seat seatIguatemi1A2 = new Seat().setNumber('2').setRow(rowIguatemi1A).setSeatType(SeatType.STANDARD).setTickets(new ArrayList<>());
-        seatRepository.saveAll(List.of(seatIguatemi1A1, seatIguatemi1A2));
+        // Rows and Seats for Iguatemi Sala 1 (5 rows x 10 seats)
+        createSeatsForRoom(savedRoomIguatemi1, 5, 10);
 
-        // Rows and Seats for Iguatemi Sala VIP
-        Row rowIguatemi2A = new Row().setLetter('A').setRoom(savedRoomIguatemi2).setSeats(new HashSet<>());
-        rowRepository.save(rowIguatemi2A);
-        Seat seatIguatemi2A1 = new Seat().setNumber('1').setRow(rowIguatemi2A).setSeatType(SeatType.STANDARD).setTickets(new ArrayList<>());
-        seatRepository.save(seatIguatemi2A1);
+        // Rows and Seats for Iguatemi Sala VIP (4 rows x 8 seats)
+        createSeatsForRoom(savedRoomIguatemi2, 4, 8);
 
         // ============================================================
         // 6. THEATER 2 - Cine São Carlos
@@ -340,19 +334,11 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setSessions(new ArrayList<>());
         Room savedRoomCineSC2 = roomRepository.save(roomCineSC2);
 
-        // Rows and Seats for Cine São Carlos Sala 1
-        Row rowCineSC1A = new Row().setLetter('A').setRoom(savedRoomCineSC1).setSeats(new HashSet<>());
-        rowRepository.save(rowCineSC1A);
-        Seat seatCineSC1A1 = new Seat().setNumber('1').setRow(rowCineSC1A).setSeatType(SeatType.STANDARD).setTickets(new ArrayList<>());
-        Seat seatCineSC1A2 = new Seat().setNumber('2').setRow(rowCineSC1A).setSeatType(SeatType.STANDARD).setTickets(new ArrayList<>());
-        Seat savedSeat = seatRepository.save(seatCineSC1A1);
-        seatRepository.save(seatCineSC1A2);
+        // Rows and Seats for Cine São Carlos Sala 1 (6 rows x 12 seats)
+        createSeatsForRoom(savedRoomCineSC1, 6, 12);
 
-        // Rows and Seats for Cine São Carlos Sala 2
-        Row rowCineSC2A = new Row().setLetter('A').setRoom(savedRoomCineSC2).setSeats(new HashSet<>());
-        rowRepository.save(rowCineSC2A);
-        Seat seatCineSC2A1 = new Seat().setNumber('1').setRow(rowCineSC2A).setSeatType(SeatType.PLUS_SIZE).setTickets(new ArrayList<>());
-        seatRepository.save(seatCineSC2A1);
+        // Rows and Seats for Cine São Carlos Sala 2 (5 rows x 10 seats)
+        createSeatsForRoom(savedRoomCineSC2, 5, 10);
 
         // ============================================================
         // 7. SESSIONS - Cinépolis Iguatemi São Carlos
@@ -584,7 +570,48 @@ public class DatabaseSeeder implements CommandLineRunner {
         System.out.println(">>> clientId: " + savedClient.getId());
         System.out.println(">>> managerId: " + savedManager.getId());
         System.out.println(">>> sessionId: " + savedSession.getId());
-        System.out.println(">>> seatId: " + savedSeat.getId());
         System.out.println("------------------------------------------------------------\n");
+    }
+
+    /**
+     * Creates rows and seats for a room.
+     * @param room The room to create seats for
+     * @param numRows Number of rows (will be lettered A, B, C, etc.)
+     * @param seatsPerRow Number of seats per row (will be numbered 1, 2, 3, etc.)
+     */
+    private void createSeatsForRoom(Room room, int numRows, int seatsPerRow) {
+        char[] rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        
+        for (int r = 0; r < numRows; r++) {
+            Row row = new Row()
+                .setLetter(rowLetters[r])
+                .setRoom(room)
+                .setSeats(new HashSet<>());
+            rowRepository.save(row);
+
+            List<Seat> seats = new ArrayList<>();
+            for (int s = 1; s <= seatsPerRow; s++) {
+                // Convert seat number to char (1-9 as '1'-'9', 10+ as 'A', 'B', etc. or use modulo)
+                char seatNumber = s <= 9 ? (char) ('0' + s) : (char) ('A' + s - 10);
+                
+                SeatType seatType = SeatType.STANDARD;
+                // Last row gets some PLUS_SIZE seats
+                if (r == numRows - 1 && s <= 2) {
+                    seatType = SeatType.PLUS_SIZE;
+                }
+                // Middle seats in last row are WHEELCHAIR
+                if (r == numRows - 1 && s >= seatsPerRow - 1) {
+                    seatType = SeatType.WHEELCHAIR;
+                }
+
+                Seat seat = new Seat()
+                    .setNumber(seatNumber)
+                    .setRow(row)
+                    .setSeatType(seatType)
+                    .setTickets(new ArrayList<>());
+                seats.add(seat);
+            }
+            seatRepository.saveAll(seats);
+        }
     }
 }

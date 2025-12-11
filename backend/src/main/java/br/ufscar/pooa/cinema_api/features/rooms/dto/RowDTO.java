@@ -5,10 +5,19 @@ import br.ufscar.pooa.cinema_api.features.theaters.dto.SeatDTO;
 import java.util.List;
 
 public class RowDTO {
+    private Long id;
     private Character letter;
     private List<SeatDTO> seats;
 
     public RowDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Character getLetter() {

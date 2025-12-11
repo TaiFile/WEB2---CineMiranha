@@ -3,10 +3,19 @@ package br.ufscar.pooa.cinema_api.features.theaters.dto;
 import br.ufscar.pooa.cinema_api.domain.enums.SeatType;
 
 public class SeatDTO {
+    private Long id;
     private Character number;
     private SeatType seatType;
 
     public SeatDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Character getNumber() {
