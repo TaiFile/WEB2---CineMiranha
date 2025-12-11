@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:classpath:./env-dev.properties
+    import: optional:file:./env-dev.properties
   devtools:
     restart:
       enabled: true
@@ -26,9 +26,9 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    sender: '"MiranhaCar" <eduardo.malagutti@catijr.com.br>'
-    username: eduardo.malagutti@catijr.com.br
-    password: tjxselqjuslhtvfd
+    sender: ${EMAIL_SENDER}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -38,6 +38,40 @@ spring:
             required: true
           ssl:
             trust: smtp.gmail.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+    shutdown:
+      access: read_only
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+    tags:
+      application: ${spring.application.name}
+      environment: dev
+  simple:
+    metrics:
+      export:
+        enabled: true
 
 logging:
   level:
