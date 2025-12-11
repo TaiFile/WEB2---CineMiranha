@@ -19,7 +19,7 @@ function MovieCarousel({ title, movies, showMore = true }) {
                             key={movie.id}
                             title={movie.title}
                             duration={movie.duration}
-                            image={movie.image}
+                            image={movie.coverUrl}
                             ageRating={movie.ageRating}
                         />
                     ))}
