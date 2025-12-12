@@ -15,11 +15,9 @@ const HomePage: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [comingSoonMovies, setComingSoonMovies] = useState<Movie[]>([]);
   
-  // Separate loading states for better UX
   const [loadingMovies, setLoadingMovies] = useState(false);
   const [loadingComingSoon, setLoadingComingSoon] = useState(true);
   
-  // Separate error states
   const [errorMovies, setErrorMovies] = useState<string | null>(null);
   const [errorComingSoon, setErrorComingSoon] = useState<string | null>(null);
   
