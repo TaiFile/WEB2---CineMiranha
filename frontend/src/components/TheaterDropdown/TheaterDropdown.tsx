@@ -136,7 +136,7 @@ const TheaterDropdown: React.FC<TheaterDropdownProps> = ({
                               <p className="text-white font-medium truncate">{theater.name}</p>
                               {theater.address && (
                                   <p className="text-gray-400 text-xs truncate">
-                                    {theater.address.neighborhood}, {theater.address.city}
+                                    {theater.address.displayName || [theater.address.neighborhood, theater.address.city].filter(Boolean).join(", ")}
                                   </p>
                               )}
                             </div>

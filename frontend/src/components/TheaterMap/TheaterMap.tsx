@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { Theater } from "../../types/Theater";
-import { openStreetMapService } from "../../services/openstreetmap/mapService";
+import { openStreetMapService } from "../../services/openstreetmap/openStreetMapService";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 
@@ -55,11 +55,17 @@ const TheaterMap: React.FC<TheaterMapProps> = ({ theater, className = "" }) => {
             <div className="text-sm">
               <strong>{theater.name}</strong>
               <br />
-              {address.street}, {address.number}
-              <br />
-              {address.neighborhood} - {address.city}/{address.state}
-              <br />
-              CEP: {address.zipCode}
+              {address.displayName ? (
+                <>{address.displayName}</>
+              ) : (
+                <>
+                  {address.street}, {address.number}
+                  <br />
+                  {address.neighborhood} - {address.city}/{address.state}
+                  <br />
+                  CEP: {address.zipCode}
+                </>
+              )}
             </div>
           </Popup>
         </Marker>
