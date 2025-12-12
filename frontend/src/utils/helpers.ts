@@ -1,4 +1,4 @@
-export function formatDuration(minutes) {
+export function formatDuration(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
 
@@ -7,12 +7,12 @@ export function formatDuration(minutes) {
     return `${hours}h ${mins}min`;
 }
 
-export function formatDate(dateString) {
+export function formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR');
 }
 
-export function truncateText(text, maxLength) {
+export function truncateText(text: string, maxLength: number): string {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
 }
