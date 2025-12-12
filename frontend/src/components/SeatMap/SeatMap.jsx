@@ -7,7 +7,7 @@ function SeatMap({ seatGrid = [], onSeatClick }) {
 
   const MIN_ZOOM = 0.5;
   const MAX_ZOOM = 3.0;
-  const ZOOM_STEP = 0.25;
+  const ZOOM_STEP = 0.5;
 
   const handleZoomIn = () => {
     setZoom((prev) => Math.min(prev + ZOOM_STEP, MAX_ZOOM));
