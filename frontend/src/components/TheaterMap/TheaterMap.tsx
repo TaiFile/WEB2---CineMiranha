@@ -47,8 +47,8 @@ const TheaterMap: React.FC<TheaterMapProps> = ({ theater, className = "" }) => {
         scrollWheelZoom={false}
       >
         <TileLayer
-          attribution={openStreetMapService.getAttribution()}
-          url={openStreetMapService.getTileUrl()}
+          attribution={openStreetMapService.attribution}
+          url={openStreetMapService.tileUrl}
         />
         <Marker position={position} icon={theaterIcon}>
           <Popup>

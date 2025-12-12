@@ -71,7 +71,6 @@ export const theaterService = {
       params: { latitude, longitude }
     });
 
-    // Educational: derive the full address via reverse geocoding using ONLY coordinates.
     const theaters = response.data;
     return Promise.all(theaters.map(reverseGeocodeTheaterAddress));
   },
