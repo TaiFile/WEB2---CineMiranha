@@ -13,7 +13,6 @@ export const useUserGeoLocation = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Try to get from localStorage first
     const storedLocation = localStorage.getItem(STORAGE_KEY);
     if (storedLocation) {
       try {
@@ -26,7 +25,6 @@ export const useUserGeoLocation = () => {
       }
     }
 
-    // Request geolocation from browser
     if (!navigator.geolocation) {
       setError("Geolocalização não é suportada pelo seu navegador");
       setLoading(false);
@@ -50,7 +48,7 @@ export const useUserGeoLocation = () => {
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 600000, // 10 minutes cache
+        maximumAge: 600000, 
       }
     );
   }, []);

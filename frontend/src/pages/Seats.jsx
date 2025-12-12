@@ -10,7 +10,6 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { sessionService } from "../services/api/sessionService";
 import { movieService } from "../services/api/movieService";
 
-// Helpers para converter enums do backend para exibição
 const formatDisplay = {
   TWO_D: "2D",
   THREE_D: "3D",
@@ -22,7 +21,6 @@ const subtitleDisplay = {
   ORIGINAL: "ORI",
 };
 
-// Helper para formatar duração
 function formatDuration(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -46,8 +44,6 @@ function Seats() {
         setLoading(true);
         const session = await sessionService.getSessionById(sessionId);
         setSessionData(session);
-
-        // Buscar dados do filme
         const movieData = await movieService.getMovieById(session.movieId);
         setMovie(movieData);
       } catch (err) {
@@ -63,21 +59,17 @@ function Seats() {
     }
   }, [sessionId]);
 
-  // Criar mapa de assentos ocupados (seatId -> true)
   const occupiedSeatIds = useMemo(() => {
     if (!sessionData?.tickets) return new Set();
     return new Set(sessionData.tickets.map((ticket) => ticket.seatId));
   }, [sessionData]);
 
-  // Converter rows do backend para o formato esperado pelo SeatMap
   const { seatGrid, allSeats } = useMemo(() => {
     if (!sessionData?.room?.rows) {
       return { seatGrid: [], allSeats: [] };
     }
 
     const rows = sessionData.room.rows;
-
-    // Encontrar o número máximo de assentos em uma fileira
     const maxSeats = Math.max(
       ...rows.map((row) => row.seats?.length || 0),
       0
@@ -114,7 +106,6 @@ function Seats() {
         seats.push(seatData);
       });
 
-      // Preencher com nulls se necessário para manter o grid uniforme
       while (gridRow.length < maxSeats) {
         gridRow.push(null);
       }
@@ -155,7 +146,6 @@ function Seats() {
     );
   }
 
-  // Preparar dados do filme e sessão para os componentes
   const movieForDetails = movie
     ? {
         image: movie.coverUrl,
@@ -228,7 +218,6 @@ function Seats() {
             </div>
           </div>
 
-          {/* Mobile Bottom Bar */}
           <div className="fixed bottom-0 left-0 right-0 flex justify-between items-center lg:hidden h-20 px-10 border-y border-black bg-cinema-darkPalette-800">
             <div className="bg-cinema-light-500 text-black flex justify-center items-center rounded-full w-8 h-8 mr-4">
               {selectedSeats.length ? selectedSeats.length : 0}

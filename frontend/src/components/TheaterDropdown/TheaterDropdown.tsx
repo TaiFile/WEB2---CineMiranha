@@ -37,8 +37,6 @@ const TheaterDropdown: React.FC<TheaterDropdownProps> = ({
           location.longitude
         );
         setTheaters(data);
-
-        // Auto-select the first theater if none selected
         if (data.length > 0 && !selectedTheater) {
           onTheaterSelect(data[0]);
         }
@@ -53,7 +51,6 @@ const TheaterDropdown: React.FC<TheaterDropdownProps> = ({
     fetchTheaters();
   }, [location]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

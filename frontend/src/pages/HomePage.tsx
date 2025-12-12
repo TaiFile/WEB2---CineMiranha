@@ -23,7 +23,6 @@ const HomePage: React.FC = () => {
   
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
-  // Fetch coming soon movies (global, not tied to a theater)
   useEffect(() => {
     const fetchComingSoon = async () => {
       try {
@@ -42,7 +41,7 @@ const HomePage: React.FC = () => {
     fetchComingSoon();
   }, []);
 
-  // Fetch movies by selected theater
+
   useEffect(() => {
     const fetchMovies = async () => {
       if (!selectedTheater) {
@@ -73,14 +72,12 @@ const HomePage: React.FC = () => {
     (movie) => movie.status === MovieStatus.NOW_PLAYING
   );
 
-  // Reusable loading spinner component
   const LoadingSpinner = () => (
     <div className="flex items-center justify-center py-12">
       <div className="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
     </div>
   );
 
-  // Reusable error message component
   const ErrorMessage: React.FC<{ message: string; onRetry?: () => void }> = ({ 
     message, 
     onRetry 
@@ -120,7 +117,6 @@ const HomePage: React.FC = () => {
 
       </div>
 
-      {/* Theater movies section */}
       {loadingMovies ? (
         <LoadingSpinner />
       ) : errorMovies ? (
@@ -144,7 +140,6 @@ const HomePage: React.FC = () => {
         </>
       )}
 
-      {/* Coming soon section */}
       <div className="mt-6">
         {loadingComingSoon ? (
           <LoadingSpinner />

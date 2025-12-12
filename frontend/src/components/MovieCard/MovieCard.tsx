@@ -1,4 +1,3 @@
-// src/components/MovieCard/MovieCard.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AgeRating from "../AgeRating/AgeRating";

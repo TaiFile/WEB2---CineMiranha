@@ -6,7 +6,6 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { movieService } from "../services/api/movieService";
 import { sessionService } from "../services/api/sessionService";
 
-// Helpers para converter enums do backend para exibição
 const formatDisplay = {
   TWO_D: "2D",
   THREE_D: "3D",
@@ -18,7 +17,6 @@ const subtitleDisplay = {
   ORIGINAL: "ORI",
 };
 
-// Helper para gerar próximos 7 dias
 function getNextSevenDays() {
   const days = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
   const result = [];
@@ -39,13 +37,12 @@ function getNextSevenDays() {
     result.push({
       day: dayName,
       date: formattedDate,
-      fullDate: date.toISOString().split("T")[0], // YYYY-MM-DD para comparação
+      fullDate: date.toISOString().split("T")[0], 
     });
   }
   return result;
 }
 
-// Helper para formatar duração
 function formatDuration(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -93,16 +90,15 @@ function Sessions() {
     }
   }, [movieId]);
 
-  // Agrupar sessões por sala e filtrar por data selecionada
   const sessionsByRoom = useMemo(() => {
     const grouped = {};
 
     sessions.forEach((session) => {
-      const sessionDate = session.date.split("T")[0]; // Pegar apenas a data YYYY-MM-DD
+      const sessionDate = session.date.split("T")[0]; 
 
       if (sessionDate !== selectedDate) return;
 
-      const roomName = `Sala ${session.roomId}`; // Usando roomId por enquanto
+      const roomName = `Sala ${session.roomId}`; 
 
       if (!grouped[roomName]) {
         grouped[roomName] = [];
@@ -142,7 +138,6 @@ function Sessions() {
     );
   }
 
-  // Preparar dados do filme para o componente MovieDetails
   const movieForDetails = movie
     ? {
         image: movie.coverUrl?.startsWith("http")
@@ -188,8 +183,6 @@ function Sessions() {
               ))}
             </div>
           </div>
-
-          {/* Lista idioma e formato */}
           <div className="flex justify-between gap-1">
             <select
               value={selectedLang}
@@ -211,8 +204,6 @@ function Sessions() {
               <option value="3D">3D</option>
             </select>
           </div>
-
-          {/* Seção de horários */}
           <div className="space-y-8">
             {Object.keys(sessionsByRoom).length === 0 ? (
               <div className="text-center text-cinema-light-600 py-8">
