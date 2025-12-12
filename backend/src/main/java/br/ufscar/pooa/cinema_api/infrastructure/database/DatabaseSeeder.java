@@ -109,7 +109,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("AINDA ESTOU AQUI")
             .setDurationInSeconds(8100)
             .setCoverUrl("/Images/ainda-estou-aqui.jpg")
-            .setTrailerUrl("https://www.youtube.com/watch?v=_NzqP0jmk3o")
+            .setTrailerUrl("https://www.youtube.com/embed/_NzqP0jmk3o?si=9c6tXFlDYT4VJSeG")
             .setSynopsis(
                 "Rio de Janeiro, início dos anos 1970. O país enfrenta o endurecimento da ditadura militar. Os Paiva — Rubens, Eunice e seus cinco filhos — vivem na frente da praia, numa casa de portas abertas para os amigos. Um dia, Rubens é levado por militares à paisana e desaparece. Eunice, cuja busca pela verdade sobre o destino de seu marido se estenderia por décadas, é obrigada a se reinventar e traçar um novo futuro para si e seus filhos. Baseado no livro biográfico de Marcelo Rubens Paiva.")
             .setAgeRating(AgeRating.FOURTEEN_YEARS)
@@ -121,7 +121,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setTitle("CHICO BENTO E A GOIABEIRA MARAVILHOSA")
             .setDurationInSeconds(6000)
             .setCoverUrl("/Images/chico-bento.jpg")
-            .setTrailerUrl("https://www.youtube.com/watch?v=7M0fKoXuQxc")
+            .setTrailerUrl("https://www.youtube.com/embed/7M0fKoXuQxc?si=tgtpefPpcwUfI-z1")
             .setSynopsis("Chico Bento embarca em uma aventura mágica para salvar a goiabeira mais especial de sua vila.")
             .setAgeRating(AgeRating.GENERAL_AUDIENCE)
             .setGenres(new ArrayList<>(List.of(animationGenre, comedyGenre, familyGenre)))
