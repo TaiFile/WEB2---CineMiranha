@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { Theater } from "../../types/Theater";
-import { mapService } from "../../services/nominatim/mapService";
+import { openStreetMapService } from "../../services/openstreetmap/mapService";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 
@@ -47,8 +47,8 @@ const TheaterMap: React.FC<TheaterMapProps> = ({ theater, className = "" }) => {
         scrollWheelZoom={false}
       >
         <TileLayer
-          attribution={mapService.getAttribution()}
-          url={mapService.getTileUrl()}
+          attribution={openStreetMapService.getAttribution()}
+          url={openStreetMapService.getTileUrl()}
         />
         <Marker position={position} icon={theaterIcon}>
           <Popup>
