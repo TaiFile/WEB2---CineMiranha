@@ -15,7 +15,7 @@ public class Seat {
     private Long id;
 
     @Column
-    private Character number;
+    private Integer number;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -40,11 +40,11 @@ public class Seat {
         return this;
     }
 
-    public Character getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public Seat setNumber(Character number) {
+    public Seat setNumber(Integer number) {
         this.number = number;
         return this;
     }

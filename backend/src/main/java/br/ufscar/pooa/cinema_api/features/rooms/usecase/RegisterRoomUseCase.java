@@ -9,7 +9,7 @@ import br.ufscar.pooa.cinema_api.domain.repositories.theater.ITheaterRepository;
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RegisterRoomRequestDTO;
 import br.ufscar.pooa.cinema_api.features.rooms.dto.RoomResponseDTO;
 import br.ufscar.pooa.cinema_api.features.rooms.mapper.IRoomMapper;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +34,11 @@ public class RegisterRoomUseCase {
         Theater theater = theaterRepository.findById(requestDTO.getTheaterId())
             .orElseThrow(() -> new IllegalArgumentException("Theater not found."));
 
-        Set<Row> rows = requestDTO.getRows().stream()
+        List<Row> rows = requestDTO.getRows().stream()
             .map(rowDTO -> {
                 Row row = new Row();
                 row.setLetter(rowDTO.getLetter());
-                Set<Seat> seats = rowDTO.getSeats().stream()
+                List<Seat> seats = rowDTO.getSeats().stream()
                     .map(seatDTO -> {
                         Seat seat = new Seat();
                         seat.setNumber(seatDTO.getNumber());
@@ -46,12 +46,12 @@ public class RegisterRoomUseCase {
                         seat.setRow(row);
                         return seat;
                     })
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
                 row.setSeats(seats);
                 row.setRoom(null); // The room is set later
                 return row;
             })
-            .collect(Collectors.toSet());
+            .collect(Collectors.toList());
 
         Room room = new Room();
         room.setName(requestDTO.getName());

@@ -278,7 +278,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setName("Sala 1")
             .setRoomType(RoomType.STANDARD)
             .setTheater(savedIguatemi)
-            .setRows(new HashSet<>())
+            .setRows(new ArrayList<>())
             .setSessions(new ArrayList<>());
         Room savedRoomIguatemi1 = roomRepository.save(roomIguatemi1);
 
@@ -286,7 +286,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setName("Sala VIP")
             .setRoomType(RoomType.SPECIAL)
             .setTheater(savedIguatemi)
-            .setRows(new HashSet<>())
+            .setRows(new ArrayList<>())
             .setSessions(new ArrayList<>());
         Room savedRoomIguatemi2 = roomRepository.save(roomIguatemi2);
 
@@ -322,7 +322,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setName("Sala 1")
             .setRoomType(RoomType.STANDARD)
             .setTheater(savedCineSC)
-            .setRows(new HashSet<>())
+            .setRows(new ArrayList<>())
             .setSessions(new ArrayList<>());
         Room savedRoomCineSC1 = roomRepository.save(roomCineSC1);
 
@@ -330,7 +330,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             .setName("Sala 2")
             .setRoomType(RoomType.STANDARD)
             .setTheater(savedCineSC)
-            .setRows(new HashSet<>())
+            .setRows(new ArrayList<>())
             .setSessions(new ArrayList<>());
         Room savedRoomCineSC2 = roomRepository.save(roomCineSC2);
 
@@ -573,12 +573,6 @@ public class DatabaseSeeder implements CommandLineRunner {
         System.out.println("------------------------------------------------------------\n");
     }
 
-    /**
-     * Creates rows and seats for a room.
-     * @param room The room to create seats for
-     * @param numRows Number of rows (will be lettered A, B, C, etc.)
-     * @param seatsPerRow Number of seats per row (will be numbered 1, 2, 3, etc.)
-     */
     private void createSeatsForRoom(Room room, int numRows, int seatsPerRow) {
         char[] rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         
@@ -586,26 +580,23 @@ public class DatabaseSeeder implements CommandLineRunner {
             Row row = new Row()
                 .setLetter(rowLetters[r])
                 .setRoom(room)
-                .setSeats(new HashSet<>());
+                .setSeats(new ArrayList<>());
             rowRepository.save(row);
 
             List<Seat> seats = new ArrayList<>();
             for (int s = 1; s <= seatsPerRow; s++) {
-                // Convert seat number to char (1-9 as '1'-'9', 10+ as 'A', 'B', etc. or use modulo)
-                char seatNumber = s <= 9 ? (char) ('0' + s) : (char) ('A' + s - 10);
-                
                 SeatType seatType = SeatType.STANDARD;
-                // Last row gets some PLUS_SIZE seats
-                if (r == numRows - 1 && s <= 2) {
+                // First row gets some PLUS_SIZE seats
+                if (r == 0 && s <= 2) {
                     seatType = SeatType.PLUS_SIZE;
                 }
-                // Middle seats in last row are WHEELCHAIR
-                if (r == numRows - 1 && s >= seatsPerRow - 1) {
+                // Middle seats in first row are WHEELCHAIR
+                if (r == 0 && s >= seatsPerRow - 1) {
                     seatType = SeatType.WHEELCHAIR;
                 }
 
                 Seat seat = new Seat()
-                    .setNumber(seatNumber)
+                    .setNumber(s)
                     .setRow(row)
                     .setSeatType(seatType)
                     .setTickets(new ArrayList<>());

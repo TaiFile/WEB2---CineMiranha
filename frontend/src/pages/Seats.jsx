@@ -76,32 +76,22 @@ function Seats() {
     }
 
     const rows = sessionData.room.rows;
-    // Ordenar fileiras por letra (A, B, C, ...)
-    const sortedRows = [...rows].sort((a, b) =>
-      a.letter.localeCompare(b.letter)
-    );
 
     // Encontrar o número máximo de assentos em uma fileira
     const maxSeats = Math.max(
-      ...sortedRows.map((row) => row.seats?.length || 0),
+      ...rows.map((row) => row.seats?.length || 0),
       0
     );
 
     const grid = [];
     const seats = [];
 
-    sortedRows.forEach((row, rowIndex) => {
+    rows.forEach((row, rowIndex) => {
       const rowSeats = row.seats || [];
-      // Ordenar assentos por número
-      const sortedSeats = [...rowSeats].sort((a, b) => {
-        const numA = parseInt(a.number) || a.number.charCodeAt(0);
-        const numB = parseInt(b.number) || b.number.charCodeAt(0);
-        return numA - numB;
-      });
 
       const gridRow = [];
 
-      sortedSeats.forEach((seat, colIndex) => {
+      rowSeats.forEach((seat, colIndex) => {
         const isOccupied = occupiedSeatIds.has(seat.id);
         const isSelected = selectedSeatIds.has(seat.id);
 

@@ -24,7 +24,8 @@ public class Room {
     private Theater theater;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<Row> rows = new LinkedHashSet<>();
+    @OrderBy("letter DESC")
+    private List<Row> rows = new ArrayList<>();
 
     @OneToMany(mappedBy = "room")
     private List<Session> sessions = new ArrayList<>();
@@ -68,11 +69,11 @@ public class Room {
         return this;
     }
 
-    public Set<Row> getRows() {
+    public List<Row> getRows() {
         return rows;
     }
 
-    public Room setRows(Set<Row> rows) {
+    public Room setRows(List<Row> rows) {
         this.rows = rows;
         return this;
     }

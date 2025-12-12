@@ -4,7 +4,7 @@ import br.ufscar.pooa.cinema_api.domain.enums.SeatType;
 
 public class SeatDTO {
     private Long id;
-    private Character number;
+    private Integer number;
     private SeatType seatType;
 
     public SeatDTO() {
@@ -18,11 +18,11 @@ public class SeatDTO {
         this.id = id;
     }
 
-    public Character getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Character number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
