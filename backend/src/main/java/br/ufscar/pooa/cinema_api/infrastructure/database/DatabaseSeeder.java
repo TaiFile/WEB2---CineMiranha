@@ -201,7 +201,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         // ============================================================
         Movie movieShrek5 = new Movie()
             .setTitle("SHREK 5")
-            .setDurationInSeconds(0)
+            .setDurationInSeconds(10140)
             .setCoverUrl("/Images/shrek-5.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=W37DlG1i61s")
             .setSynopsis("O ogro mais amado do cinema retorna em uma nova aventura hilária.")
@@ -211,7 +211,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Movie movieCapitaoAmerica = new Movie()
             .setTitle("CAPITÃO AMÉRICA: ADMIRÁVEL MUNDO NOVO")
-            .setDurationInSeconds(0)
+            .setDurationInSeconds(8880)
             .setCoverUrl("/Images/capitao-america.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=U7JG6FMoEdM")
             .setSynopsis("Sam Wilson assume o manto do Capitão América e enfrenta novos desafios.")
@@ -221,7 +221,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Movie movieCoringa2 = new Movie()
             .setTitle("CORINGA 2: FOLIE À DEUX")
-            .setDurationInSeconds(0)
+            .setDurationInSeconds(7800)
             .setCoverUrl("/Images/coringa-2.jpg")
             .setTrailerUrl("https://www.youtube.com/watch?v=kD6LoK5GcGw")
             .setSynopsis("Arthur Fleck encontra o amor enquanto enfrenta as consequências de seus atos.")
