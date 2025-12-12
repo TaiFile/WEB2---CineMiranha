@@ -1,7 +1,3 @@
-// OpenStreetMap service for geocoding and map utilities
-// Note: Leaflet uses OpenStreetMap tiles directly, so most map functionality
-// is handled by the react-leaflet library. This service provides additional utilities.
-
 export interface GeocodingResult {
   lat: number;
   lon: number;
@@ -10,7 +6,7 @@ export interface GeocodingResult {
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org";
 
-export const mapService = {
+export const openStreetMapService = {
   /**
    * Search for a location using OpenStreetMap Nominatim API
    */
@@ -19,11 +15,13 @@ export const mapService = {
       `${NOMINATIM_BASE_URL}/search?format=json&q=${encodeURIComponent(query)}`
     );
     const data = await response.json();
-    return data.map((item: { lat: string; lon: string; display_name: string }) => ({
-      lat: parseFloat(item.lat),
-      lon: parseFloat(item.lon),
-      displayName: item.display_name,
-    }));
+    return data.map(
+      (item: { lat: string; lon: string; display_name: string }) => ({
+        lat: parseFloat(item.lat),
+        lon: parseFloat(item.lon),
+        displayName: item.display_name,
+      })
+    );
   },
 
   /**
